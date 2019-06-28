@@ -1,0 +1,67 @@
+/******/
+
+// webpackBootstrap
+
+// The module cache
+
+// The require function
+
+// Check if module is in cache
+
+// Create a new module (and put it into the cache)
+
+// Execute the module function
+
+// Return the exports of the module
+
+// Flag the module as loaded
+
+// expose the modules object (__webpack_modules__)
+
+// Load entry module and return exports
+
+// expose the module cache
+
+// define getter function for harmony exports
+
+// define __esModule on exports
+
+// create a fake namespace object
+
+// mode & 1: value is a module id, require it
+
+// mode & 2: merge all properties of value into the ns
+
+// mode & 4: return value when already ns object
+
+// mode & 8|1: behave like require
+
+// getDefaultExport function for compatibility with non-harmony modules
+
+// Object.prototype.hasOwnProperty.call
+
+// __webpack_public_path__
+
+/************************************************************************/
+
+/* 0 */
+
+/***/
+
+/* 1 */
+
+//Use to switch toggleColour colours
+
+/*Toggle dropdown list*/
+
+/*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
+
+//Nav Menu
+
+// click NOT on the menu
+
+// click both outside link and outside menu, hide menu
+
+/* 2 */
+
+// extracted by mini-css-extract-plugin
