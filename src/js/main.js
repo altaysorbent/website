@@ -1,9 +1,9 @@
-let scrollpos = window.scrollY;
-let header = document.getElementById('header');
-let logo = document.getElementById('logo');
-let navcontent = document.getElementById('nav-content');
-let navaction = document.getElementById('navAction');
-let toToggle = document.querySelectorAll('.toggleColour');
+var scrollpos = window.scrollY;
+const header = document.getElementById('header');
+const logo = document.getElementById('logo');
+const navcontent = document.getElementById('nav-content');
+const navaction = document.getElementById('navAction');
+const toToggle = document.querySelectorAll('.toggleColour');
 
 document.addEventListener('scroll', function () {
 
@@ -12,11 +12,7 @@ document.addEventListener('scroll', function () {
 
   if (scrollpos > 10) {
     logo.src = '/images/logo_black.png';
-    header.classList.add('bg-white');
-    navaction.classList.remove('bg-white');
-    navaction.classList.add('gradient');
-    navaction.classList.remove('text-gray-800');
-    navaction.classList.add('text-white');
+    header.classList.add('bg-white', 'border-b');
     //Use to switch toggleColour colours
     for (let i = 0; i < toToggle.length; i++) {
       toToggle[i].classList.add('text-gray-800');
@@ -27,11 +23,7 @@ document.addEventListener('scroll', function () {
     navcontent.classList.add('bg-white');
   } else {
     logo.src = '/images/logo_white.png';
-    header.classList.remove('bg-white');
-    navaction.classList.remove('gradient');
-    navaction.classList.add('bg-white');
-    navaction.classList.remove('text-white');
-    navaction.classList.add('text-gray-800');
+    header.classList.remove('bg-white', 'border-b');
     //Use to switch toggleColour colours
     for (let i = 0; i < toToggle.length; i++) {
       toToggle[i].classList.add('text-white');
