@@ -36,7 +36,7 @@ module.exports = (env, argv) => {
       ],
     },
     output: {
-      path: __dirname + "/docs",
+      path: __dirname + "/dist",
       filename: './js/[name].js',
     },
     devtool: 'source-map',
