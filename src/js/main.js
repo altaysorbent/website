@@ -1,82 +1,100 @@
-var scrollpos = window.scrollY;
-var header = document.getElementById("header");
+let scrollpos = window.scrollY;
+let header = document.getElementById('header');
 let logo = document.getElementById('logo');
-var navcontent = document.getElementById("nav-content");
-var navaction = document.getElementById("navAction");
-var brandname = document.getElementById("brandname");
-var toToggle = document.querySelectorAll(".toggleColour");
+let navcontent = document.getElementById('nav-content');
+let navaction = document.getElementById('navAction');
+let toToggle = document.querySelectorAll('.toggleColour');
 
 document.addEventListener('scroll', function () {
 
-    /*Apply classes for slide in bar*/
-    scrollpos = window.scrollY;
+  /*Apply classes for slide in bar*/
+  scrollpos = window.scrollY;
 
-    if (scrollpos > 10) {
-        logo.src = '/images/logo_black.png';
-        header.classList.add("bg-white");
-        navaction.classList.remove("bg-white");
-        navaction.classList.add("gradient");
-        navaction.classList.remove("text-gray-800");
-        navaction.classList.add("text-white");
-        //Use to switch toggleColour colours
-        for (var i = 0; i < toToggle.length; i++) {
-            toToggle[i].classList.add("text-gray-800");
-            toToggle[i].classList.remove("text-white");
-        }
-        header.classList.add("shadow");
-        navcontent.classList.remove("bg-gray-100");
-        navcontent.classList.add("bg-white");
+  if (scrollpos > 10) {
+    logo.src = '/images/logo_black.png';
+    header.classList.add('bg-white');
+    navaction.classList.remove('bg-white');
+    navaction.classList.add('gradient');
+    navaction.classList.remove('text-gray-800');
+    navaction.classList.add('text-white');
+    //Use to switch toggleColour colours
+    for (let i = 0; i < toToggle.length; i++) {
+      toToggle[i].classList.add('text-gray-800');
+      toToggle[i].classList.remove('text-white');
     }
-    else {
-        logo.src = '/images/logo_white.png';
-        header.classList.remove("bg-white");
-        navaction.classList.remove("gradient");
-        navaction.classList.add("bg-white");
-        navaction.classList.remove("text-white");
-        navaction.classList.add("text-gray-800");
-        //Use to switch toggleColour colours
-        for (var i = 0; i < toToggle.length; i++) {
-            toToggle[i].classList.add("text-white");
-            toToggle[i].classList.remove("text-gray-800");
-        }
-
-        header.classList.remove("shadow");
-        navcontent.classList.remove("bg-white");
-        navcontent.classList.add("bg-gray-100");
-
+    header.classList.add('shadow');
+    navcontent.classList.remove('bg-gray-100');
+    navcontent.classList.add('bg-white');
+  } else {
+    logo.src = '/images/logo_white.png';
+    header.classList.remove('bg-white');
+    navaction.classList.remove('gradient');
+    navaction.classList.add('bg-white');
+    navaction.classList.remove('text-white');
+    navaction.classList.add('text-gray-800');
+    //Use to switch toggleColour colours
+    for (let i = 0; i < toToggle.length; i++) {
+      toToggle[i].classList.add('text-white');
+      toToggle[i].classList.remove('text-gray-800');
     }
+
+    header.classList.remove('shadow');
+    navcontent.classList.remove('bg-white');
+    navcontent.classList.add('bg-gray-100');
+
+  }
 
 });
 
-		/*Toggle dropdown list*/
-		/*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
+/*Toggle dropdown list*/
+/*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
 
-		var navMenuDiv = document.getElementById("nav-content");
-		var navMenu = document.getElementById("nav-toggle");
+let navMenuDiv = document.getElementById('nav-content');
+let navMenu = document.getElementById('nav-toggle');
 
-		document.onclick = check;
-		function check(e) {
-			var target = (e && e.target) || (event && event.srcElement);
+document.onclick = check;
 
-			//Nav Menu
-			if (!checkParent(target, navMenuDiv)) {
-				// click NOT on the menu
-				if (checkParent(target, navMenu)) {
-					// click on the link
-					if (navMenuDiv.classList.contains("hidden")) {
-						navMenuDiv.classList.remove("hidden");
-					} else { navMenuDiv.classList.add("hidden"); }
-				} else {
-					// click both outside link and outside menu, hide menu
-					navMenuDiv.classList.add("hidden");
-				}
-			}
+function check (e) {
+  let target = (e && e.target) || (event && event.srcElement);
 
-		}
-		function checkParent(t, elm) {
-			while (t.parentNode) {
-				if (t == elm) { return true; }
-				t = t.parentNode;
-			}
-			return false;
-		}
+  //Nav Menu
+  if (!checkParent(target, navMenuDiv)) {
+    // click NOT on the menu
+    if (checkParent(target, navMenu)) {
+      // click on the link
+      if (navMenuDiv.classList.contains('hidden')) {
+        navMenuDiv.classList.remove('hidden');
+      } else { navMenuDiv.classList.add('hidden'); }
+    } else {
+      // click both outside link and outside menu, hide menu
+      navMenuDiv.classList.add('hidden');
+    }
+  }
+
+}
+
+function checkParent (t, elm) {
+  while (t.parentNode) {
+    if (t == elm) { return true; }
+    t = t.parentNode;
+  }
+  return false;
+}
+
+ymaps.ready(init);
+
+function init () {
+  let myMap = new ymaps.Map('map', {
+    center: [49.965184, 82.610],
+    zoom: 16,
+    controls: [],
+  });
+  myMap.behaviors.disable(['drag', 'multiTouch', 'scrollZoom', 'dblClickZoom']);
+
+  myPlacemark = new ymaps.Placemark([49.965184, 82.611933], {
+  }, {
+    preset: 'islands#redMedicalIcon',
+  });
+
+  myMap.geoObjects.add(myPlacemark);
+}
