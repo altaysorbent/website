@@ -1,6 +1,6 @@
 const tailwind = require('tailwindcss')('./tailwind.config.js');
 const purgeCSS = require('@fullhuman/postcss-purgecss')({
-  content: ['./src/template/**/*.html'],
+  content: ['./src/template/**/*.html', './src/js/**/*.js'],
   whitelist: ['html', 'body', 'h1', 'h2', 'h3', 'h4', 'h5'],
   whitelistPatternsChildren: [],
   extractors: [

@@ -11,16 +11,16 @@ module.exports = {
       },
       colors: {
         transparent: 'transparent',
-  
+
         black: '#22292f',
         white: '#fff',
-  
+
         'black-light': '#303340',
-  
+
         'twitter': '#55acee',
         'vk': '#537599',
         'instagram': '#2b5c84',
-  
+
         'pelorous': {
           100: '#EAF5FA',
           200: '#C9E7F2',
@@ -32,7 +32,7 @@ module.exports = {
           800: '#12475C',
           900: '#0C2F3D',
         },
-  
+
         gray: {
           100: '#FDFDFD',
           200: '#FAFAFA',
@@ -159,6 +159,7 @@ module.exports = {
         '16': '4rem',
         '20': '5rem',
         '24': '6rem',
+        '28': '5rem',
         '32': '8rem',
         '40': '10rem',
         '48': '12rem',
@@ -504,4 +505,3 @@ module.exports = {
     corePlugins: {},
     plugins: [],
   };
-  

@@ -106,6 +106,10 @@ module.exports = (env, argv) => {
           from: './src/images',
           to: './images',
         },
+        {
+          from: './src/static',
+          to: './',
+        }
       ]),
 
     ].concat(htmlPlugins),

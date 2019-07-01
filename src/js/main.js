@@ -19,8 +19,6 @@ document.addEventListener('scroll', function () {
       toToggle[i].classList.remove('text-white');
     }
     header.classList.add('shadow');
-    navcontent.classList.remove('bg-gray-100');
-    navcontent.classList.add('bg-white');
   } else {
     logo.src = '/images/logo_white.png';
     header.classList.remove('bg-white', 'border-b');
@@ -31,9 +29,6 @@ document.addEventListener('scroll', function () {
     }
 
     header.classList.remove('shadow');
-    navcontent.classList.remove('bg-white');
-    navcontent.classList.add('bg-gray-100');
-
   }
 
 });
