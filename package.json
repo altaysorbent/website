@@ -4,9 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode production",
     "dev": "webpack-dev-server",
-    "deploy": "gh-pages -d dist",
+    "deploy": "webpack --mode production && gh-pages -d dist",
     "lintfix": "eslint --ext .js --ignore-path .gitignore . --fix"
   },
   "devDependencies": {
