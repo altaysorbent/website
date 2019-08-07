@@ -5,8 +5,7 @@ const navcontent = document.getElementById('nav-content');
 const navaction = document.getElementById('navAction');
 const toToggle = document.querySelectorAll('.toggleColour');
 
-document.addEventListener('scroll', function () {
-
+document.addEventListener('scroll', function() {
   /*Apply classes for slide in bar*/
   scrollpos = window.scrollY;
 
@@ -30,7 +29,6 @@ document.addEventListener('scroll', function () {
 
     header.classList.remove('shadow');
   }
-
 });
 
 /*Toggle dropdown list*/
@@ -41,7 +39,7 @@ let navMenu = document.getElementById('nav-toggle');
 
 document.onclick = check;
 
-function check (e) {
+function check(e) {
   let target = (e && e.target) || (event && event.srcElement);
 
   //Nav Menu
@@ -51,18 +49,21 @@ function check (e) {
       // click on the link
       if (navMenuDiv.classList.contains('hidden')) {
         navMenuDiv.classList.remove('hidden');
-      } else { navMenuDiv.classList.add('hidden'); }
+      } else {
+        navMenuDiv.classList.add('hidden');
+      }
     } else {
       // click both outside link and outside menu, hide menu
       navMenuDiv.classList.add('hidden');
     }
   }
-
 }
 
-function checkParent (t, elm) {
+function checkParent(t, elm) {
   while (t.parentNode) {
-    if (t == elm) { return true; }
+    if (t == elm) {
+      return true;
+    }
     t = t.parentNode;
   }
   return false;
@@ -70,18 +71,27 @@ function checkParent (t, elm) {
 
 ymaps.ready(init);
 
-function init () {
+function init() {
   let myMap = new ymaps.Map('map', {
-    center: [49.965184, 82.610],
+    center: [49.965184, 82.61],
     zoom: 16,
-    controls: [],
+    controls: []
   });
-  myMap.behaviors.disable(['drag', 'multiTouch', 'scrollZoom', 'dblClickZoom']);
+  myMap.behaviors.disable([
+    'drag',
+    'multiTouch',
+    'scrollZoom',
+    'dblClickZoom',
+    'rightMouseButtonMagnifier'
+  ]);
 
-  myPlacemark = new ymaps.Placemark([49.965184, 82.611933], {
-  }, {
-    preset: 'islands#redMedicalIcon',
-  });
+  myPlacemark = new ymaps.Placemark(
+    [49.965184, 82.611933],
+    {},
+    {
+      preset: 'islands#redMedicalIcon'
+    }
+  );
 
   myMap.geoObjects.add(myPlacemark);
 }
