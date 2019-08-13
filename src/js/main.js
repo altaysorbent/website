@@ -23,7 +23,6 @@ document.addEventListener('scroll', function() {
     header.classList.remove('bg-white', 'border-b');
     //Use to switch toggleColour colours
     for (let i = 0; i < toToggle.length; i++) {
-      toToggle[i].classList.add('text-white');
       toToggle[i].classList.remove('text-gray-800');
     }
 
@@ -49,8 +48,11 @@ function check(e) {
       // click on the link
       if (navMenuDiv.classList.contains('hidden')) {
         navMenuDiv.classList.remove('hidden');
+        navMenuDiv.classList.add('text-black');
+        navMenuDiv.classList.add('bg-white');
       } else {
         navMenuDiv.classList.add('hidden');
+        navMenuDiv.classList.remove('bg-white');
       }
     } else {
       // click both outside link and outside menu, hide menu
