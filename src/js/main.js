@@ -75,7 +75,7 @@ ymaps.ready(init);
 
 function init() {
   let myMap = new ymaps.Map('map', {
-    center: [49.965184, 82.61],
+    center: [49.94, 82.61],
     zoom: 16,
     controls: []
   });
@@ -88,7 +88,7 @@ function init() {
   ]);
 
   myPlacemark = new ymaps.Placemark(
-    [49.965184, 82.611933],
+    [49.945177, 82.612766],
     {},
     {
       preset: 'islands#redMedicalIcon'
