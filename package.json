@@ -8,7 +8,7 @@
     "dev": "gatsby develop",
     "prettier": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "serve": "gatsby serve",
-    "deploy": "webpack --mode production && gh-pages -d public"
+    "deploy": "gatsby build && gh-pages -d public"
   },
   "dependencies": {
     "gatsby": "^2.16.1",
