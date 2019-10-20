@@ -7,9 +7,8 @@
     "build": "gatsby build",
     "dev": "gatsby develop",
     "prettier": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
     "serve": "gatsby serve",
-    "deploy": "webpack --mode production && gh-pages -d dist"
+    "deploy": "webpack --mode production && gh-pages -d public"
   },
   "dependencies": {
     "gatsby": "^2.16.1",
@@ -25,6 +24,7 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
+    "react-yandex-maps": "^4.0.1",
     "tailwindcss": "^1.0.4"
   },
   "devDependencies": {

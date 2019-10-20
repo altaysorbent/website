@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Map as YMap, Placemark, YMaps } from "react-yandex-maps";
+import { Map as YMap, Placemark, YMaps } from 'react-yandex-maps';
 const Footer = () => {
   const Map = () => {
     const placemark = (
@@ -13,13 +13,13 @@ const Footer = () => {
 
     const disableBehaviors = ref => {
       ref &&
-      ref.behaviors.disable([
-        'drag',
-        'multiTouch',
-        'scrollZoom',
-        'dblClickZoom',
-        'rightMouseButtonMagnifier',
-      ]);
+        ref.behaviors.disable([
+          'drag',
+          'multiTouch',
+          'scrollZoom',
+          'dblClickZoom',
+          'rightMouseButtonMagnifier',
+        ]);
     };
 
     return (
@@ -124,7 +124,7 @@ const Footer = () => {
         </div>
       </section>
     </Fragment>
-  )
+  );
 };
 
 export default Footer;

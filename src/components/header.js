@@ -1,6 +1,7 @@
-import React, { useEffect, createRef } from 'react';
+import React, { useEffect, createRef, useState } from 'react';
 
 const Header = () => {
+  const [showMenu, setShowMenu] = useState(false);
   const logoRef = createRef();
   const headerRef = createRef();
   const toToggle = [];
@@ -12,7 +13,7 @@ const Header = () => {
       headerRef.current.classList.add('bg-white', 'border-b', 'shadow');
       //Use to switch toggleColour colours
       for (let element of toToggle) {
-        element.classList.add('text-gray-800');
+        element.classList.add('text-black');
         element.classList.remove('text-white');
       }
     } else {
@@ -20,17 +21,22 @@ const Header = () => {
 
       headerRef.current.classList.remove('bg-white', 'border-b', 'shadow');
       for (let element of toToggle) {
-        element.classList.remove('text-gray-800');
+        element.classList.remove('text-black');
       }
     }
   };
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [handleScroll]);
+  });
   return (
     <nav className="fixed w-full z-30 top-0 text-white" ref={headerRef}>
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
@@ -58,7 +64,7 @@ const Header = () => {
 
         <div className="block lg:hidden pr-4">
           <button
-            id="nav-toggle"
+            onClick={toggleMenu}
             className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-teal-500 appearance-none focus:outline-none"
           >
             <svg
@@ -73,13 +79,19 @@ const Header = () => {
         </div>
 
         <div
-          className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white lg:bg-transparent p-4 lg:p-0 z-20"
-          ref={el => {
-            toToggle.push(el);
-          }}
+          className={[
+            'w-full flex-grow mt-2 bg-white p-4 z-20',
+            'lg:mt-0 lg:flex lg:items-center lg:w-auto lg:block lg:bg-transparent lg:p-0',
+            showMenu ? 'block text-black' : 'hidden text-white',
+          ].join(' ')}
           id="nav-content"
         >
-          <ul className="list-reset lg:flex justify-end flex-1 items-center">
+          <ul
+            className="list-reset lg:flex justify-end flex-1 items-center"
+            ref={el => {
+              toToggle.push(el);
+            }}
+          >
             <li className="mr-3">
               <a
                 className="inline-block no-underline hover:text-underline"
