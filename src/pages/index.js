@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../components/layouts';
 import Meta from '../components/meta';
+import PharmacyMap from '../components/PharmacyMap';
 
 const IndexPage = () => {
   return (
@@ -156,6 +157,9 @@ const IndexPage = () => {
             </div>
           </div>
         </div>
+      </section>
+      <section className="bg-white border-b py-8" id="wheretobuy">
+        <PharmacyMap />
       </section>
       <section id="use" className="bg-white border-b py-8">
         <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">
