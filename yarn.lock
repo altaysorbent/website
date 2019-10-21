@@ -5400,6 +5400,13 @@ gatsby-plugin-sharp@^2.2.31:
     svgo "^1.3.0"
     uuid "^3.3.3"
 
+gatsby-plugin-yandex-metrica@^0.1.3-check:
+  version "0.1.3-check"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-yandex-metrica/-/gatsby-plugin-yandex-metrica-0.1.3-check.tgz#3b06c4934633f4cf159d303ece6c5e47ff2e0914"
+  integrity sha512-DOJUxZgMWYn5OuuJaw6JtkTRIDCcqVj0mufSS7y7H6GU6NhR1CiIlgHhiTVOmrGvnKNj1Q38hINPkd5hWTNR3Q==
+  dependencies:
+    "@babel/runtime" "^7.3.4"
+
 gatsby-react-router-scroll@^2.1.14:
   version "2.1.14"
   resolved "https://registry.yarnpkg.com/gatsby-react-router-scroll/-/gatsby-react-router-scroll-2.1.14.tgz#ca88e736f8ef8ca44d7ad827391292b2077811db"
