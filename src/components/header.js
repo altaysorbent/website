@@ -144,7 +144,7 @@ const Header = () => {
                   navigateTo('use');
                 }}
               >
-                Приминение
+                Применение
               </button>
             </li>
             <li className="mr-3">
