@@ -22,8 +22,9 @@ Build:
     paths:
       - public
   only:
-    - next
-    - master
+    refs:
+      - next
+      - master
 
 Deploy to Staging:
   image: alpine
@@ -38,7 +39,8 @@ Deploy to Staging:
     - apk add --no-cache rsync openssh
     - sh ./scripts/deploy/gitlab-staging.sh
   only:
-    - next
+    refs:
+      - next
 
 Deploy to Production:
   image: alpine
@@ -53,4 +55,5 @@ Deploy to Production:
     - apk add --no-cache rsync openssh
     - sh ./scripts/deploy/gitlab-production.sh
   only:
-    - master
+    refs:
+      - master
