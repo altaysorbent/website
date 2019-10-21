@@ -11,6 +11,7 @@
     "deploy": "gatsby build && gh-pages -d public"
   },
   "dependencies": {
+    "contentful": "^7.10.0",
     "gatsby": "^2.16.1",
     "gatsby-image": "^2.2.29",
     "gatsby-plugin-manifest": "^2.2.23",

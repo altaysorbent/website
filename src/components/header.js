@@ -1,42 +1,56 @@
-import React, { useEffect, createRef, useState } from 'react';
+import React, {
+  Component,
+  createRef,
+  PureComponent,
+  useEffect,
+  useState,
+} from 'react';
 
 const Header = () => {
-  const [showMenu, setShowMenu] = useState(false);
   const logoRef = createRef();
   const headerRef = createRef();
   const toToggle = [];
-  const handleScroll = () => {
-    const scrollpos = window.scrollY;
 
-    if (scrollpos > 10) {
-      logoRef.current.src = '/images/logo_black.png';
-      headerRef.current.classList.add('bg-white', 'border-b', 'shadow');
-      //Use to switch toggleColour colours
-      for (let element of toToggle) {
-        element.classList.add('text-black');
-        element.classList.remove('text-white');
-      }
-    } else {
-      logoRef.current.src = '/images/logo_white.png';
-
-      headerRef.current.classList.remove('bg-white', 'border-b', 'shadow');
-      for (let element of toToggle) {
-        element.classList.remove('text-black');
-      }
-    }
-  };
+  const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
+  const navigateTo = anchor => {
+    document.getElementById(anchor).scrollIntoView();
+  };
+
+  const handleScroll = () => {
+    const scrollpos = window.scrollY;
+
+    if (logoRef.current && headerRef.current) {
+      if (scrollpos > 10) {
+        logoRef.current.src = '/images/logo_black.png';
+        headerRef.current.classList.add('bg-white', 'border-b', 'shadow');
+        //Use to switch toggleColour colours
+        for (let element of toToggle) {
+          element.classList.add('text-black');
+          element.classList.remove('text-white');
+        }
+      } else {
+        logoRef.current.src = '/images/logo_white.png';
+
+        headerRef.current.classList.remove('bg-white', 'border-b', 'shadow');
+        for (let element of toToggle) {
+          element.classList.remove('text-black');
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  });
+  }, []);
+
   return (
     <nav className="fixed w-full z-30 top-0 text-white" ref={headerRef}>
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
@@ -45,13 +59,13 @@ const Header = () => {
             className="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
             href="/"
           >
-            <img id="logo" ref={logoRef} src="/images/logo_white.png" alt="" />
+            <img ref={logoRef} src="/images/logo_white.png" alt="" />
           </a>
         </div>
         <div
           className="ml-0 lg:ml-6 "
           ref={el => {
-            toToggle.push(el);
+            el && toToggle.push(el);
           }}
         >
           <p>
@@ -93,44 +107,65 @@ const Header = () => {
             }}
           >
             <li className="mr-3">
-              <a
-                className="inline-block no-underline hover:text-underline"
-                href="#sorbent"
+              <button
+                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
+                onClick={() => {
+                  navigateTo('sorbent');
+                }}
               >
                 Алтайсорбент
-              </a>
+              </button>
             </li>
+
             <li className="mr-3">
-              <a
-                className="inline-block no-underline hover:text-underline"
-                href="#specification"
+              <button
+                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
+                onClick={() => {
+                  navigateTo('specification');
+                }}
               >
                 Описание
-              </a>
+              </button>
             </li>
             <li className="mr-3">
-              <a
-                className="inline-block no-underline hover:text-underline"
-                href="#use"
+              <button
+                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
+                onClick={() => {
+                  navigateTo('wheretobuy');
+                }}
+              >
+                Где купить?
+              </button>
+            </li>
+            <li className="mr-3">
+              <button
+                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
+                onClick={() => {
+                  navigateTo('use');
+                }}
               >
                 Приминение
-              </a>
+              </button>
             </li>
             <li className="mr-3">
-              <a
-                className="inline-block no-underline hover:text-underline"
-                href="#certificates"
+              <button
+                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
+                onClick={() => {
+                  navigateTo('certificates');
+                }}
               >
                 Сертификация
-              </a>
+              </button>
             </li>
             <li>
-              <a
-                className="inline-block no-underline hover:text-underline"
-                href="#contacts"
+              <button
+                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
+                onClick={() => {
+                  navigateTo('contacts');
+                }}
               >
                 Контакты
-              </a>
+              </button>
             </li>
           </ul>
         </div>
