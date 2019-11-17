@@ -99,7 +99,7 @@ const Footer = () => {
             />
             <h4 className="font-bold">ТОО "Арника"</h4>
             <p>
-              <i className="fas fa-map-marked-alt mr-2" /> Ауэзова 14/1 офис 308
+              <i className="fas fa-map-marked-alt mr-2" /> Ауэзова 14/1 офис 306
             </p>
             <p>
               <i className="fas fa-phone-volume mr-2" />{' '}
