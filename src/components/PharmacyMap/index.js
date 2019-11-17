@@ -10,10 +10,24 @@ import * as contentful from 'contentful';
 
 const PlaceMark = props => {
   const {
-    pharmacy: { location, title, price },
+    pharmacy: { location, title, price, address, phone },
   } = props;
 
-  const baloonContent = renderToStaticMarkup(<strong>{title}</strong>);
+  const content = (
+    <div>
+      <h4 className="text-lg font-bold mb-2">{title}</h4>
+      <p>
+        <b>Адрес:</b> {address}
+      </p>
+      <p>
+        <b>Телефон:</b> {phone}
+      </p>
+      <p>
+        <b>Стоимость:</b> {price} &#8376;
+      </p>
+    </div>
+  );
+  const baloonContent = renderToStaticMarkup(content);
   return (
     <YPlaceMark
       geometry={[location.lat, location.lon]}
