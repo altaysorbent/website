@@ -218,6 +218,17 @@ const IndexPage = () => {
                 }}
                 alt=""
               />
+              <div className="w-full flex flex-col items-center text-gray-800">
+                <h4 className="text-3xl">Цена: 920 &#8376;</h4>
+                <div className="w-full flex justify-center">
+                  <button
+                    className="bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed focus:outline-none"
+                    title={'Скоро с возможностью купить Онлайн'}
+                  >
+                    Купить
+                  </button>
+                </div>
+              </div>
               <p className="w-full text-gray-700 px-6 text-center">
                 Спрашивайте в аптеках вашего города
               </p>
@@ -238,12 +249,12 @@ const IndexPage = () => {
               <h4 className="w-full font-bold text-xl text-gray-800 px-6 text-center">
                 Сертификаты
               </h4>
-              <p className="text-gray-700 text-base px-6 mb-2 text-justify">
+              <p className="text-gray-700 text-base px-6 mb-4 text-justify">
                 Наши продукты соответствуют высоким стандартам. Ниже приведены
                 документы для ознакомления с нашей компанией и продукцией
               </p>
               <div className="flex items-center justify-center">
-                <div className="w-1/4 px-3">
+                <div className="w-1/3 px-3">
                   <a
                     className="cursor-pointer"
                     href="/images/certificates/sertificate-eas.jpg"
@@ -256,8 +267,7 @@ const IndexPage = () => {
                     />
                   </a>
                 </div>
-
-                <div className="w-1/4 px-3">
+                <div className="w-1/3 px-3">
                   <a
                     className="cursor-pointer"
                     href="/images/certificates/test-report.jpg"
@@ -270,7 +280,7 @@ const IndexPage = () => {
                     />
                   </a>
                 </div>
-                <div className="w-1/4 px-3">
+                <div className="w-1/3 px-3">
                   <a
                     className="cursor-pointer"
                     href="/images/certificates/test-report-2.jpg"
