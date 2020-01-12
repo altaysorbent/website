@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from '../components/layouts';
 import Meta from '../components/meta';
-import PharmacyMap from '../components/PharmacyMap';
 
 const IndexPage = () => {
   return (
@@ -14,10 +13,21 @@ const IndexPage = () => {
               <h1 className="my-4 text-5xl font-bold leading-tight">
                 Altaysorbent - здоровья важный элемент!
               </h1>
-              <p className="leading-normal text-2xl mb-8">
+              <p className="leading-normal text-2xl mb-2">
                 100% натуральный кремнесодержащий энтеросорбент с широким
                 спектром действия, изготавливается из природного минерала
-                монтмориллонита
+                монтмориллонита.
+              </p>
+              <p className="leading-normal text-xl mb-8">
+                Инструкция по применению -{' '}
+                <a
+                  href="https://docs.google.com/document/d/1EnG8ulzUB9xqOJD8wZTuWmE1zr43G9IkRMUe9SyxTIw/edit#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  Скачать
+                </a>
               </p>
             </div>
             <div className="w-full md:w-1/2 py-6 flex justify-end">
@@ -153,146 +163,6 @@ const IndexPage = () => {
                   полезная микрофлора кишечника, более того, сорбент
                   способствует ее росту.
                 </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="bg-white border-b py-8" id="wheretobuy">
-        <PharmacyMap />
-      </section>
-      <section id="use" className="bg-white border-b py-8">
-        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">
-          Применение
-        </h3>
-        <div className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
-          <p>
-            «Алтайсорбент» применяют как эффективное профилактическое и
-            вспомогательное средство при лечении заболеваний, сопровождающихся
-            интоксикацией, в частности:
-          </p>
-          <ul className="list-disc lg:ml-10">
-            <li>
-              выведении из организма солей тяжелых металлов и радионуклидов,
-            </li>
-            <li>пищевых, химических, медикаментозных отравлениях,</li>
-            <li>смягчении побочных эффектов лучевой и химиотерапии,</li>
-            <li>снятии алкогольной интоксикации (похмелье)</li>
-            <li>
-              заболеваниях желудочно- кишечного такта (гастрит, язвенная болезнь
-              желудка, дисбактериоз и др)
-            </li>
-            <li>
-              метеоризме (вздутие живота), диспепсических недугах (рвота,
-              изжога, отрыжка),
-            </li>
-            <li>
-              аллергических заболеваниях (поллиноз, пищевая и лекарственная
-              аллергии),
-            </li>
-            <li>артериосклерозах,</li>
-            <li>заболеваниях кожного покрова (экзема, псориаз),</li>
-            <li>нарушении обмена веществ, в том числе ожирении,</li>
-            <li>токсикозе беременных,</li>
-            <li>пародонтозе,</li>
-            <li>лечении кожных опрелостей, пролежней, ран, ожогов и др.</li>
-          </ul>
-          <p>
-            «Алтайорбент» зарегистрирован как биологически активная добавка. Не
-            является лекарственным средством.
-          </p>
-        </div>
-      </section>
-      <section className="bg-white border-b py-8" id="certificates">
-        <div className="container mx-auto flex flex-wrap pt-4 pb-12">
-          <div className="w-full md:w-1/2 p-6 flex flex-col ">
-            <div className="shadow py-4">
-              <h4 className="font-bold text-xl text-gray-800 px-6 text-center">
-                Алтайсорбент №20
-              </h4>
-              <img
-                className="block mx-auto my-2"
-                src="/images/sorbent.png"
-                style={{
-                  height: '170px',
-                }}
-                alt=""
-              />
-              <div className="w-full flex flex-col items-center text-gray-800">
-                <h4 className="text-3xl">Цена: 920 &#8376;</h4>
-                <div className="w-full flex justify-center">
-                  <button
-                    className="bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed focus:outline-none"
-                    title={'Скоро с возможностью купить Онлайн'}
-                  >
-                    Купить
-                  </button>
-                </div>
-              </div>
-              <p className="w-full text-gray-700 px-6 text-center">
-                Спрашивайте в аптеках вашего города
-              </p>
-              <div className="flex items-center justify-center">
-                <a
-                  href="https://docs.google.com/document/d/1EnG8ulzUB9xqOJD8wZTuWmE1zr43G9IkRMUe9SyxTIw/edit#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block mx-auto lg:mx-0 underline text-green-700 font-bold cursor-pointer"
-                >
-                  Инструкция по применению
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-1/2 p-6 flex flex-col ">
-            <div className="shadow py-4">
-              <h4 className="w-full font-bold text-xl text-gray-800 px-6 text-center">
-                Сертификаты
-              </h4>
-              <p className="text-gray-700 text-base px-6 mb-4 text-justify">
-                Наши продукты соответствуют высоким стандартам. Ниже приведены
-                документы для ознакомления с нашей компанией и продукцией
-              </p>
-              <div className="flex items-center justify-center">
-                <div className="w-1/3 px-3">
-                  <a
-                    className="cursor-pointer"
-                    href="/images/certificates/sertificate-eas.jpg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      alt="Свидетельство о регистрации"
-                      src="/images/certificates/sertificate-eas.jpg"
-                    />
-                  </a>
-                </div>
-                <div className="w-1/3 px-3">
-                  <a
-                    className="cursor-pointer"
-                    href="/images/certificates/test-report.jpg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      alt="Протокол испытаний"
-                      src="/images/certificates/test-report.jpg"
-                    />
-                  </a>
-                </div>
-                <div className="w-1/3 px-3">
-                  <a
-                    className="cursor-pointer"
-                    href="/images/certificates/test-report-2.jpg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      alt="Протокол испытаний"
-                      src="/images/certificates/test-report-2.jpg"
-                    />
-                  </a>
-                </div>
               </div>
             </div>
           </div>
