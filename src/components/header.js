@@ -1,10 +1,5 @@
-import React, {
-  Component,
-  createRef,
-  PureComponent,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createRef, useEffect, useState } from 'react';
+import { Link } from 'gatsby';
 
 const Header = () => {
   const logoRef = createRef();
@@ -17,17 +12,13 @@ const Header = () => {
     setShowMenu(!showMenu);
   };
 
-  const navigateTo = anchor => {
-    document.getElementById(anchor).scrollIntoView();
-  };
-
   const handleScroll = () => {
     const scrollpos = window.scrollY;
-
+    const headerClasses = ['bg-white', 'border-b', 'shadow', 'top-0'];
     if (logoRef.current && headerRef.current) {
-      if (scrollpos > 10) {
+      if (scrollpos > 1) {
         logoRef.current.src = '/images/logo_black.png';
-        headerRef.current.classList.add('bg-white', 'border-b', 'shadow');
+        headerRef.current.classList.add(...headerClasses);
         //Use to switch toggleColour colours
         for (let element of toToggle) {
           element.classList.add('text-black');
@@ -36,7 +27,7 @@ const Header = () => {
       } else {
         logoRef.current.src = '/images/logo_white.png';
 
-        headerRef.current.classList.remove('bg-white', 'border-b', 'shadow');
+        headerRef.current.classList.remove(...headerClasses);
         for (let element of toToggle) {
           element.classList.remove('text-black');
         }
@@ -52,15 +43,15 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className="fixed w-full z-30 top-0 text-white" ref={headerRef}>
+    <nav className="w-full z-30 text-white sticky" ref={headerRef}>
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
         <div className="lg:pl-0 pl-2 flex items-center">
-          <a
+          <Link
             className="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-            href="/"
+            to="/"
           >
             <img ref={logoRef} src="/images/logo_white.png" alt="" />
-          </a>
+          </Link>
         </div>
         <div
           className="ml-0 lg:ml-6 "
@@ -69,7 +60,8 @@ const Header = () => {
           }}
         >
           <p>
-            <a className="cursor-pointer" href="tel:+77779898998">
+            Отдел продаж
+            <a className="cursor-pointer ml-2" href="tel:+77779898998">
               <i className="fab fa-whatsapp" aria-hidden="true" />
               &nbsp; +7 (777) 989-89-98
             </a>
@@ -98,7 +90,6 @@ const Header = () => {
             'lg:mt-0 lg:flex lg:items-center lg:w-auto lg:block lg:bg-transparent lg:p-0',
             showMenu ? 'block text-black' : 'hidden text-white',
           ].join(' ')}
-          id="nav-content"
         >
           <ul
             className="list-reset lg:flex justify-end flex-1 items-center"
@@ -107,65 +98,52 @@ const Header = () => {
             }}
           >
             <li className="mr-3">
-              <button
+              <Link
                 className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
-                onClick={() => {
-                  navigateTo('sorbent');
-                }}
+                to="/"
               >
-                Алтайсорбент
-              </button>
-            </li>
-
-            <li className="mr-3">
-              <button
-                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
-                onClick={() => {
-                  navigateTo('specification');
-                }}
-              >
-                Описание
-              </button>
+                Главная
+              </Link>
             </li>
             <li className="mr-3">
-              <button
+              <Link
                 className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
-                onClick={() => {
-                  navigateTo('wheretobuy');
-                }}
+                to="/where-to-buy"
               >
                 Где купить?
-              </button>
+              </Link>
             </li>
             <li className="mr-3">
-              <button
-                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
-                onClick={() => {
-                  navigateTo('use');
-                }}
+              <Link
+                className="no-underline hover:text-underline cursor-pointer focus:outline-none"
+                to="/usage"
               >
                 Применение
-              </button>
+              </Link>
             </li>
             <li className="mr-3">
-              <button
+              <Link
+                className="no-underline hover:text-underline cursor-pointer focus:outline-none"
+                to="/additional-information"
+              >
+                Дополнительная информация
+              </Link>
+            </li>
+            <li className="mr-3">
+              <Link
                 className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
-                onClick={() => {
-                  navigateTo('certificates');
-                }}
+                to="/certification"
               >
                 Сертификация
-              </button>
+              </Link>
             </li>
             <li>
-              <button
+              <Link
                 className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
-                onClick={() => {
-                  navigateTo('contacts');
-                }}
+                to="/contacts"
               >
                 Контакты
-              </button>
+              </Link>
             </li>
           </ul>
         </div>
