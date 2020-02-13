@@ -3,7 +3,7 @@ import Layout from '../components/layouts';
 import Meta from '../components/meta';
 
 const UsagePage = () => {
-  const title = 'Приминение';
+  const title = 'Применение';
   return (
     <Layout>
       <Meta title={title} />
