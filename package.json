@@ -27,7 +27,8 @@
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
     "react-yandex-maps": "^4.0.1",
-    "tailwindcss": "^1.0.4"
+    "tailwindcss": "^1.0.4",
+    "axios": "^0.19.2"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",

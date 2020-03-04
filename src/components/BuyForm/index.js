@@ -1,17 +1,36 @@
 import React from 'react';
+import BuyFormManager from './BuyFormManager';
 
 const BuyForm = () => {
+    
     const title = 'Оформление заказа';
+    let product = {}
+
+    let customer = {
+        name: null,
+        phone: null,
+        email: null,
+    };
+
+    let delivery = {
+        city: null,
+        zipcode: null,
+        address: null
+    };
+
+    const mgr = new BuyFormManager(product, customer, delivery);
+    mgr.loadProduct();
+
     return (
         <section className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
             <div>
                 <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">Товар</h3>
                 <div class="md:flex md:justify-center mb-6">
-                    <form class="w-full max-w-lg">
+                    <div class="w-full max-w-lg">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <img
-                                    src="/images/new-design.png"
+                                    src={ product.img }
                                     className="mx-auto"
                                     style={{
                                         height: '200px',
@@ -22,19 +41,35 @@ const BuyForm = () => {
                             </div>
 
                             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <div class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Наименование:</div>
-                                <div class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Количество:</div>
-                                <div class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Сумма:</div>
+                                <div class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    <span class="mr-3">Наименование:</span>
+                                    <span class="text-xl">{product.name}</span> 
+                                </div>
+                                <div class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    <span class="mr-3">Количество:</span>
+                                    <button
+                                        onClick={() => mgr.changeCount(-1)}
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded" >-</button>
+                                    <input class="w-10 text-center" value={product.count} />
+                                    <button
+                                        onClick={() => changeCount(1)}
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded">+</button>
+                                </div>
+                                <div class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    <span class="mr-3">Сумма:</span>
+                                    
+                                    <span class="text-xl text-orange-600">{product.totalAmount} тг.</span>
+                                </div>
                             </div>
 
                             <p class="text-blue-800 text-xs italic">Правильно заполните все параметры для покупки товара</p>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
                 <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">Покупатель</h3>
                 <div class="md:flex md:justify-center mb-6">
-                    <form class="w-full max-w-lg">
+                    <div class="w-full max-w-lg">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full px-3">
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-customer-name">
@@ -73,12 +108,12 @@ const BuyForm = () => {
                                 <p class="text-blue-800 text-xs italic">Контактные данные нужны для связи с покупателем в случае необходимости</p>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
                 <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">Доставка</h3>
                 <div class="md:flex md:justify-center mb-6">
-                    <form class="w-full max-w-lg">
+                    <div class="w-full max-w-lg">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
                                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-delivery-city">
@@ -118,12 +153,12 @@ const BuyForm = () => {
                                 <p class="text-blue-800 text-xs italic">Укажите ваш полный адрес, чтобы мы могли доставить ваш товар</p>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
                 <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">Подтверждение заказа</h3>
                 <div class="md:flex md:justify-center mb-6">
-                    <form class="w-full max-w-lg">
+                    <div class="w-full max-w-lg">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full px-3 mb-6 md:mb-0">
                                 <div class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Наименование:</div>
@@ -145,13 +180,14 @@ const BuyForm = () => {
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full px-3 mb-6 text-center">
                                 <div class="w-full px-3 mb-6">
-                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        onClick={mgr.createOrder}>
                                         Оплатить
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             
