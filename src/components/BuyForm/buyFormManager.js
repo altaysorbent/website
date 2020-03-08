@@ -9,10 +9,7 @@ export default class BuyFormManager {
 
     loadProduct() {
         // TODO: забирать параметры товара с сервера
-        this.product.name= 'Алтайсорбент';
-        this.product.img= '/images/new-design.png';
-        this.product.count= 0;
-        this.product.amount = 750;
+        
 
         this.changeCount(10);
     }
@@ -25,9 +22,14 @@ export default class BuyFormManager {
         console.log('changeCount', value, this);
     }
 
-    createOrder() {
-        axios.post('/api/yakassa/token', rsp => {
+    decCount() {
+        this.changeCount(-1);
+    }
 
-        })
+    createOrder() {
+        //axios.post('/api/yakassa/token', rsp => {
+
+        //})
+        alert('createOrder');
     }
 }
