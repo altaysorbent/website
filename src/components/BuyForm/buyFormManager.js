@@ -8,6 +8,7 @@ class Product {
         this.img = origin.img || '';
         this.count = origin.count || 0;
         this.amount = origin.amount || 0;
+
         this.totalAmount = this.count * this.amount;
     }
 }
@@ -43,5 +44,19 @@ export default class BuyFormManager {
     clone(origin) {
         const rslt = JSON.parse(JSON.stringify(origin));
         return rslt;
+    }
+
+    createOrder(product, customer, delivery, callback) {
+        const rq = { product, customer, delivery };
+        axios.post('/api/yakassa/token', rq).
+            then(rsp => {
+                callback({
+                    result: rsp.data
+                })
+            }).catch(err => {
+                callback({
+                    error: err
+                })
+            });
     }
 }

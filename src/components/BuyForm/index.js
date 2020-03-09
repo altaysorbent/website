@@ -7,6 +7,7 @@ const BuyForm = () => {
     const [product, updateProduct] = useState(mgr.getDefaultProduct());
     const [customer, updateCustomer] = useState({});
     const [delivery, updateDelivery] = useState({});
+    const [order, updateOrder] = useState({});
 
     useEffect(() => {
         mgr.loadProduct(rsp => {
@@ -30,9 +31,16 @@ const BuyForm = () => {
         updateDelivery(mgr.clone(delivery));
     }
 
+    const createOrder = () => {
+        mgr.createOrder(product, customer, delivery, rsp => {
+            const nextOrder = rsp.result;
+            updateOrder(nextOrder);
+        })
+    }
+
     return (
         <section className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
-            <div>
+            <div id="order-form">
                 <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">Товар</h3>
                 <div className="md:flex md:justify-center mb-6">
                     <div className="w-full max-w-lg">
@@ -235,6 +243,7 @@ const BuyForm = () => {
                             <div className="w-full px-3 mb-6 text-center">
                                 <div className="w-full px-3 mb-6">
                                     <button
+                                        onClick={createOrder}
                                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Оплатить
                                     </button>
@@ -245,7 +254,9 @@ const BuyForm = () => {
                 </div>
             </div>
             
-            <div id="payment-form"></div>
+            <div id="payment-form">
+
+            </div>
         </section>
     )
 };
