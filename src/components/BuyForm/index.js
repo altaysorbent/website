@@ -1,44 +1,34 @@
-import React, { useState } from 'react';
-import { func } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import BuyFormManager from './BuyFormManager';
 
 const BuyForm = () => {
+    const mgr = new BuyFormManager();
 
-    const [product, updateProduct] = useState({
-        empty: true,
-        name: '',
-        img: '',
-        count: 0,
-        amount: 0,
-        totalAmount: 0
-    });
+    const [product, updateProduct] = useState(mgr.getDefaultProduct());
+    const [customer, updateCustomer] = useState({});
+    const [delivery, updateDelivery] = useState({});
+
+    useEffect(() => {
+        mgr.loadProduct(rsp => {
+            const product = rsp.result;
+            updateProduct(product);
+        });
+    }, []);
 
     const changeCount = dlt => {
-        var nextCount = product.count + dlt;
-        if (nextCount < 1) { return; }
-        const pnext = {
-            name: product.name,
-            img: product.img,
-            count: nextCount,
-            amount: product.amount,
-            totalAmount: product.amount * nextCount
-        };
+        const pnext = mgr.changeProcuctCount(product, dlt);
         updateProduct(pnext);
     }
 
-    const init = () => {
-        if (!product.empty) { return; }
-        const pnext = {
-            empty: false,
-            name: 'Алтайсорбент',
-            img: '/images/new-design.png',
-            count: 1,
-            amount: 750,
-            totalAmount: 750 * 1
-        };
-        updateProduct(pnext);
+    const updateCustomerValue = (modifier) => {
+        modifier(customer);
+        updateCustomer(mgr.clone(customer));
     }
 
-    init();
+    const updateDeliveryValue = (modifier) => {
+        modifier(delivery);
+        updateDelivery(mgr.clone(delivery));
+    }
 
     return (
         <section className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
@@ -98,7 +88,10 @@ const BuyForm = () => {
                                     <input className="
                                     appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 
                                     leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                                    id="grid-customer-name"  placeholder="заполните Ф.И.О." />
+                                        id="grid-customer-name"
+                                        placeholder="заполните Ф.И.О."
+                                        value={customer.name}
+                                        onChange={e => updateCustomerValue(customer => customer.name = e.target.value)} />
                                 </label>
                                 
                                 <p className="text-blue-800 text-xs italic">На данное имя будет оформлена доставка заказа по почте</p>
@@ -115,7 +108,9 @@ const BuyForm = () => {
                                     leading-tight focus:outline-none focus:bg-white" 
                                     id="grid-order-phone" 
                                     type="text" 
-                                    placeholder="+7 (xxx) xxx-xx-xx" />
+                                    placeholder="+7 (xxx) xxx-xx-xx"
+                                    value={customer.phone}
+                                    onChange={e => updateCustomerValue(customer => customer.phone = e.target.value)}/>
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-order-email">
@@ -124,7 +119,11 @@ const BuyForm = () => {
                                 <input className="
                                     appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
                                     focus:outline-none focus:bg-white focus:border-gray-500" 
-                                    id="grid-order-email" type="text" placeholder="эл. почта" />
+                                    id="grid-order-email"
+                                    type="text"
+                                    placeholder="эл. почта"
+                                    value={customer.email}
+                                    onChange={e => updateCustomerValue(customer => customer.email = e.target.value)}/>
                             </div>
                             <div className="w-full px-3 mb-6 md:mb-0">
                                 <p className="text-blue-800 text-xs italic">Контактные данные нужны для связи с покупателем в случае необходимости</p>
@@ -146,7 +145,9 @@ const BuyForm = () => {
                                     leading-tight focus:outline-none focus:bg-white" 
                                     id="grid-delivery-city" 
                                     type="text" 
-                                    placeholder="Город" />
+                                    placeholder="Город"
+                                    value={delivery.city}
+                                    onChange={e => updateDeliveryValue(customer => delivery.city = e.target.value)} />
                             </div>
                             <div className="w-full md:w-1/3 px-3">
                                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-delivery-zip">
@@ -155,7 +156,11 @@ const BuyForm = () => {
                                 <input className="
                                     appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
                                     focus:outline-none focus:bg-white focus:border-gray-500" 
-                                    id="grid-delivery-zip" type="text" placeholder="код" />
+                                    id="grid-delivery-zip"
+                                    type="text"
+                                    placeholder="код"
+                                    value={delivery.zipcode}
+                                    onChange={e => updateDeliveryValue(customer => delivery.zipcode = e.target.value)} />
                             </div>
                             
                         </div>
@@ -168,7 +173,10 @@ const BuyForm = () => {
                                 <input className="
                                     appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 
                                     leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                                    id="grid-delivery-address"  placeholder="улица, дом, квартира" />
+                                    id="grid-delivery-address"
+                                    placeholder="улица, дом, квартира"
+                                    value={delivery.address}
+                                    onChange={e => updateDeliveryValue(customer => delivery.address = e.target.value)} />
                             </div>
 
                             <div className="w-full px-3 mb-6 md:mb-0">
@@ -183,14 +191,38 @@ const BuyForm = () => {
                     <div className="w-full max-w-lg">
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full px-3 mb-6 md:mb-0">
-                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Наименование:</div>
-                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Количество:</div>
-                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">ФИО покупателя:</div>
-                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Тел:</div>
-                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">E-Mail:</div>
-                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Адрес:</div>
-                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Почтовый код:</div>
-                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Итоговая сумма:</div>
+                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    Наименование:
+                                    <i className="not-italic float-right text-green-700 text-base">{product.name}</i>
+                                </div>
+                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    Количество:
+                                    <i className="not-italic float-right text-green-700 text-base">{product.count}</i>
+                                </div>
+                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    ФИО покупателя:
+                                    <i className="not-italic float-right text-green-700 text-base">{customer.name}</i>
+                                </div>
+                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    Телефон:
+                                    <i className="not-italic float-right text-green-700 text-base">{customer.phone}</i>
+                                </div>
+                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    E-Mail:
+                                    <i className="not-italic float-right text-green-700 text-base">{customer.email}</i>
+                                </div>
+                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    Адрес:
+                                    <i className="not-italic float-right text-green-700">{delivery.city} {delivery.address}</i>
+                                </div>
+                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    Почтовый код:
+                                    <i className="not-italic float-right text-green-700 text-base">{delivery.zipcode}</i>
+                                </div>
+                                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                    Итоговая сумма:
+                                    <i className="not-italic float-right text-blue-700 text-lg">{product.totalAmount} тг</i>
+                                   </div>
                             </div>
                         </div>
 

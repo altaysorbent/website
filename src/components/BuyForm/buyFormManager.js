@@ -1,35 +1,47 @@
 const axios = require('axios').default;
 
+
+class Product {
+    constructor(origin) {
+        origin = origin || {};
+        this.name = origin.name || '';
+        this.img = origin.img || '';
+        this.count = origin.count || 0;
+        this.amount = origin.amount || 0;
+        this.totalAmount = this.count * this.amount;
+    }
+}
+
 export default class BuyFormManager {
-    constructor(product, customer, delivery) {
-        this.product = product;
-        this.customer = customer;
-        this.delivery = delivery;
+    constructor() {
     }
 
-    loadProduct() {
-        // TODO: забирать параметры товара с сервера
-        
-
-        this.changeCount(10);
+    getDefaultProduct() {
+        return new Product();
     }
 
-    changeCount(value) {
-        
-        this.product.count += value;
-        this.product.totalAmount = this.product.count * this.product.amount;
+    loadProduct(callback) {
+        const rsp = {
+            result: new Product({
+                name: 'Алтайсорбент',
+                img: '/images/new-design.png',
+                count: 1,
+                amount: 1000
+            })
+        };
 
-        console.log('changeCount', value, this);
+        callback(rsp);
     }
 
-    decCount() {
-        this.changeCount(-1);
+    changeProcuctCount(produt, dlt) {
+        produt.count += dlt;
+        produt.count = Math.max(1, produt.count);
+        const rslt = new Product(produt);
+        return rslt;
     }
 
-    createOrder() {
-        //axios.post('/api/yakassa/token', rsp => {
-
-        //})
-        alert('createOrder');
+    clone(origin) {
+        const rslt = JSON.parse(JSON.stringify(origin));
+        return rslt;
     }
 }
