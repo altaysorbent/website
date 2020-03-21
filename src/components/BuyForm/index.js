@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import BuyFormManager from './BuyFormManager';
+import classNames from 'classnames';
 
 const BuyForm = () => {
     const mgr = new BuyFormManager();
+    const currentUrl = new URL(typeof window !== 'undefined' ? window.location.href : '');
+    const orderIdValue = currentUrl.searchParams.get("m");
+    const orderId = parseInt(orderIdValue);
+    const hasOrder = orderId > 0;
 
     const [product, updateProduct] = useState(mgr.getDefaultProduct());
     const [customer, updateCustomer] = useState({});
     const [delivery, updateDelivery] = useState({});
-    const [order, updateOrder] = useState({});
+    const [order, updateOrder] = useState({ finished: false });
 
     useEffect(() => {
+        if (hasOrder) {
+
+        }
         mgr.loadProduct(rsp => {
             const product = rsp.result;
             updateProduct(product);
@@ -21,26 +29,59 @@ const BuyForm = () => {
         updateProduct(pnext);
     }
 
+    const recalculateOrder = (cust, dlvr) => {
+        order.finished =
+            cust.name && cust.phone && cust.email
+            && dlvr.city && dlvr.address && dlvr.zipcode
+        ;
+        updateOrder(mgr.clone(order))
+    }
+
     const updateCustomerValue = (modifier) => {
         modifier(customer);
         updateCustomer(mgr.clone(customer));
+
+        recalculateOrder(customer, delivery);
     }
 
     const updateDeliveryValue = (modifier) => {
         modifier(delivery);
         updateDelivery(mgr.clone(delivery));
+
+        recalculateOrder(customer, delivery);
     }
 
     const createOrder = () => {
-        mgr.createOrder(product, customer, delivery, rsp => {
-            const nextOrder = rsp.result;
+        mgr.createOrder(product, customer, delivery, async rsp => {
+            
+            const rspOrder = await rsp;
+            if (rspOrder.err || !rspOrder.result) { return; }
+
+            const nextOrder = rspOrder.result.result;
             updateOrder(nextOrder);
+            console.log('nextOrder', nextOrder);
+
+            const form = document.getElementById('frm-payment');
+            form.submit();
         })
     }
 
     return (
         <section className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
-            <div id="order-form">
+
+            {hasOrder ? (
+                <div id="product-form">
+                    <div className="md:flex md:justify-center mb-6">
+                        <div className="w-full max-w-lg">
+                            <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">Покупка успешно завершена!</h3>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                    <div></div>
+            )}
+
+             <div id="order-form">
                 <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">Товар</h3>
                 <div className="md:flex md:justify-center mb-6">
                     <div className="w-full max-w-lg">
@@ -230,7 +271,7 @@ const BuyForm = () => {
                                 <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     Итоговая сумма:
                                     <i className="not-italic float-right text-blue-700 text-lg">{product.totalAmount} тг</i>
-                                   </div>
+                                    </div>
                             </div>
                         </div>
 
@@ -244,7 +285,11 @@ const BuyForm = () => {
                                 <div className="w-full px-3 mb-6">
                                     <button
                                         onClick={createOrder}
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        className={classNames({
+                                            'text-white font-bold py-2 px-4 rounded': true,
+                                            'bg-gray-500 hover:bg-blue-gray cursor-not-allowed': !order.finished,
+                                            'bg-blue-500 hover:bg-blue-700': order.finished,
+                                        })}>
                                         Оплатить
                                     </button>
                                 </div>
@@ -252,11 +297,23 @@ const BuyForm = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div id="payment-form">
 
-            </div>
+                <form id="frm-payment" method="POST" action="https://api.paybox.money/payment.php">
+                    <input type="text" name="pg_merchant_id" value={order.pg_merchant_id} />
+                    <input type="text" name="pg_order_id" value={order.pg_order_id} />
+                    <input type="text" name="pg_amount" value={order.pg_amount} />
+                    <input type="text" name="pg_currency" value={order.pg_currency} />
+                    <input type="text" name="pg_lifetime" value={order.pg_lifetime} />
+                    <input type="text" name="pg_description" value={order.pg_description} />
+                    <input type="text" name="pg_testing_mode" value={order.pg_testing_mode} />
+                    <input type="text" name="pg_salt" value={order.pg_salt} />
+                    <input type="text" name="pg_sig" value={order.pg_sig} />
+
+                    <input type="text" name="pg_user_phone" value={order.pg_user_phone} />
+                    <input type="text" name="pg_user_contact_email" value={order.pg_user_contact_email} />
+                    <input type="text" name="pg_request_method" value={order.pg_request_method} />
+                </form>
+                </div>
         </section>
     )
 };

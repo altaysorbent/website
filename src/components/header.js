@@ -108,14 +108,6 @@ const Header = () => {
             <li className="mr-3">
               <Link
                 className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
-                to="/where-to-buy"
-              >
-                Где купить?
-              </Link>
-            </li>
-            <li className="mr-3">
-              <Link
-                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
                 to="/buy">
                 Купить
               </Link>

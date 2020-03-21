@@ -1,6 +1,5 @@
 const axios = require('axios').default;
 
-
 class Product {
     constructor(origin) {
         origin = origin || {};
@@ -8,9 +7,18 @@ class Product {
         this.img = origin.img || '';
         this.count = origin.count || 0;
         this.amount = origin.amount || 0;
+        this.currency = origin.currency || 'RUB';
+        this.descr = origin.descr || 'Заказ';
+        this.uid = origin.uid || '';
 
         this.totalAmount = this.count * this.amount;
     }
+}
+
+function uuidv4() {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
 }
 
 export default class BuyFormManager {
@@ -26,8 +34,11 @@ export default class BuyFormManager {
             result: new Product({
                 name: 'Алтайсорбент',
                 img: '/images/new-design.png',
+                currency: 'KZT',
                 count: 1,
-                amount: 1000
+                amount: 10,
+                descr: 'Заказ Алтайсорбент',
+                uid: uuidv4()
             })
         };
 
@@ -48,8 +59,8 @@ export default class BuyFormManager {
 
     createOrder(product, customer, delivery, callback) {
         const rq = { product, customer, delivery };
-        axios.post('/api/yakassa/token', rq).
-            then(rsp => {
+        axios.post('/api/paybox/init', rq)
+            .then(rsp => {
                 callback({
                     result: rsp.data
                 })
