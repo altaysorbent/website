@@ -6,11 +6,14 @@ class Product {
         this.name = origin.name || '';
         this.img = origin.img || '';
         this.count = origin.count || 0;
-        this.amount = origin.amount || 0;
-        this.currency = origin.currency || 'RUB';
+        this.currency = origin.currency || 'KZT';
         this.descr = origin.descr || 'Заказ';
         this.uid = origin.uid || '';
+        this.amounts = origin.amounts || {
+            'KZT': { name: 'KZT', short: 'тг.', price: 0 },
+        };
 
+        this.amount = this.amounts[this.currency].price;
         this.totalAmount = this.count * this.amount;
     }
 }
@@ -34,9 +37,13 @@ export default class BuyFormManager {
             result: new Product({
                 name: 'Алтайсорбент',
                 img: '/images/new-design.png',
-                currency: 'KZT',
                 count: 1,
-                amount: 10,
+                amounts: {
+                    'KZT': { name: 'KZT', short: 'тг.', price: 750 },
+                    'RUB': { name: 'RUB', short: 'руб.', price: 150 },
+                },
+                currency: 'KZT',
+                amount: 100,
                 descr: 'Заказ Алтайсорбент',
                 uid: uuidv4()
             })

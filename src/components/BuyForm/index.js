@@ -20,7 +20,8 @@ const BuyForm = () => {
         }
         mgr.loadProduct(rsp => {
             const product = rsp.result;
-            updateProduct(product);
+            const pnext = mgr.changeProcuctCount(product, 0);
+            updateProduct(pnext);
         });
     }, []);
 
@@ -35,6 +36,12 @@ const BuyForm = () => {
             && dlvr.city && dlvr.address && dlvr.zipcode
         ;
         updateOrder(mgr.clone(order))
+    }
+
+    const updateProductValue = (modifier) => {
+        modifier(product);
+        const pnext = mgr.changeProcuctCount(product, 0);
+        updateProduct(pnext);
     }
 
     const updateCustomerValue = (modifier) => {
@@ -59,10 +66,9 @@ const BuyForm = () => {
 
             const nextOrder = rspOrder.result.result;
             updateOrder(nextOrder);
-            console.log('nextOrder', nextOrder);
 
             const form = document.getElementById('frm-payment');
-            form.submit();
+            //form.submit();
         })
     }
 
@@ -103,6 +109,32 @@ const BuyForm = () => {
                                     <span className="mr-3">Наименование:</span>
                                     <span className="text-xl">{product.name}</span> 
                                 </div>
+
+                                <div className="flex flex-wrap -mx-3 mb-2">
+                                    <div className="w-full md:w-1/2 px-3 py-3 mb-6 md:mb-0">
+                                        Валюта
+                                    </div>
+                                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                        <div className="relative">
+                                            <select
+                                                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                                value={product.currency}
+                                                onChange={e => updateProductValue(product => product.currency = e.target.value)}
+                                            id="grid-state">
+                                                {Object.keys(product.amounts).map(
+                                                    item =>
+                                                        <option value={item}>{product.amounts[item].name}</option>
+                                                    )
+                                                }
+                                            </select>
+                                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
                                 <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     <span className="mr-3">Количество:</span>
                                     <button
@@ -116,8 +148,8 @@ const BuyForm = () => {
                                 </div>
                                 <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                     <span className="mr-3">Сумма:</span>
-                                    
-                                    <span className="text-xl text-orange-600">{product.totalAmount} тг.</span>
+
+                                    <span className="text-xl text-orange-600">{product.totalAmount} {product.amounts[product.currency].short}</span>
                                 </div>
                             </div>
 
@@ -306,6 +338,7 @@ const BuyForm = () => {
                     <input type="text" name="pg_lifetime" value={order.pg_lifetime} />
                     <input type="text" name="pg_description" value={order.pg_description} />
                     <input type="text" name="pg_testing_mode" value={order.pg_testing_mode} />
+                    <input type="text" name="pg_success_url" value={order.pg_success_url} />
                     <input type="text" name="pg_salt" value={order.pg_salt} />
                     <input type="text" name="pg_sig" value={order.pg_sig} />
 
