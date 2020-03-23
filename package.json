@@ -10,6 +10,8 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "classnames": "^2.2.6",
     "contentful": "^7.10.0",
     "gatsby": "^2.16.1",
     "gatsby-image": "^2.2.29",
