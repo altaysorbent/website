@@ -4,10 +4,16 @@ import classNames from 'classnames';
 
 const BuyForm = () => {
     const mgr = new BuyFormManager();
-    const currentUrl = new URL(typeof window !== 'undefined' ? window.location.href : '');
-    const orderIdValue = currentUrl.searchParams.get("m");
-    const orderId = parseInt(orderIdValue);
-    const hasOrder = orderId > 0;
+    const isBrowser = typeof window !== `undefined`;
+    let currentUrl = '';
+    let orderIdValue = '';
+    let hasOrder = false;
+    if (isBrowser) {
+        currentUrl = new URL(typeof window !== 'undefined' ? window.location.href : '');
+        orderIdValue = currentUrl.searchParams.get("m");
+        const orderId = parseInt(orderIdValue);
+        hasOrder = orderId > 0;
+    }
 
     const [product, updateProduct] = useState(mgr.getDefaultProduct());
     const [customer, updateCustomer] = useState({});
@@ -68,7 +74,7 @@ const BuyForm = () => {
             updateOrder(nextOrder);
 
             const form = document.getElementById('frm-payment');
-            //form.submit();
+            form.submit();
         })
     }
 
