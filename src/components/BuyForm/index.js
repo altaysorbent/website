@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import BuyFormManager from './BuyFormManager';
+import BuyFormManager from './BuyFormManager.js';
 import classNames from 'classnames';
 
 const BuyForm = () => {
