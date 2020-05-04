@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { createRef, useEffect, useState, useCallback } from 'react';
 import { Link } from 'gatsby';
 
 const Header = () => {
@@ -12,7 +12,7 @@ const Header = () => {
     setShowMenu(!showMenu);
   };
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const scrollpos = window.scrollY;
     const headerClasses = ['bg-white', 'border-b', 'shadow', 'top-0'];
     if (logoRef.current && headerRef.current) {
@@ -33,14 +33,14 @@ const Header = () => {
         }
       }
     }
-  };
+  }, [headerRef, logoRef, toToggle]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [handleScroll]);
 
   return (
     <nav className="w-full z-30 text-white sticky" ref={headerRef}>
@@ -106,12 +106,16 @@ const Header = () => {
               </Link>
             </li>
             <li className="mr-3">
-              <Link
+              <a
                 className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
                 to="/where-to-buy"
+                href="https://biosfera.kz/product/product?path=13_378_398&product_id=22827"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Где купить?
-              </Link>
+                <i className="fas fa-external-link-alt ml-1 text-xs" />
+              </a>
             </li>
             <li className="mr-3">
               <Link

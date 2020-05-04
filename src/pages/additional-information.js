@@ -52,6 +52,28 @@ const AdditionalInformationPage = () => {
                 Google Drive
               </a>
             </li>
+            <li>
+              Отзывы о продукции -
+              <a
+                className={linkClassName}
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://irecommend.ru/content/altaisorbent-maloizvestnyi-no-ochen-khoroshii-sorbent"
+              >
+                irecommend.ru
+              </a>
+            </li>
+            <li>
+              Бентониты в экологии. Л. С. Васильянова -
+              <a
+                className={linkClassName}
+                rel="noopener noreferrer"
+                target="_blank"
+                href="http://www.vestnik.nauka.kz/wp-content/uploads/2016/10/5-%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D1%8F%D0%BD%D0%BE%D0%B2%D0%B0.pdf"
+              >
+                vestnik.nauka.kz
+              </a>
+            </li>
           </ul>
         </div>
       </section>
