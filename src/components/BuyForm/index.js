@@ -57,7 +57,7 @@ const BuyForm = () => {
         recalculateOrder(customer, delivery);
     }
 
-    const updateDeliveryValue = (modifier) => {
+    const updateDeliveryValue = (modifier, noRecalcDelivery) => {
         modifier(delivery);
 
         //console.log('updateDeliveryValue', delivery)
@@ -67,15 +67,21 @@ const BuyForm = () => {
         delivery.city = cdecCity.name;
         delivery.cityId = cdecCity.uid;
         
-        
+        if (noRecalcDelivery) {
+            updateDelivery(mgr.clone(delivery));
+            recalculateOrder(customer, delivery);
+            return;
+        }
 
         mgr.loadDeliveryPrice(delivery, product, rsp => {
             ///console.log('loadDeliveryPrice', rsp);
             if (rsp.error) {
                 delivery.error = Array.isArray(rsp.error) ? rsp.error.map(e => e.text) : rsp.error;
                 delivery.price = null;
-            } else {
+            } else if (product.currency == 'KZT') {
                 delivery.price = rsp.result.priceByCurrency;
+            } else {
+                delivery.price = Math.ceil( parseFloat(rsp.result.price) );
             }
 
             updateDelivery(mgr.clone(delivery));
@@ -326,7 +332,7 @@ const BuyForm = () => {
                                     id="grid-delivery-address"
                                     placeholder="улица, дом, квартира"
                                     value={delivery.address}
-                                    onChange={e => updateDeliveryValue(customer => delivery.address = e.target.value)} />
+                                    onChange={e => updateDeliveryValue(customer => delivery.address = e.target.value, true)} />
                             </div>
 
                             <div className="w-full px-3 mb-6 md:mb-0">
