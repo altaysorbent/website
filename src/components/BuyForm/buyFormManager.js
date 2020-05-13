@@ -1,4 +1,6 @@
-const axios = require('axios').default;
+const axiosClass = require('axios');
+const axios = axiosClass.default;
+let jsonpAdapter = require('axios-jsonp');
 
 class Product {
     constructor(origin) {
@@ -12,9 +14,13 @@ class Product {
         this.amounts = origin.amounts || {
             'KZT': { name: 'KZT', short: 'тг.', price: 0 },
         };
+        this.deliveryPrice = origin.deliveryPrice || 0;
 
         this.amount = this.amounts[this.currency].price;
-        this.totalAmount = this.count * this.amount;
+        this.price = this.count * this.amount;
+
+        const succ = !isNaN(this.price) && !isNaN(this.deliveryPrice);
+        this.totalAmount = succ ? this.price + this.deliveryPrice : null;
     }
 }
 
@@ -59,6 +65,13 @@ export default class BuyFormManager {
         return rslt;
     }
 
+    changeDeliveryPrice(produt, deliveryPrice) {
+        produt.deliveryPrice = parseInt(deliveryPrice);
+
+        const rslt = new Product(produt);
+        return rslt;
+    }
+
     clone(origin) {
         const rslt = JSON.parse(JSON.stringify(origin));
         return rslt;
@@ -71,6 +84,50 @@ export default class BuyFormManager {
                 callback({
                     result: rsp.data
                 })
+            }).catch(err => {
+                callback({
+                    error: err
+                })
+            });
+    }
+
+    loadCities(searchStr, callback) {
+        if (searchStr.length < 4) { return; }
+
+        axiosClass({
+            url: 'http://api.cdek.ru/city/getListByTerm/jsonp.php?q=' + searchStr,
+            adapter: jsonpAdapter,
+            callbackParamName: 'callback'
+        }).then(rsp => {
+            const geonames = rsp.data.geonames;
+            if (!geonames) { return }
+            var rslt = geonames.map(itm => {
+                return {
+                    uid: itm.id,
+                    name: itm.cityName,
+                    region: itm.regionName,
+                    label: itm.name,
+                    zipcodes: itm.postCodeArray
+                }
+            });
+
+            callback({
+                result: rslt
+            })
+        })
+    }
+
+    loadDeliveryPrice(delivery, product, callback) {
+        //console.log('loadDeliveryPrice', delivery, product);
+        const rq = {
+            destCityId: delivery.cityId,
+            quantity: product.count,
+            currency: product.currency
+        };
+
+        axios.post('/api/cdek/calculate_price', rq)
+            .then(rsp => {
+                callback(rsp.data.result)
             }).catch(err => {
                 callback({
                     error: err
