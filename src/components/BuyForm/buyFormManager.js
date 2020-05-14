@@ -96,7 +96,7 @@ export default class BuyFormManager {
         if (searchStr.length < 4) { return; }
 
         axiosClass({
-            url: 'http://api.cdek.ru/city/getListByTerm/jsonp.php?q=' + searchStr,
+            url: 'https://api.cdek.ru/city/getListByTerm/jsonp.php?q=' + searchStr,
             adapter: jsonpAdapter,
             callbackParamName: 'callback'
         }).then(rsp => {
