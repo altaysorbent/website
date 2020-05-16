@@ -62,17 +62,21 @@ const BuyForm = () => {
 
         //console.log('updateDeliveryValue', delivery)
         const cdecCity = cities.filter(itm => itm.label === delivery.cityFull)[0];
-        updateZipcodes(cdecCity.zipcodes.map(src => { return { uid: src, label: src } }));
+        if (cdecCity) {
+            updateZipcodes(cdecCity.zipcodes.map(src => { return { uid: src, label: src } }));
 
-        delivery.city = cdecCity.name;
-        delivery.cityId = cdecCity.uid;
+            delivery.city = cdecCity.name;
+            delivery.cityId = cdecCity.uid;
+        }
         
         if (noRecalcDelivery) {
             updateDelivery(mgr.clone(delivery));
             recalculateOrder(customer, delivery);
+            //console.log('noRecalcDelivery');
             return;
         }
 
+        delivery.error = null;
         mgr.loadDeliveryPrice(delivery, product, rsp => {
             ///console.log('loadDeliveryPrice', rsp);
             if (rsp.error) {
