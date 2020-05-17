@@ -116,7 +116,7 @@ const BuyForm = () => {
             updateOrder(nextOrder);
 
             const form = document.getElementById('frm-payment');
-            //form.submit();
+            form.submit();
         })
     }
 
