@@ -67,6 +67,6 @@ module.exports = {
   ],
   proxy: {
     prefix: '/api',
-    url: process.env.GATSBY_API_URL,
+    url: 'http://localhost:1337',
   },
 };
