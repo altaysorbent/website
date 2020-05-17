@@ -1,7 +1,6 @@
 const axiosClass = require('axios');
 const axios = axiosClass.default;
-//axios.defaults.baseURL = 'https://next.api.altaysorbent.org/';
-axios.defaults.baseURL = 'http://localhost:1337/';
+axios.defaults.baseURL = process.env.GATSBY_API_URL;
 let jsonpAdapter = require('axios-jsonp');
 
 class Product {
