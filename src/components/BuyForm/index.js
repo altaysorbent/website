@@ -424,20 +424,20 @@ const BuyForm = () => {
                 </div>
 
                 <form id="frm-payment" method="POST" action="https://api.paybox.money/payment.php">
-                    <input type="text" name="pg_merchant_id" value={order.pg_merchant_id} />
-                    <input type="text" name="pg_order_id" value={order.pg_order_id} />
-                    <input type="text" name="pg_amount" value={order.pg_amount} />
-                    <input type="text" name="pg_currency" value={order.pg_currency} />
-                    <input type="text" name="pg_lifetime" value={order.pg_lifetime} />
-                    <input type="text" name="pg_description" value={order.pg_description} />
-                    <input type="text" name="pg_testing_mode" value={order.pg_testing_mode} />
-                    <input type="text" name="pg_success_url" value={order.pg_success_url} />
-                    <input type="text" name="pg_salt" value={order.pg_salt} />
-                    <input type="text" name="pg_sig" value={order.pg_sig} />
+                    <input type="hidden" name="pg_merchant_id" value={order.pg_merchant_id} />
+                    <input type="hidden" name="pg_order_id" value={order.pg_order_id} />
+                    <input type="hidden" name="pg_amount" value={order.pg_amount} />
+                    <input type="hidden" name="pg_currency" value={order.pg_currency} />
+                    <input type="hidden" name="pg_lifetime" value={order.pg_lifetime} />
+                    <input type="hidden" name="pg_description" value={order.pg_description} />
+                    <input type="hidden" name="pg_testing_mode" value={order.pg_testing_mode} />
+                    <input type="hidden" name="pg_success_url" value={order.pg_success_url} />
+                    <input type="hidden" name="pg_salt" value={order.pg_salt} />
+                    <input type="hidden" name="pg_sig" value={order.pg_sig} />
 
-                    <input type="text" name="pg_user_phone" value={order.pg_user_phone} />
-                    <input type="text" name="pg_user_contact_email" value={order.pg_user_contact_email} />
-                    <input type="text" name="pg_request_method" value={order.pg_request_method} />
+                    <input type="hidden" name="pg_user_phone" value={order.pg_user_phone} />
+                    <input type="hidden" name="pg_user_contact_email" value={order.pg_user_contact_email} />
+                    <input type="hidden" name="pg_request_method" value={order.pg_request_method} />
                 </form>
             </div>
         </section>
