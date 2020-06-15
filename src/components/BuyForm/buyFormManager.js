@@ -61,7 +61,7 @@ export default class BuyFormManager {
 
     changeProcuctCount(produt, dlt) {
         produt.count += dlt;
-        produt.count = Math.min(90, Math.max(1, produt.count));
+        produt.count = Math.min(30, Math.max(1, produt.count));
         const rslt = new Product(produt);
         return rslt;
     }

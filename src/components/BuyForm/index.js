@@ -18,7 +18,7 @@ const BuyForm = () => {
 
     const [product, updateProduct] = useState(mgr.getDefaultProduct());
     const [customer, updateCustomer] = useState({});
-    const [delivery, updateDelivery] = useState({ tariffId: 11 });
+    const [delivery, updateDelivery] = useState({ tariffId: 137 });
     const [order, updateOrder] = useState({ finished: false });
     const [cities, updateCities] = useState([]);
     const [zipcodes, updateZipcodes] = useState([]);
@@ -356,9 +356,9 @@ const BuyForm = () => {
                                             className="py-3 px-4 mb-3 mr-5"
                                             type="radio" name="deliveryType"
                                             placeholder="доставка до квартиры"
-                                            checked={delivery.tariffId === 11}
+                                            checked={delivery.tariffId === 137}
                                             value={delivery.tariffId}
-                                            onChange={e => updateDeliveryValue(customer => delivery.tariffId = 11)}
+                                            onChange={e => updateDeliveryValue(customer => delivery.tariffId = 137)}
                                         />
                                         <span>доставка до квартиры</span>
                                     </label>
@@ -369,9 +369,9 @@ const BuyForm = () => {
                                         <input id="grid-delivery-type-11"
                                             className="py-3 px-4 mb-3 mr-5"
                                             type="radio" name="deliveryType" placeholder="заберу со склада"
-                                            checked={delivery.tariffId === 10}
+                                            checked={delivery.tariffId === 136}
                                             value={delivery.tariffId}
-                                            onChange={e => updateDeliveryValue(customer => delivery.tariffId = 10)}
+                                            onChange={e => updateDeliveryValue(customer => delivery.tariffId = 136)}
                                         />
                                         <span>заберу со склада</span>
                                     </label>
