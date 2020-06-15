@@ -61,7 +61,7 @@ export default class BuyFormManager {
 
     changeProcuctCount(produt, dlt) {
         produt.count += dlt;
-        produt.count = Math.max(1, produt.count);
+        produt.count = Math.min(90, Math.max(1, produt.count));
         const rslt = new Product(produt);
         return rslt;
     }
@@ -123,7 +123,8 @@ export default class BuyFormManager {
         const rq = {
             destCityId: delivery.cityId,
             quantity: product.count,
-            currency: product.currency
+            currency: product.currency,
+            tariff: delivery.tariffId
         };
 
         axios.post('/api/cdek/calculate_price', rq)

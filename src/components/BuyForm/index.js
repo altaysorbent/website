@@ -18,7 +18,7 @@ const BuyForm = () => {
 
     const [product, updateProduct] = useState(mgr.getDefaultProduct());
     const [customer, updateCustomer] = useState({});
-    const [delivery, updateDelivery] = useState({});
+    const [delivery, updateDelivery] = useState({ tariffId: 11 });
     const [order, updateOrder] = useState({ finished: false });
     const [cities, updateCities] = useState([]);
     const [zipcodes, updateZipcodes] = useState([]);
@@ -341,6 +341,41 @@ const BuyForm = () => {
 
                             <div className="w-full px-3 mb-6 md:mb-0">
                                 <p className="text-blue-800 text-xs italic">Укажите ваш полный адрес, чтобы мы могли доставить ваш товар</p>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-wrap -mx-3 mb-6">
+                            <div className="w-full px-3">
+                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-delivery-city">
+                                    Способ доставки
+                                </label>
+
+                                <div>
+                                    <label>
+                                        <input id="grid-delivery-type-10"
+                                            className="py-3 px-4 mb-3 mr-5"
+                                            type="radio" name="deliveryType"
+                                            placeholder="доставка до квартиры"
+                                            checked={delivery.tariffId === 11}
+                                            value={delivery.tariffId}
+                                            onChange={e => updateDeliveryValue(customer => delivery.tariffId = 11)}
+                                        />
+                                        <span>доставка до квартиры</span>
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <label>
+                                        <input id="grid-delivery-type-11"
+                                            className="py-3 px-4 mb-3 mr-5"
+                                            type="radio" name="deliveryType" placeholder="заберу со склада"
+                                            checked={delivery.tariffId === 10}
+                                            value={delivery.tariffId}
+                                            onChange={e => updateDeliveryValue(customer => delivery.tariffId = 10)}
+                                        />
+                                        <span>заберу со склада</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
