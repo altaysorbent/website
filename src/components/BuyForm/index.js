@@ -50,11 +50,37 @@ const BuyForm = () => {
         updateProduct(pnext);
     }
 
+    const updateProductWithRecalcDelivery = (modifier) => {
+        updateProductValue(modifier);
+        execLoadDeliveryPrice();
+    }
+
     const updateCustomerValue = (modifier) => {
         modifier(customer);
         updateCustomer(mgr.clone(customer));
 
         recalculateOrder(customer, delivery);
+    }
+
+    const execLoadDeliveryPrice = () => {
+        delivery.error = null;
+        mgr.loadDeliveryPrice(delivery, product, rsp => {
+            ///console.log('loadDeliveryPrice', rsp);
+            if (rsp.error) {
+                delivery.error = Array.isArray(rsp.error) ? rsp.error.map(e => e.text) : rsp.error;
+                delivery.price = null;
+            } else if (product.currency == 'KZT') {
+                delivery.price = rsp.result.priceByCurrency;
+            } else {
+                delivery.price = Math.ceil(parseFloat(rsp.result.price));
+            }
+
+            updateDelivery(mgr.clone(delivery));
+
+            const pnext = mgr.changeDeliveryPrice(product, delivery.price);
+            updateProduct(pnext);
+            recalculateOrder(customer, delivery);
+        })
     }
 
     const updateDeliveryValue = (modifier, noRecalcDelivery) => {
@@ -76,25 +102,8 @@ const BuyForm = () => {
             return;
         }
 
-        delivery.error = null;
-        mgr.loadDeliveryPrice(delivery, product, rsp => {
-            ///console.log('loadDeliveryPrice', rsp);
-            if (rsp.error) {
-                delivery.error = Array.isArray(rsp.error) ? rsp.error.map(e => e.text) : rsp.error;
-                delivery.price = null;
-            } else if (product.currency == 'KZT') {
-                delivery.price = rsp.result.priceByCurrency;
-            } else {
-                delivery.price = Math.ceil( parseFloat(rsp.result.price) );
-            }
 
-            updateDelivery(mgr.clone(delivery));
-
-            const pnext = mgr.changeDeliveryPrice(product, delivery.price);
-            updateProduct(pnext);
-            recalculateOrder(customer, delivery);
-        })
-
+        execLoadDeliveryPrice();
     }
 
     const loadCities = (modifier) => {
@@ -107,6 +116,10 @@ const BuyForm = () => {
     }
 
     const createOrder = () => {
+        if (!order.finished) {
+            alert('Пожалуйста, заполните все поля');
+            return;
+        }
         mgr.createOrder(product, customer, delivery, async rsp => {
 
             const rspOrder = await rsp;
@@ -167,7 +180,7 @@ const BuyForm = () => {
                                             <select
                                                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                                 value={product.currency}
-                                                onChange={e => updateProductValue(product => product.currency = e.target.value)}
+                                                onChange={e => updateProductWithRecalcDelivery(product => product.currency = e.target.value)}
                                                 id="grid-state">
                                                 {Object.keys(product.amounts).map(
                                                     item =>
@@ -437,7 +450,7 @@ const BuyForm = () => {
 
 
                         <div className="w-full px-3 mb-6">
-                            <p className="text-blue-800 text-xs italic">Подтвердите правильность всех парметров заказа</p>
+                            <p className="text-blue-800 text-xs italic">Подтвердите правильность всех параметров заказа</p>
                         </div>
 
                         <div className="flex flex-wrap -mx-3 mb-6">
