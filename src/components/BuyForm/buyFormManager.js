@@ -46,8 +46,8 @@ export default class BuyFormManager {
                 img: '/images/new-design.png',
                 count: 1,
                 amounts: {
-                    'KZT': { name: 'KZT', short: 'тг.', price: 600 },
-                    'RUB': { name: 'RUB', short: 'руб.', price: 100 },
+                    'KZT': { name: 'KZT', short: 'тг.', price: 700 },
+                    'RUB': { name: 'RUB', short: 'руб.', price: 110 },
                 },
                 currency: 'KZT',
                 amount: 0,
