@@ -106,16 +106,11 @@ const Header = () => {
               </Link>
             </li>
             <li className="mr-3">
-              <a
+              <Link
                 className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
-                to="/where-to-buy"
-                href="https://biosfera.kz/product/product?path=13_378_398&product_id=22827"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Где купить?
-                <i className="fas fa-external-link-alt ml-1 text-xs" />
-              </a>
+                to="/buy">
+                Купить
+              </Link>
             </li>
             <li className="mr-3">
               <Link
