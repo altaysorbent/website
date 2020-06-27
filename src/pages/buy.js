@@ -4,14 +4,14 @@ import Meta from 'components/meta';
 import BuyForm from 'components/BuyForm';
 
 const BuyPage = () => {
-    return (
-        <Layout>
-            <Meta title="Купить" />
-            <section className="bg-white border-b py-8" id="wheretobuy">
-                <BuyForm />
-            </section>
-        </Layout>
-    );
+  return (
+    <Layout>
+      <Meta title="Купить" />
+      <section className="bg-white border-b py-8" id="wheretobuy">
+        <BuyForm />
+      </section>
+    </Layout>
+  );
 };
 
 export default BuyPage;

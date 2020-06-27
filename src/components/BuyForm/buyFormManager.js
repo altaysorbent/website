@@ -4,136 +4,146 @@ axios.defaults.baseURL = process.env.GATSBY_API_URL;
 let jsonpAdapter = require('axios-jsonp');
 
 class Product {
-    constructor(origin) {
-        origin = origin || {};
-        this.name = origin.name || '';
-        this.img = origin.img || '';
-        this.count = origin.count || 0;
-        this.currency = origin.currency || 'KZT';
-        this.descr = origin.descr || 'Заказ';
-        this.uid = origin.uid || '';
-        this.amounts = origin.amounts || {
-            'KZT': { name: 'KZT', short: 'тг.', price: 0 },
-        };
-        this.deliveryPrice = origin.deliveryPrice || 0;
+  constructor(origin) {
+    origin = origin || {};
+    this.name = origin.name || '';
+    this.img = origin.img || '';
+    this.count = origin.count || 0;
+    this.currency = origin.currency || 'KZT';
+    this.descr = origin.descr || 'Заказ';
+    this.uid = origin.uid || '';
+    this.amounts = origin.amounts || {
+      KZT: { name: 'KZT', short: 'тг.', price: 0 },
+    };
+    this.deliveryPrice = origin.deliveryPrice || 0;
 
-        this.amount = this.amounts[this.currency].price;
-        this.price = this.count * this.amount;
+    this.amount = this.amounts[this.currency].price;
+    this.price = this.count * this.amount;
 
-        const succ = !isNaN(this.price) && !isNaN(this.deliveryPrice);
-        this.totalAmount = succ ? this.price + this.deliveryPrice : null;
-    }
+    const succ = !isNaN(this.price) && !isNaN(this.deliveryPrice);
+    this.totalAmount = succ ? this.price + this.deliveryPrice : null;
+  }
 }
 
 function uuidv4() {
-    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    );
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  );
 }
 
 export default class BuyFormManager {
-    constructor() {
+  constructor() {}
+
+  getDefaultProduct() {
+    return new Product();
+  }
+
+  loadProduct(callback) {
+    const rsp = {
+      result: new Product({
+        name: 'Алтайсорбент',
+        img: '/images/new-design.png',
+        count: 1,
+        amounts: {
+          KZT: { name: 'KZT', short: 'тг.', price: 700 },
+          RUB: { name: 'RUB', short: 'руб.', price: 110 },
+        },
+        currency: 'KZT',
+        amount: 0,
+        descr: 'Заказ Алтайсорбент',
+        uid: uuidv4(),
+      }),
+    };
+
+    callback(rsp);
+  }
+
+  changeProcuctCount(produt, dlt) {
+    produt.count += dlt;
+    produt.count = Math.min(30, Math.max(1, produt.count));
+    const rslt = new Product(produt);
+    return rslt;
+  }
+
+  changeDeliveryPrice(produt, deliveryPrice) {
+    produt.deliveryPrice = parseInt(deliveryPrice);
+
+    const rslt = new Product(produt);
+    return rslt;
+  }
+
+  clone(origin) {
+    const rslt = JSON.parse(JSON.stringify(origin));
+    return rslt;
+  }
+
+  createOrder(product, customer, delivery, callback) {
+    const rq = { product, customer, delivery };
+    axios
+      .post('/api/paybox/init', rq)
+      .then(rsp => {
+        callback({
+          result: rsp.data,
+        });
+      })
+      .catch(err => {
+        callback({
+          error: err,
+        });
+      });
+  }
+
+  loadCities(searchStr, callback) {
+    if (searchStr.length < 4) {
+      return;
     }
 
-    getDefaultProduct() {
-        return new Product();
-    }
-
-    loadProduct(callback) {
-        const rsp = {
-            result: new Product({
-                name: 'Алтайсорбент',
-                img: '/images/new-design.png',
-                count: 1,
-                amounts: {
-                    'KZT': { name: 'KZT', short: 'тг.', price: 700 },
-                    'RUB': { name: 'RUB', short: 'руб.', price: 110 },
-                },
-                currency: 'KZT',
-                amount: 0,
-                descr: 'Заказ Алтайсорбент',
-                uid: uuidv4()
-            })
+    axiosClass({
+      url: 'https://api.cdek.ru/city/getListByTerm/jsonp.php?q=' + searchStr,
+      adapter: jsonpAdapter,
+      callbackParamName: 'callback',
+    }).then(rsp => {
+      const geonames = rsp.data.geonames;
+      if (!geonames) {
+        return;
+      }
+      var rslt = geonames.map(itm => {
+        return {
+          uid: itm.id,
+          name: itm.cityName,
+          region: itm.regionName,
+          label: itm.name,
+          zipcodes: itm.postCodeArray,
         };
+      });
 
-        callback(rsp);
-    }
+      callback({
+        result: rslt,
+      });
+    });
+  }
 
-    changeProcuctCount(produt, dlt) {
-        produt.count += dlt;
-        produt.count = Math.min(30, Math.max(1, produt.count));
-        const rslt = new Product(produt);
-        return rslt;
-    }
+  loadDeliveryPrice(delivery, product, callback) {
+    //console.log('loadDeliveryPrice', delivery, product);
+    const rq = {
+      destCityId: delivery.cityId,
+      quantity: product.count,
+      currency: product.currency,
+      tariff: delivery.tariffId,
+    };
 
-    changeDeliveryPrice(produt, deliveryPrice) {
-        produt.deliveryPrice = parseInt(deliveryPrice);
-
-        const rslt = new Product(produt);
-        return rslt;
-    }
-
-    clone(origin) {
-        const rslt = JSON.parse(JSON.stringify(origin));
-        return rslt;
-    }
-
-    createOrder(product, customer, delivery, callback) {
-        const rq = { product, customer, delivery };
-        axios.post('/api/paybox/init', rq)
-            .then(rsp => {
-                callback({
-                    result: rsp.data
-                })
-            }).catch(err => {
-                callback({
-                    error: err
-                })
-            });
-    }
-
-    loadCities(searchStr, callback) {
-        if (searchStr.length < 4) { return; }
-
-        axiosClass({
-            url: 'https://api.cdek.ru/city/getListByTerm/jsonp.php?q=' + searchStr,
-            adapter: jsonpAdapter,
-            callbackParamName: 'callback'
-        }).then(rsp => {
-            const geonames = rsp.data.geonames;
-            if (!geonames) { return }
-            var rslt = geonames.map(itm => {
-                return {
-                    uid: itm.id,
-                    name: itm.cityName,
-                    region: itm.regionName,
-                    label: itm.name,
-                    zipcodes: itm.postCodeArray
-                }
-            });
-
-            callback({
-                result: rslt
-            })
-        })
-    }
-
-    loadDeliveryPrice(delivery, product, callback) {
-        //console.log('loadDeliveryPrice', delivery, product);
-        const rq = {
-            destCityId: delivery.cityId,
-            quantity: product.count,
-            currency: product.currency,
-            tariff: delivery.tariffId
-        };
-
-        axios.post('/api/cdek/calculate_price', rq)
-            .then(rsp => {
-                callback(rsp.data.result)
-            }).catch(err => {
-                callback({
-                    error: err
-                })
-            });
-    }
+    axios
+      .post('/api/cdek/calculate_price', rq)
+      .then(rsp => {
+        callback(rsp.data.result);
+      })
+      .catch(err => {
+        callback({
+          error: err,
+        });
+      });
+  }
 }
