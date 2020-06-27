@@ -38,6 +38,9 @@ const BuyForm = () => {
     updateProduct(pnext);
   };
 
+  const decreaseCount = () => changeCount(-1);
+  const increaseCount = () => changeCount(1);
+
   const recalculateOrder = (cust, dlvr) => {
     order.finished =
       cust.name &&
@@ -144,9 +147,19 @@ const BuyForm = () => {
     });
   };
 
+  const temporaryUnAvailable = (
+    <div className="w-full mb-4 text-center">
+      <h4 className="text-green-700">
+        <span className="text-red-700">Внимание!</span> По{' '}
+        <b>техническим причинам</b> купить Алтайсорбент на сайте можно будет с 1
+        июля 2020 года!
+      </h4>
+    </div>
+  );
+
   return (
-    <section className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
-      {hasOrder ? (
+    <section className="container mx-auto px-2 pt-4 text-gray-700 text-xl">
+      {hasOrder && (
         <div id="product-form">
           <div className="md:flex md:justify-center mb-6">
             <div className="w-full max-w-lg">
@@ -156,43 +169,35 @@ const BuyForm = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <div></div>
       )}
 
       <div id="order-form">
-        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">
-          Товар
-        </h3>
         <div className="md:flex md:justify-center mb-6">
           <div className="w-full max-w-lg">
-            <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="flex flex-wrap mb-6">
+              {temporaryUnAvailable}
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <img
                   src={product.img}
                   className="mx-auto"
                   style={{
-                    height: '200px',
+                    height: 220,
                     width: 'auto',
                   }}
                   alt=""
                 />
               </div>
-
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  <span className="mr-3">Наименование:</span>
-                  <span className="text-xl">{product.name}</span>
+              <div className="w-full flex flex-col md:w-1/2 px-3 mb-6 md:mb-0">
+                <div className="block uppercase tracking-wide text-gray-800 text-3xl font-bold mb-4 text-center md:text-left">
+                  {product.name}
                 </div>
 
-                <div className="flex flex-wrap -mx-3 mb-2">
-                  <div className="w-full md:w-1/2 px-3 py-3 mb-6 md:mb-0">
-                    Валюта
-                  </div>
-                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <div className="flex flex-wrap mb-6">
+                  <div className="flex items-center w-1/2 mb-4">Валюта</div>
+                  <div className="flex items-center mb-4">
                     <div className="relative">
                       <select
-                        className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        className="appearance-none w-full bg-gray-200 border border-gray-500 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         value={product.currency}
                         onChange={e =>
                           updateProductWithRecalcDelivery(
@@ -218,42 +223,48 @@ const BuyForm = () => {
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  <span className="mr-3">Количество:</span>
-                  <button
-                    onClick={() => changeCount(-1)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
-                  >
-                    -
-                  </button>
+                  <div className="flex items-center w-1/2">Количество</div>
+                  <div className="flex items-center">
+                    <div className="w-full">
+                      <button
+                        onClick={decreaseCount}
+                        className="focus:outline-none leading-none bg-green-600 hover:bg-green-700 text-white font-bold  py-1 px-2 rounded"
+                      >
+                        &minus;
+                      </button>
 
-                  <span className="w-10 px-4 text-center">{product.count}</span>
-                  <button
-                    onClick={() => changeCount(1)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
-                  >
-                    +
-                  </button>
-                </div>
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  <span className="mr-3">Сумма:</span>
-
-                  <span className="text-xl text-orange-600">
-                    {product.price} {product.amounts[product.currency].short}
-                  </span>
+                      <span className="w-10 px-4 text-center">
+                        {product.count}
+                      </span>
+                      <button
+                        onClick={increaseCount}
+                        className="focus:outline-none leading-none bg-green-600 hover:bg-green-700 text-white font-bold  py-1 px-2 rounded"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <hr className="w-full border-t my-4 border-green-200" />
+                  <div className="flex items-center w-1/2">
+                    <span className="mr-3">Сумма</span>
+                  </div>
+                  <div className="flex items-center w-1/2">
+                    <span className="text-xl text-green-700 font-bold">
+                      {product.price} {product.amounts[product.currency].short}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <p className="text-blue-800 text-xs italic">
+              <p className="text-red-800 text-sm">
                 Правильно заполните все параметры для покупки товара
               </p>
             </div>
           </div>
         </div>
 
-        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">
+        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-4 text-center">
           Покупатель
         </h3>
         <div className="md:flex md:justify-center mb-6">
@@ -261,16 +272,14 @@ const BuyForm = () => {
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full px-3">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block text-gray-800 mb-2"
                   htmlFor="grid-customer-name"
                 >
-                  Ф.И.О. покупателя
+                  Ф.И.О.
                   <input
-                    className="
-                                    appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 
-                                    leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-customer-name"
-                    placeholder="заполните Ф.И.О."
+                    placeholder="Например: Иванов Иван Иванович"
                     value={customer.name}
                     onChange={e =>
                       updateCustomerValue(
@@ -280,7 +289,7 @@ const BuyForm = () => {
                   />
                 </label>
 
-                <p className="text-blue-800 text-xs italic">
+                <p className="text-green-700 text-sm">
                   На данное имя будет оформлена доставка заказа по почте
                 </p>
               </div>
@@ -289,15 +298,13 @@ const BuyForm = () => {
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block text-gray-800"
                   htmlFor="grid-order-phone"
                 >
                   Номер телефона
                 </label>
                 <input
-                  className="
-                                    appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 
-                                    leading-tight focus:outline-none focus:bg-white"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-order-phone"
                   type="text"
                   placeholder="+7 (xxx) xxx-xx-xx"
@@ -311,18 +318,16 @@ const BuyForm = () => {
               </div>
               <div className="w-full md:w-1/2 px-3">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block text-gray-800"
                   htmlFor="grid-order-email"
                 >
-                  e-mail
+                  E-mail
                 </label>
                 <input
-                  className="
-                                    appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight 
-                                    focus:outline-none focus:bg-white focus:border-gray-500"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-order-email"
-                  type="text"
-                  placeholder="эл. почта"
+                  type="email"
+                  placeholder="E-mail"
                   value={customer.email}
                   onChange={e =>
                     updateCustomerValue(
@@ -331,8 +336,8 @@ const BuyForm = () => {
                   }
                 />
               </div>
-              <div className="w-full px-3 mb-6 md:mb-0">
-                <p className="text-blue-800 text-xs italic">
+              <div className="w-full px-3">
+                <p className="text-green-800 text-sm">
                   Контактные данные нужны для связи с покупателем в случае
                   необходимости
                 </p>
@@ -341,15 +346,15 @@ const BuyForm = () => {
           </div>
         </div>
 
-        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">
+        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-4 text-center">
           Доставка
         </h3>
         <div className="md:flex md:justify-center mb-6">
           <div className="w-full max-w-lg">
-            <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="flex flex-wrap mb-6">
               <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block text-gray-800"
                   htmlFor="grid-delivery-city"
                 >
                   Город
@@ -357,10 +362,8 @@ const BuyForm = () => {
 
                 <Autocomplete
                   inputProps={{
-                    className: `
-                                                appearance-none block w-full bg-gray-200 text-gray-700 
-                                                border border-gray-500 rounded py-3 px-4 
-                                                leading-tight focus:outline-none focus:bg-white`,
+                    className:
+                      'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white',
                     type: 'text',
                     placeholder: 'Город',
                   }}
@@ -388,7 +391,7 @@ const BuyForm = () => {
               </div>
               <div className="w-full md:w-1/3 px-3">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block text-gray-800"
                   htmlFor="grid-delivery-zip"
                 >
                   Почтовый код
@@ -396,12 +399,10 @@ const BuyForm = () => {
 
                 <Autocomplete
                   inputProps={{
-                    className: `
-                                                appearance-none block w-full bg-gray-200 text-gray-700 
-                                                border border-gray-200 rounded py-3 px-4 leading-tight 
-                                                focus:outline-none focus:bg-white focus:border-gray-500`,
+                    className:
+                      'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500',
                     type: 'text',
-                    placeholder: 'код',
+                    placeholder: '070004',
                   }}
                   wrapperStyle={{ display: 'block' }}
                   items={zipcodes}
@@ -425,20 +426,18 @@ const BuyForm = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="flex flex-wrap mb-6">
               <div className="w-full px-3">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block text-gray-800"
                   htmlFor="grid-delivery-address"
                 >
                   Адрес получателя
                 </label>
                 <input
-                  className="
-                                    appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 
-                                    leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-delivery-address"
-                  placeholder="улица, дом, квартира"
+                  placeholder="Улица, дом, квартира"
                   value={delivery.address}
                   onChange={e =>
                     updateDeliveryValue(
@@ -450,16 +449,16 @@ const BuyForm = () => {
               </div>
 
               <div className="w-full px-3 mb-6 md:mb-0">
-                <p className="text-blue-800 text-xs italic">
+                <p className="text-green-700 text-sm">
                   Укажите ваш полный адрес, чтобы мы могли доставить ваш товар
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="flex flex-wrap mb-6">
               <div className="w-full px-3">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className="block text-gray-800 mb-2"
                   htmlFor="grid-delivery-city"
                 >
                   Способ доставки
@@ -469,7 +468,7 @@ const BuyForm = () => {
                   <label>
                     <input
                       id="grid-delivery-type-10"
-                      className="py-3 px-4 mb-3 mr-5"
+                      className="py-3 px-4 mb-3 mr-5 text-green-500"
                       type="radio"
                       name="deliveryType"
                       placeholder="доставка до квартиры"
@@ -481,7 +480,13 @@ const BuyForm = () => {
                         )
                       }
                     />
-                    <span>доставка до квартиры</span>
+                    <span
+                      className={classNames({
+                        'text-green-700': delivery.tariffId === 137,
+                      })}
+                    >
+                      доставка до квартиры
+                    </span>
                   </label>
                 </div>
 
@@ -501,112 +506,105 @@ const BuyForm = () => {
                         )
                       }
                     />
-                    <span>заберу со склада</span>
+                    <span
+                      className={classNames({
+                        'text-green-700': delivery.tariffId === 136,
+                      })}
+                    >
+                      заберу со склада
+                    </span>
                   </label>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-wrap -mx-3 mb-6 text-red-600">
-              {delivery.error}
-            </div>
+            {delivery?.error && (
+              <div className="block mb-6 text-red-600">{delivery.error}</div>
+            )}
           </div>
         </div>
 
-        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">
+        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-6 text-center">
           Подтверждение заказа
         </h3>
-        <div className="md:flex md:justify-center mb-6">
-          <div className="w-full max-w-lg">
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3 mb-6 md:mb-0">
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Наименование:
-                  <i className="not-italic float-right text-green-700 text-base">
-                    {product.name}
-                  </i>
-                </div>
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Количество:
-                  <i className="not-italic float-right text-green-700 text-base">
-                    {product.count}
-                  </i>
-                </div>
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  ФИО покупателя:
-                  <i className="not-italic float-right text-green-700 text-base">
-                    {customer.name}
-                  </i>
-                </div>
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Телефон:
-                  <i className="not-italic float-right text-green-700 text-base">
-                    {customer.phone}
-                  </i>
-                </div>
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  E-Mail:
-                  <i className="not-italic float-right text-green-700 text-base">
-                    {customer.email}
-                  </i>
-                </div>
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Адрес:
-                  <i className="not-italic float-right text-green-700">
-                    {delivery.city} {delivery.address}
-                  </i>
-                </div>
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Почтовый код:
-                  <i className="not-italic float-right text-green-700 text-base">
-                    {delivery.zipcode}
-                  </i>
-                </div>
 
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Цена товара:
-                  <i className="not-italic float-right text-red-700 text-base">
-                    {product.price} {product.currency}
-                  </i>
-                </div>
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Стоимость доставки товара:
-                  <i className="not-italic float-right text-red-700 text-base">
-                    {product.deliveryPrice} {product.currency}
-                  </i>
-                </div>
+        <div className="w-full max-w-lg mx-auto text-gray-800">
+          <div className="flex">
+            <div className="w-1/2">Наименование:</div>
+            <div className="text-green-700">{product.name}</div>
+          </div>
 
-                <div className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Итоговая сумма:
-                  <i className="not-italic float-right text-blue-700 text-lg">
-                    {product.totalAmount} {product.currency}
-                  </i>
-                </div>
-              </div>
+          <div className="flex">
+            <div className="w-1/2">Количество:</div>
+            <div className="text-green-700">{product.count}</div>
+          </div>
+
+          <div className="flex">
+            <div className="w-1/2">ФИО:</div>
+            <div className="text-green-700">{customer.name}</div>
+          </div>
+
+          <div className="flex">
+            <div className="w-1/2">Телефон:</div>
+            <div className="text-green-700">{customer.phone}</div>
+          </div>
+
+          <div className="flex">
+            <div className="w-1/2">E-Mail:</div>
+            <div className="text-green-700">{customer.email}</div>
+          </div>
+
+          <div className="flex">
+            <div className="w-1/2">Адрес:</div>
+            <div className="text-green-700">
+              {delivery.city} {delivery.address}
             </div>
+          </div>
 
-            <div className="w-full px-3 mb-6">
-              <p className="text-blue-800 text-xs italic">
-                Подтвердите правильность всех параметров заказа
-              </p>
-            </div>
+          <div className="flex">
+            <div className="w-1/2">Почтовый код:</div>
+            <div className="text-green-700">{delivery.zipcode}</div>
+          </div>
 
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3 mb-6 text-center">
-                <div className="w-full px-3 mb-6">
-                  <button
-                    onClick={createOrder}
-                    className={classNames({
-                      'text-white font-bold py-2 px-4 rounded': true,
-                      'bg-gray-500 hover:bg-blue-gray cursor-not-allowed': !order.finished,
-                      'bg-blue-500 hover:bg-blue-700': order.finished,
-                    })}
-                  >
-                    Оплатить
-                  </button>
-                </div>
-              </div>
+          <div className="flex">
+            <div className="w-1/2">Цена товара:</div>
+            <div className="text-green-700">
+              {product.price} {product.currency}
             </div>
+          </div>
+
+          <div className="flex">
+            <div className="w-1/2">Стоимость доставки товара:</div>
+            <div className="text-green-700">
+              {product.deliveryPrice} {product.currency}
+            </div>
+          </div>
+
+          <div className="flex">
+            <div className="w-1/2">Итоговая сумма:</div>
+            <div className="text-green-700">
+              {product.totalAmount} {product.currency}
+            </div>
+          </div>
+
+          <div className="w-full my-6">
+            <p className="text-green-700">
+              Подтвердите правильность всех параметров заказа
+            </p>
+          </div>
+          {temporaryUnAvailable}
+          <div className="w-full text-center">
+            <button
+              onClick={createOrder}
+              className={classNames({
+                'text-white font-bold py-2 px-4 rounded ': true,
+                'bg-gray-500 hover:bg-blue-gray cursor-not-allowed': !order.finished,
+                'bg-green-600 hover:bg-green-700': order.finished,
+              })}
+              disabled={!order.finished}
+            >
+              Оплатить
+            </button>
           </div>
         </div>
 

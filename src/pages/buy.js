@@ -7,7 +7,7 @@ const BuyPage = () => {
   return (
     <Layout>
       <Meta title="Купить" />
-      <section className="bg-white border-b py-8" id="wheretobuy">
+      <section className="bg-white border-b py-8" id="buy">
         <BuyForm />
       </section>
     </Layout>
