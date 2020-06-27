@@ -135,7 +135,9 @@ const BuyForm = () => {
 
     return (
         <section className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
-
+            <div className="constructionBanner">
+                <h2> Технический ремонт до 1 июля</h2>
+            </div>
             {hasOrder ? (
                 <div id="product-form">
                     <div className="md:flex md:justify-center mb-6">
