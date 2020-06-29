@@ -1,2 +1,0 @@
-C:\Work\CityInfo\Altaysorbent\WebUI\obj\Debug\WebUI.njsprojAssemblyReference.cache
-C:\Work\CityInfo\Altaysorbent\WebUI\bin\Microsoft.NodejsTools.WebRole.dll

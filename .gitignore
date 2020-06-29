@@ -70,3 +70,8 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# Visual Studio files
+*.njsproj*
+obj
+bin

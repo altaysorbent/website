@@ -10,10 +10,28 @@ const Footer = () => {
             <br />
             Республика Казахстан, г. Усть-Каменогорск
           </p>
+          <div className="text-white mt-4">
+            <a
+              className="mr-4"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="/files/privacy-policy.pdf"
+            >
+              Политика конфиденциальности
+            </a>
+
+            <a
+              rel="noopener noreferrer"
+              target="_blank"
+              href="/files/public-offer-agreement.pdf"
+            >
+              Договор оферта
+            </a>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default Footer; 
+export default Footer;
