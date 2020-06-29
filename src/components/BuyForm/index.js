@@ -605,6 +605,28 @@ const BuyForm = () => {
             >
               Оплатить
             </button>
+
+            <p className="mt-4">
+              Нажимая на кнопку "Оплатить", Вы соглашаетесь с{' '}
+              <a
+                className="text-green-700 border-b border-green-700 cursor-pointer"
+                rel="noopener noreferrer"
+                target="_blank"
+                href="/files/privacy-policy.pdf"
+              >
+                Политикой конфиденциальности
+              </a>{' '}
+              и условиями{' '}
+              <a
+                className="text-green-700 border-b border-green-700 cursor-pointer"
+                rel="noopener noreferrer"
+                target="_blank"
+                href="/files/public-offer-agreement.pdf"
+              >
+                Публичного договора
+              </a>
+              .
+            </p>
           </div>
         </div>
 
