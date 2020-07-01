@@ -147,16 +147,6 @@ const BuyForm = () => {
     });
   };
 
-  const temporaryUnAvailable = (
-    <div className="w-full mb-4 text-center">
-      <h4 className="text-green-700">
-        <span className="text-red-700">Внимание!</span> По{' '}
-        <b>техническим причинам</b> купить Алтайсорбент на сайте можно будет с 1
-        июля 2020 года!
-      </h4>
-    </div>
-  );
-
   return (
     <section className="container mx-auto px-2 pt-4 text-gray-700 text-xl">
       {hasOrder && (
@@ -175,7 +165,6 @@ const BuyForm = () => {
         <div className="md:flex md:justify-center mb-6">
           <div className="w-full max-w-lg">
             <div className="flex flex-wrap mb-6">
-              {temporaryUnAvailable}
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <img
                   src={product.img}
@@ -592,7 +581,6 @@ const BuyForm = () => {
               Подтвердите правильность всех параметров заказа
             </p>
           </div>
-          {temporaryUnAvailable}
           <div className="w-full text-center">
             <button
               onClick={createOrder}
