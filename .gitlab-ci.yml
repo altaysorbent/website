@@ -42,7 +42,6 @@ Build production:
       - public
   only:
     refs:
-      - next
       - master
 
 Deploy to Staging:
