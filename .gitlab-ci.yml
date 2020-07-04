@@ -16,9 +16,9 @@ Build next:
   environment:
     name: next
   before_script:
-    - yarn install
+    - npm install
   script:
-    - yarn run build
+    - npm run build
   artifacts:
     expire_in: 1 week
     paths:
@@ -33,9 +33,9 @@ Build production:
   environment:
     name: production
   before_script:
-    - yarn install
+    - npm install
   script:
-    - yarn run build
+    - npm run build
   artifacts:
     expire_in: 1 week
     paths:
