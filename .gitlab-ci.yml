@@ -18,9 +18,9 @@ Build next:
   before_script:
     - npm install
   script:
-    - npm run build
+    - npm run build-next
   artifacts:
-    expire_in: 1 week
+    expire_in: 1 day
     paths:
       - public
   only:
@@ -37,7 +37,7 @@ Build production:
   script:
     - npm run build
   artifacts:
-    expire_in: 1 week
+    expire_in: 1 day
     paths:
       - public
   only:

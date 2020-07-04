@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
+    "build-next": "GATSBY_ACTIVE_ENV=next gatsby build",
     "dev": "gatsby develop",
     "prettier": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "serve": "gatsby serve"
