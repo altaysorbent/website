@@ -10,9 +10,28 @@ stages:
   - build
   - deploy
 
-Build:
+Build next:
   image: node:10-alpine
   stage: build
+  environment:
+    name: next
+  before_script:
+    - yarn install
+  script:
+    - yarn run build
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - public
+  only:
+    refs:
+      - next
+
+Build production:
+  image: node:10-alpine
+  stage: build
+  environment:
+    name: production
   before_script:
     - yarn install
   script:
