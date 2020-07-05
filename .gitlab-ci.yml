@@ -16,11 +16,11 @@ Build next:
   environment:
     name: next
   before_script:
-    - yarn install
+    - npm install
   script:
-    - yarn run build
+    - npm run build-next
   artifacts:
-    expire_in: 1 week
+    expire_in: 1 day
     paths:
       - public
   only:
@@ -33,16 +33,15 @@ Build production:
   environment:
     name: production
   before_script:
-    - yarn install
+    - npm install
   script:
-    - yarn run build
+    - npm run build
   artifacts:
-    expire_in: 1 week
+    expire_in: 1 day
     paths:
       - public
   only:
     refs:
-      - next
       - master
 
 Deploy to Staging:
