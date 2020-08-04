@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BuyFormManager from './buyFormManager';
 import classNames from 'classnames';
 import Autocomplete from 'react-autocomplete';
+import InputMask from 'react-input-mask';
 
 const BuyForm = () => {
   const mgr = new BuyFormManager();
@@ -246,8 +247,9 @@ const BuyForm = () => {
                 </div>
               </div>
 
-              <p className="text-red-800 text-sm">
-                Правильно заполните все параметры для покупки товара
+              <p className="text-orange-800 text-sm">
+                Мы принимаем платежи Visa и MasterCard
+                <img src="/images/cards.jpg" width="150px"></img>
               </p>
             </div>
           </div>
@@ -292,11 +294,13 @@ const BuyForm = () => {
                 >
                   Номер телефона
                 </label>
-                <input
+
+                <InputMask
+                  mask="+99999999999"
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-order-phone"
                   type="text"
-                  placeholder="+7 (xxx) xxx-xx-xx"
+                  placeholder="Номер Вашего телефона"
                   value={customer.phone}
                   onChange={e =>
                     updateCustomerValue(
@@ -316,6 +320,7 @@ const BuyForm = () => {
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-order-email"
                   type="email"
+                  pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"
                   placeholder="E-mail"
                   value={customer.email}
                   onChange={e =>
@@ -338,6 +343,7 @@ const BuyForm = () => {
         <h3 className="text-3xl text-gray-800 font-bold leading-none mb-4 text-center">
           Доставка
         </h3>
+
         <div className="md:flex md:justify-center mb-6">
           <div className="w-full max-w-lg">
             <div className="flex flex-wrap mb-6">
@@ -414,7 +420,12 @@ const BuyForm = () => {
                 />
               </div>
             </div>
-
+            <div className="w-full px-3">
+              <p className="text-green-800 text-sm">
+                Начните вводить город, а затем выберите город и почтовый индекс
+                из списка.
+              </p>
+            </div>
             <div className="flex flex-wrap mb-6">
               <div className="w-full px-3">
                 <label
@@ -513,109 +524,106 @@ const BuyForm = () => {
           </div>
         </div>
 
-        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-6 text-center">
-          Подтверждение заказа
-        </h3>
-
         <div className="w-full max-w-lg mx-auto text-gray-800">
-          <div className="flex">
-            <div className="w-1/2">Наименование:</div>
-            <div className="text-green-700">{product.name}</div>
-          </div>
+          <div className="receipt">
+            <h3 className="text-3xl text-gray-800 font-bold leading-none mb-6 text-center">
+              Итоговый чек
+            </h3>
 
-          <div className="flex">
-            <div className="w-1/2">Количество:</div>
-            <div className="text-green-700">{product.count}</div>
-          </div>
+            <div className="w-full max-w-lg mx-auto text-white-800">
+              <div className="flex">
+                <div className="w-1/2">Получатель:</div>
+                <div className="text-grey-300">
+                  <b>
+                    {customer.name}
+                    <br></br> {customer.phone}
+                    <br></br> {customer.email}
+                  </b>
+                </div>
+              </div>
 
-          <div className="flex">
-            <div className="w-1/2">ФИО:</div>
-            <div className="text-green-700">{customer.name}</div>
-          </div>
+              <hr></hr>
+              <div className="flex">
+                <div className="w-1/2">Товар:</div>
+                <div className="text-black-600">{product.name}</div>
+              </div>
+              <hr></hr>
+              <div className="flex">
+                <div className="w-1/2">Количество:</div>
+                <div className="text-black-600">x{product.count}</div>
+              </div>
 
-          <div className="flex">
-            <div className="w-1/2">Телефон:</div>
-            <div className="text-green-700">{customer.phone}</div>
-          </div>
+              <hr></hr>
+              <div className="flex">
+                <div className="w-1/2">Стоимость товара:</div>
+                <div className="text-black-600">
+                  {product.price} {product.currency}
+                </div>
+              </div>
+              <hr></hr>
+              <div className="flex">
+                <div className="w-1/2">
+                  Доставка до г.{delivery.city}, {delivery.zipcode}:
+                </div>
+                <div className="text-black-600">
+                  {product.deliveryPrice} {product.currency}
+                </div>
+              </div>
+              <hr></hr>
+              <div className="flex">
+                <div className="w-1/2">Всего к оплате:</div>
+                <div className="text-black-600">
+                  {product.totalAmount} {product.currency}
+                </div>
+              </div>
 
-          <div className="flex">
-            <div className="w-1/2">E-Mail:</div>
-            <div className="text-green-700">{customer.email}</div>
-          </div>
+              <div className="flex">
+                <div className="receipttext">
+                  <br></br>
 
-          <div className="flex">
-            <div className="w-1/2">Адрес:</div>
-            <div className="text-green-700">
-              {delivery.city} {delivery.address}
-            </div>
-          </div>
-
-          <div className="flex">
-            <div className="w-1/2">Почтовый код:</div>
-            <div className="text-green-700">{delivery.zipcode}</div>
-          </div>
-
-          <div className="flex">
-            <div className="w-1/2">Цена товара:</div>
-            <div className="text-green-700">
-              {product.price} {product.currency}
-            </div>
-          </div>
-
-          <div className="flex">
-            <div className="w-1/2">Стоимость доставки товара:</div>
-            <div className="text-green-700">
-              {product.deliveryPrice} {product.currency}
-            </div>
-          </div>
-
-          <div className="flex">
-            <div className="w-1/2">Итоговая сумма:</div>
-            <div className="text-green-700">
-              {product.totalAmount} {product.currency}
-            </div>
-          </div>
-
-          <div className="w-full my-6">
-            <p className="text-green-700">
-              Подтвердите правильность всех параметров заказа
-            </p>
-          </div>
-          <div className="w-full text-center">
-            <button
-              onClick={createOrder}
-              className={classNames({
-                'text-white font-bold py-2 px-4 rounded ': true,
-                'bg-gray-500 hover:bg-blue-gray cursor-not-allowed': !order.finished,
-                'bg-green-600 hover:bg-green-700': order.finished,
-              })}
-              disabled={!order.finished}
-            >
-              Оплатить
-            </button>
-
-            <p className="mt-4">
-              Нажимая на кнопку "Оплатить", Вы соглашаетесь с{' '}
-              <a
-                className="text-green-700 border-b border-green-700 cursor-pointer"
-                rel="noopener noreferrer"
-                target="_blank"
-                href="/files/privacy-policy.pdf"
+                  <p className="">
+                    {' '}
+                    Нажимая кнопку "Оплатить", Вы соглашаетесь с{' '}
+                    <a
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      href="/files/privacy-policy.pdf"
+                    >
+                      <u>Политикой конфиденциальности</u>
+                    </a>{' '}
+                    и условиями{' '}
+                    <a
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      href="/files/public-offer-agreement.pdf"
+                    >
+                      <u>Публичного договора</u>
+                    </a>
+                    .
+                  </p>
+                </div>
+              </div>
+              <br></br>
+              <button
+                onClick={createOrder}
+                className={classNames({
+                  'text-white font-bold py-2 px-4 rounded ': true,
+                  'bg-gray-500 hover:bg-blue-gray cursor-not-allowed': !order.finished,
+                  'bg-green-600 hover:bg-green-700': order.finished,
+                })}
+                disabled={!order.finished}
               >
-                Политикой конфиденциальности
-              </a>{' '}
-              и условиями{' '}
-              <a
-                className="text-green-700 border-b border-green-700 cursor-pointer"
-                rel="noopener noreferrer"
-                target="_blank"
-                href="/files/public-offer-agreement.pdf"
-              >
-                Публичного договора
-              </a>
-              .
-            </p>
+                Оплатить
+              </button>
+              <p className="text-yellow-900 text-sm">
+                * необходимо заполнить все поля для оплаты.
+              </p>
+            </div>
           </div>
+
+          <div className="w-full my-6"></div>
+
+          <div className="w-full text-center"></div>
         </div>
 
         <form
