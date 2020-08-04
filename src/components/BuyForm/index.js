@@ -249,10 +249,7 @@ const BuyForm = () => {
 
               <p className="text-orange-800 text-sm">
                 Мы принимаем платежи Visa и MasterCard
-                <img
-                  src="/images/cards.jpg"
-                  width="150px"
-                ></img>
+                <img src="/images/cards.jpg" width="150px"></img>
               </p>
             </div>
           </div>
