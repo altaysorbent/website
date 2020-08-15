@@ -49,7 +49,7 @@ export default class BuyFormManager {
         count: 1,
         amounts: {
           KZT: { name: 'KZT', short: 'тг.', price: 700 },
-          RUB: { name: 'RUB', short: 'руб.', price: 110 },
+          RUB: { name: 'RUB', short: 'руб.', price: 125 },
         },
         currency: 'KZT',
         amount: 0,
@@ -63,7 +63,7 @@ export default class BuyFormManager {
 
   changeProcuctCount(produt, dlt) {
     produt.count += dlt;
-    produt.count = Math.min(30, Math.max(1, produt.count));
+    produt.count = Math.min(64, Math.max(1, produt.count));
     const rslt = new Product(produt);
     return rslt;
   }
