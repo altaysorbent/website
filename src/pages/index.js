@@ -18,17 +18,9 @@ const IndexPage = () => {
                 спектром действия, изготавливается из природного минерала
                 монтмориллонита.
               </p>
-              <p className="leading-normal text-xl mb-8">
-                Инструкция по применению -{' '}
-                <a
-                  href="https://docs.google.com/document/d/1EnG8ulzUB9xqOJD8wZTuWmE1zr43G9IkRMUe9SyxTIw/edit#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline"
-                >
-                  Скачать
-                </a>
-              </p>
+              <a href="https://altaysorbent.org/buy" class="myButton">
+                Купить
+              </a>
             </div>
             <div className="w-full md:w-1/2 py-6 flex justify-end">
               <iframe
@@ -83,33 +75,11 @@ const IndexPage = () => {
       </section>
       <section className="bg-white border-b py-8" id="specification">
         <div className="container mx-auto">
-          <div className="flex flex-wrap flex-col-reverse sm:flex-row">
-            <div className="w-full sm:w-1/3 p-6 align-middle">
-              <img
-                src="/images/new-design.png"
-                className="mx-auto"
-                style={{
-                  height: '300px',
-                  width: 'auto',
-                }}
-                alt=""
-              />
-            </div>
-            <div className="w-full sm:w-2/3 p-6">
-              <div className="align-middle mt-24">
-                <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
-                  Новое Оформление
-                </h3>
-                <p className="text-gray-700 text-xl mb-2 lg:mb-8 text-black text-justify">
-                  Мы рады представить «Алтайсорбент» с обновленным дизайном.
-                </p>
-              </div>
-            </div>
-          </div>
+          <div className="flex flex-wrap flex-col-reverse sm:flex-row"></div>
           <div className="flex flex-wrap">
             <div className="w-full sm:w-2/3 p-6">
               <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
-                Алтайсорбент – натуральный сорбент
+                Уникальный продукт
               </h3>
               <p className="text-gray-700 text-xl mb-8 text-justify">
                 Алтайсорбент – натуральный сорбент из элитных бентонитовых глин
@@ -136,7 +106,7 @@ const IndexPage = () => {
           <div className="flex flex-wrap flex-col-reverse sm:flex-row">
             <div className="w-full sm:w-1/3 p-6 align-middle">
               <img
-                src="/images/glina.png"
+                src="/images/yoga.jpg"
                 className="mx-auto"
                 style={{
                   height: '300px',

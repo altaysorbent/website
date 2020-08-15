@@ -32,6 +32,7 @@
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
     "react-input-mask": "^3.0.0-alpha.2",
+    "react-tabs": "^3.1.1",
     "react-yandex-maps": "^4.0.1",
     "tailwindcss": "^1.0.4"
   },

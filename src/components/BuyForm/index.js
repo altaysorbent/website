@@ -3,6 +3,7 @@ import BuyFormManager from './buyFormManager';
 import classNames from 'classnames';
 import Autocomplete from 'react-autocomplete';
 import InputMask from 'react-input-mask';
+import Description from '../description';
 
 const BuyForm = () => {
   const mgr = new BuyFormManager();
@@ -162,372 +163,349 @@ const BuyForm = () => {
         </div>
       )}
 
-      <div id="order-form">
-        <div className="md:flex md:justify-center mb-6">
-          <div className="w-full max-w-lg">
-            <div className="flex flex-wrap mb-6">
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <img
-                  src={product.img}
-                  className="mx-auto"
-                  style={{
-                    height: 220,
-                    width: 'auto',
-                  }}
-                  alt=""
-                />
+      <div class="max-w-sm w-full lg:max-w-full lg:flex">
+        <div
+          class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+          title="Woman holding a mug"
+        >
+          <h3> {product.name} 1г №20</h3>
+          <img src="https://altaysorbent.org/images/new-design.png"></img>
+          <p className="buydescription">
+            {' '}
+            <b>ТОО "Арника"</b>
+            <br></br>
+            Срок хранения: 3 года
+          </p>
+        </div>
+        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+          <div class="mb-8">
+            <p class="text-sm text-gray-900 flex items-center"></p>
+
+            <Description></Description>
+          </div>
+          <hr></hr>
+          <div class="flex flex-wrap">
+            <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 mb-4 ">
+              Валюта:
+              <select
+                className="appearance-none w-full bg-gray-200 border border-gray-500 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 currencysize"
+                value={product.currency}
+                onChange={e =>
+                  updateProductWithRecalcDelivery(
+                    product => (product.currency = e.target.value)
+                  )
+                }
+                id="grid-state"
+              >
+                {Object.keys(product.amounts).map(item => (
+                  <option key={product.amounts[item].name} value={item}>
+                    {product.amounts[item].name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 mb-4  justify-center">
+              Количество<br></br>
+              <button
+                onClick={decreaseCount}
+                className="focus:outline-none leading-none bg-green-600 hover:bg-green-700 text-white font-bold  py-1 px-2 rounded"
+              >
+                &minus;
+              </button>
+              <span className="w-10 px-4 text-center">{product.count}</span>
+              <button
+                onClick={increaseCount}
+                className="focus:outline-none leading-none bg-green-600 hover:bg-green-700 text-white font-bold  py-1 px-2 rounded"
+              >
+                +
+              </button>
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 mb-4 ">
+              Сумма<br></br>
+              {product.price} {product.amounts[product.currency].short}
+            </div>
+
+            <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-3/6 mb-4 ">
+              Мы принимаем платежи с карт:
+              <img src="https://i.ibb.co/8DpSfNH/cards.png" width="300px"></img>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap">
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/2 mb-4">
+          <div className="note">
+            <h3 className="text-1xl text-gray-800 font-bold leading-none mb-4">
+              1. Покупатель
+            </h3>
+            <div className="md:flex md:justify-center mb-6">
+              <div className="w-full max-w-lg">
+                <div className="flex flex-wrap -mx-3 mb-6">
+                  <div className="w-full px-3">
+                    <label
+                      className="block text-gray-800 mb-2"
+                      htmlFor="grid-customer-name"
+                    >
+                      Ф.И.О.
+                      <input
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="grid-customer-name"
+                        placeholder="Например: Иванов Иван Иванович"
+                        value={customer.name}
+                        onChange={e =>
+                          updateCustomerValue(
+                            customer => (customer.name = e.target.value)
+                          )
+                        }
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap -mx-3 mb-6">
+                  <div className="w-full md:w-1/1 px-3 mb-6 md:mb-0">
+                    <label
+                      className="block text-gray-800"
+                      htmlFor="grid-order-phone"
+                    >
+                      Номер телефона
+                    </label>
+
+                    <InputMask
+                      mask="+99999999999"
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white"
+                      id="grid-order-phone"
+                      type="text"
+                      placeholder="Номер Вашего телефона"
+                      value={customer.phone}
+                      onChange={e =>
+                        updateCustomerValue(
+                          customer => (customer.phone = e.target.value)
+                        )
+                      }
+                    />
+                  </div>
+                  <div className="w-full md:w-1/1 px-3">
+                    <label
+                      className="block text-gray-800"
+                      htmlFor="grid-order-email"
+                    >
+                      E-mail
+                    </label>
+                    <input
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="grid-order-email"
+                      type="email"
+                      pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"
+                      placeholder="E-mail"
+                      value={customer.email}
+                      onChange={e =>
+                        updateCustomerValue(
+                          customer => (customer.email = e.target.value)
+                        )
+                      }
+                    />
+                  </div>
+                  <div className="w-full px-3"></div>
+                </div>
               </div>
-              <div className="w-full flex flex-col md:w-1/2 px-3 mb-6 md:mb-0">
-                <div className="block uppercase tracking-wide text-gray-800 text-3xl font-bold mb-4 text-center md:text-left">
-                  {product.name}
+            </div>
+          </div>
+        </div>
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/2 mb-4">
+          <div className="note">
+            <h3 className="text-1xl text-gray-800 font-bold leading-none mb-4">
+              2. Доставка
+            </h3>
+
+            <div className="md:flex md:justify-center mb-6">
+              <div className="w-full max-w-lg">
+                <div className="flex flex-wrap mb-6">
+                  <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+                    <label
+                      className="block text-gray-800"
+                      htmlFor="grid-delivery-city"
+                    >
+                      Город
+                    </label>
+
+                    <Autocomplete
+                      inputProps={{
+                        className:
+                          'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white',
+                        type: 'text',
+                        placeholder: 'Город',
+                      }}
+                      wrapperStyle={{ display: 'block' }}
+                      items={cities}
+                      getItemValue={item => item.label}
+                      renderItem={(item, isHighlighted) => (
+                        <div
+                          key={item.uid}
+                          style={{
+                            background: isHighlighted ? 'lightgray' : 'white',
+                          }}
+                        >
+                          {item.label}
+                        </div>
+                      )}
+                      value={delivery.cityFull}
+                      onChange={e =>
+                        loadCities(
+                          customer => (delivery.cityFull = e.target.value)
+                        )
+                      }
+                      onSelect={val =>
+                        updateDeliveryValue(
+                          customer => (delivery.cityFull = val)
+                        )
+                      }
+                    />
+                  </div>
+                  <div className="w-full md:w-1/3 px-3">
+                    <label
+                      className="block text-gray-800"
+                      htmlFor="grid-delivery-zip"
+                    >
+                      Почтовый код
+                    </label>
+
+                    <Autocomplete
+                      inputProps={{
+                        className:
+                          'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500',
+                        type: 'text',
+                        placeholder: 'Индекс',
+                      }}
+                      wrapperStyle={{ display: 'block' }}
+                      items={zipcodes}
+                      getItemValue={item => item.label}
+                      renderItem={(item, isHighlighted) => (
+                        <div
+                          key={item.uid}
+                          style={{
+                            background: isHighlighted ? 'lightgray' : 'white',
+                          }}
+                        >
+                          {item.label}
+                        </div>
+                      )}
+                      value={delivery.zipcode}
+                      onChange={e => {}}
+                      onSelect={val =>
+                        updateDeliveryValue(
+                          customer => (delivery.zipcode = val)
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="w-full px-3"></div>
+                <div className="flex flex-wrap mb-6">
+                  <div className="w-full px-3">
+                    <label
+                      className="block text-gray-800"
+                      htmlFor="grid-delivery-address"
+                    >
+                      Адрес получателя
+                    </label>
+                    <input
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      id="grid-delivery-address"
+                      placeholder="Улица, дом, квартира"
+                      value={delivery.address}
+                      onChange={e =>
+                        updateDeliveryValue(
+                          customer => (delivery.address = e.target.value),
+                          true
+                        )
+                      }
+                    />
+                  </div>
+
+                  <div className="w-full px-3 mb-6 md:mb-0"></div>
                 </div>
 
                 <div className="flex flex-wrap mb-6">
-                  <div className="flex items-center w-1/2 mb-4">Валюта</div>
-                  <div className="flex items-center mb-4">
-                    <div className="relative">
-                      <select
-                        className="appearance-none w-full bg-gray-200 border border-gray-500 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        value={product.currency}
-                        onChange={e =>
-                          updateProductWithRecalcDelivery(
-                            product => (product.currency = e.target.value)
-                          )
-                        }
-                        id="grid-state"
-                      >
-                        {Object.keys(product.amounts).map(item => (
-                          <option key={product.amounts[item].name} value={item}>
-                            {product.amounts[item].name}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg
-                          className="fill-current h-4 w-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
+                  <div className="w-full px-3">
+                    <label
+                      className="block text-gray-800 mb-2"
+                      htmlFor="grid-delivery-city"
+                    >
+                      Способ доставки
+                    </label>
+
+                    <div>
+                      <label>
+                        <input
+                          id="grid-delivery-type-10"
+                          className="py-3 px-4 mb-3 mr-5 text-green-500"
+                          type="radio"
+                          name="deliveryType"
+                          placeholder="доставка до квартиры"
+                          checked={delivery.tariffId === 137}
+                          value={delivery.tariffId}
+                          onChange={e =>
+                            updateDeliveryValue(
+                              customer => (delivery.tariffId = 137)
+                            )
+                          }
+                        />
+                        <span
+                          className={classNames({
+                            'text-green-700': delivery.tariffId === 137,
+                          })}
                         >
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                      </div>
+                          доставка до квартиры
+                        </span>
+                      </label>
                     </div>
-                  </div>
 
-                  <div className="flex items-center w-1/2">Количество</div>
-                  <div className="flex items-center">
-                    <div className="w-full">
-                      <button
-                        onClick={decreaseCount}
-                        className="focus:outline-none leading-none bg-green-600 hover:bg-green-700 text-white font-bold  py-1 px-2 rounded"
-                      >
-                        &minus;
-                      </button>
-
-                      <span className="w-10 px-4 text-center">
-                        {product.count}
-                      </span>
-                      <button
-                        onClick={increaseCount}
-                        className="focus:outline-none leading-none bg-green-600 hover:bg-green-700 text-white font-bold  py-1 px-2 rounded"
-                      >
-                        +
-                      </button>
+                    <div>
+                      <label>
+                        <input
+                          id="grid-delivery-type-11"
+                          className="py-3 px-4 mb-3 mr-5"
+                          type="radio"
+                          name="deliveryType"
+                          placeholder="заберу со склада"
+                          checked={delivery.tariffId === 136}
+                          value={delivery.tariffId}
+                          onChange={e =>
+                            updateDeliveryValue(
+                              customer => (delivery.tariffId = 136)
+                            )
+                          }
+                        />
+                        <span
+                          className={classNames({
+                            'text-green-700': delivery.tariffId === 136,
+                          })}
+                        >
+                          заберу со склада
+                        </span>
+                      </label>
                     </div>
-                  </div>
-                  <hr className="w-full border-t my-4 border-green-200" />
-                  <div className="flex items-center w-1/2">
-                    <span className="mr-3">Сумма</span>
-                  </div>
-                  <div className="flex items-center w-1/2">
-                    <span className="text-xl text-green-700 font-bold">
-                      {product.price} {product.amounts[product.currency].short}
-                    </span>
                   </div>
                 </div>
-              </div>
 
-              <p className="text-orange-800 text-sm">
-                Мы принимаем платежи Visa и MasterCard
-                <img src="/images/cards.jpg" width="150px"></img>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-4 text-center">
-          Покупатель
-        </h3>
-        <div className="md:flex md:justify-center mb-6">
-          <div className="w-full max-w-lg">
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full px-3">
-                <label
-                  className="block text-gray-800 mb-2"
-                  htmlFor="grid-customer-name"
-                >
-                  Ф.И.О.
-                  <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="grid-customer-name"
-                    placeholder="Например: Иванов Иван Иванович"
-                    value={customer.name}
-                    onChange={e =>
-                      updateCustomerValue(
-                        customer => (customer.name = e.target.value)
-                      )
-                    }
-                  />
-                </label>
-
-                <p className="text-green-700 text-sm">
-                  На данное имя будет оформлена доставка заказа по почте
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap -mx-3 mb-6">
-              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label
-                  className="block text-gray-800"
-                  htmlFor="grid-order-phone"
-                >
-                  Номер телефона
-                </label>
-
-                <InputMask
-                  mask="+99999999999"
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-                  id="grid-order-phone"
-                  type="text"
-                  placeholder="Номер Вашего телефона"
-                  value={customer.phone}
-                  onChange={e =>
-                    updateCustomerValue(
-                      customer => (customer.phone = e.target.value)
-                    )
-                  }
-                />
-              </div>
-              <div className="w-full md:w-1/2 px-3">
-                <label
-                  className="block text-gray-800"
-                  htmlFor="grid-order-email"
-                >
-                  E-mail
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="grid-order-email"
-                  type="email"
-                  pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"
-                  placeholder="E-mail"
-                  value={customer.email}
-                  onChange={e =>
-                    updateCustomerValue(
-                      customer => (customer.email = e.target.value)
-                    )
-                  }
-                />
-              </div>
-              <div className="w-full px-3">
-                <p className="text-green-800 text-sm">
-                  Контактные данные нужны для связи с покупателем в случае
-                  необходимости
-                </p>
+                {delivery?.error && (
+                  <div className="block mb-6 text-red-600">
+                    {delivery.error}
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <h3 className="text-3xl text-gray-800 font-bold leading-none mb-4 text-center">
-          Доставка
-        </h3>
-
-        <div className="md:flex md:justify-center mb-6">
-          <div className="w-full max-w-lg">
-            <div className="flex flex-wrap mb-6">
-              <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
-                <label
-                  className="block text-gray-800"
-                  htmlFor="grid-delivery-city"
-                >
-                  Город
-                </label>
-
-                <Autocomplete
-                  inputProps={{
-                    className:
-                      'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white',
-                    type: 'text',
-                    placeholder: 'Город',
-                  }}
-                  wrapperStyle={{ display: 'block' }}
-                  items={cities}
-                  getItemValue={item => item.label}
-                  renderItem={(item, isHighlighted) => (
-                    <div
-                      key={item.uid}
-                      style={{
-                        background: isHighlighted ? 'lightgray' : 'white',
-                      }}
-                    >
-                      {item.label}
-                    </div>
-                  )}
-                  value={delivery.cityFull}
-                  onChange={e =>
-                    loadCities(customer => (delivery.cityFull = e.target.value))
-                  }
-                  onSelect={val =>
-                    updateDeliveryValue(customer => (delivery.cityFull = val))
-                  }
-                />
-              </div>
-              <div className="w-full md:w-1/3 px-3">
-                <label
-                  className="block text-gray-800"
-                  htmlFor="grid-delivery-zip"
-                >
-                  Почтовый код
-                </label>
-
-                <Autocomplete
-                  inputProps={{
-                    className:
-                      'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500',
-                    type: 'text',
-                    placeholder: 'Индекс',
-                  }}
-                  wrapperStyle={{ display: 'block' }}
-                  items={zipcodes}
-                  getItemValue={item => item.label}
-                  renderItem={(item, isHighlighted) => (
-                    <div
-                      key={item.uid}
-                      style={{
-                        background: isHighlighted ? 'lightgray' : 'white',
-                      }}
-                    >
-                      {item.label}
-                    </div>
-                  )}
-                  value={delivery.zipcode}
-                  onChange={e => {}}
-                  onSelect={val =>
-                    updateDeliveryValue(customer => (delivery.zipcode = val))
-                  }
-                />
-              </div>
-            </div>
-            <div className="w-full px-3">
-              <p className="text-green-800 text-sm">
-                Начните вводить город, а затем выберите город и почтовый индекс
-                из списка.
-              </p>
-            </div>
-            <div className="flex flex-wrap mb-6">
-              <div className="w-full px-3">
-                <label
-                  className="block text-gray-800"
-                  htmlFor="grid-delivery-address"
-                >
-                  Адрес получателя
-                </label>
-                <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="grid-delivery-address"
-                  placeholder="Улица, дом, квартира"
-                  value={delivery.address}
-                  onChange={e =>
-                    updateDeliveryValue(
-                      customer => (delivery.address = e.target.value),
-                      true
-                    )
-                  }
-                />
-              </div>
-
-              <div className="w-full px-3 mb-6 md:mb-0">
-                <p className="text-green-700 text-sm">
-                  Укажите ваш полный адрес, чтобы мы могли доставить ваш товар
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap mb-6">
-              <div className="w-full px-3">
-                <label
-                  className="block text-gray-800 mb-2"
-                  htmlFor="grid-delivery-city"
-                >
-                  Способ доставки
-                </label>
-
-                <div>
-                  <label>
-                    <input
-                      id="grid-delivery-type-10"
-                      className="py-3 px-4 mb-3 mr-5 text-green-500"
-                      type="radio"
-                      name="deliveryType"
-                      placeholder="доставка до квартиры"
-                      checked={delivery.tariffId === 137}
-                      value={delivery.tariffId}
-                      onChange={e =>
-                        updateDeliveryValue(
-                          customer => (delivery.tariffId = 137)
-                        )
-                      }
-                    />
-                    <span
-                      className={classNames({
-                        'text-green-700': delivery.tariffId === 137,
-                      })}
-                    >
-                      доставка до квартиры
-                    </span>
-                  </label>
-                </div>
-
-                <div>
-                  <label>
-                    <input
-                      id="grid-delivery-type-11"
-                      className="py-3 px-4 mb-3 mr-5"
-                      type="radio"
-                      name="deliveryType"
-                      placeholder="заберу со склада"
-                      checked={delivery.tariffId === 136}
-                      value={delivery.tariffId}
-                      onChange={e =>
-                        updateDeliveryValue(
-                          customer => (delivery.tariffId = 136)
-                        )
-                      }
-                    />
-                    <span
-                      className={classNames({
-                        'text-green-700': delivery.tariffId === 136,
-                      })}
-                    >
-                      заберу со склада
-                    </span>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            {delivery?.error && (
-              <div className="block mb-6 text-red-600">{delivery.error}</div>
-            )}
-          </div>
-        </div>
-
-        <div className="w-full max-w-lg mx-auto text-gray-800">
-          <div className="receipt">
-            <h3 className="text-3xl text-gray-800 font-bold leading-none mb-6 text-center">
-              Итоговый чек
+      <div class="flex flex-wrap">
+        <div class="w-full sm:w-1/1 md:w-1/1 lg:w-1/1 xl:w-1/1 mb-12">
+          <div className="note">
+            <h3 className="text-1xl text-gray-800 font-bold leading-none mb-6 text-center">
+              Подтвердите информацию
             </h3>
 
             <div className="w-full max-w-lg mx-auto text-white-800">
@@ -581,26 +559,44 @@ const BuyForm = () => {
                 <div className="receipttext">
                   <br></br>
 
-                  <p className="">
-                    {' '}
-                    Нажимая кнопку "Оплатить", Вы соглашаетесь с{' '}
-                    <a
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      href="/files/privacy-policy.pdf"
-                    >
-                      <u>Политикой конфиденциальности</u>
-                    </a>{' '}
-                    и условиями{' '}
-                    <a
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      href="/files/public-offer-agreement.pdf"
-                    >
-                      <u>Публичного договора</u>
-                    </a>
-                    .
-                  </p>
+                  <div
+                    class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+                    role=""
+                  >
+                    <div class="flex">
+                      <div class="py-1">
+                        <svg
+                          class="fill-current h-6 w-6 text-teal-500 mr-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="">
+                          {' '}
+                          Нажимая кнопку "Оплатить", Вы соглашаетесь с{' '}
+                          <a
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            href="/files/privacy-policy.pdf"
+                          >
+                            <u>Политикой конфиденциальности</u>
+                          </a>{' '}
+                          и условиями{' '}
+                          <a
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            href="/files/public-offer-agreement.pdf"
+                          >
+                            <u>Публичного договора</u>
+                          </a>
+                          .
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <br></br>
@@ -616,16 +612,14 @@ const BuyForm = () => {
                 Оплатить
               </button>
               <p className="text-yellow-900 text-sm">
-                * необходимо заполнить все поля для оплаты.
+                * Сумма оплачивается в валюте KZT (Казахстанский тенге).
               </p>
             </div>
           </div>
-
-          <div className="w-full my-6"></div>
-
-          <div className="w-full text-center"></div>
         </div>
+      </div>
 
+      <div id="order-form">
         <form
           id="frm-payment"
           method="POST"

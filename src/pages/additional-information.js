@@ -12,10 +12,12 @@ const AdditionalInformationPage = () => {
         {title}
       </h3>
       <div className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
-        <p>
-          Если Вам интересно поглубже узнать о нашей пищевой добавке, то мы
-          специально подготовили несколько статей:
-        </p>
+        <div>
+          <p className="buydescription">
+            Если Вам интересно поглубже узнать о нашей пищевой добавке, то мы
+            специально подготовили несколько статей:
+          </p>
+        </div>
         <ul className="list-disc lg:ml-10">
           <li>
             Природа против болезней и старости -
@@ -25,7 +27,7 @@ const AdditionalInformationPage = () => {
               target="_blank"
               href="https://drive.google.com/file/d/1dhmSmjziJt5zoAT12HP1cOCfIYKLHeoh/view?usp=sharing"
             >
-              Google Drive
+              Перейти к статье
             </a>
           </li>
           <li>
@@ -36,7 +38,7 @@ const AdditionalInformationPage = () => {
               target="_blank"
               href="https://drive.google.com/file/d/1FqydJPlLO5FIO9S8PeIMot0f2y_QWOPV/view?usp=sharing"
             >
-              Google Drive
+              Перейти к статье
             </a>
           </li>
           <li>
@@ -47,7 +49,7 @@ const AdditionalInformationPage = () => {
               target="_blank"
               href="https://drive.google.com/file/d/1pMajZd5H2yVyIpoIz0KyPtUcLRoKWwPG/view?usp=sharing"
             >
-              Google Drive
+              Перейти к статье
             </a>
           </li>
           <li>
