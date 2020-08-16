@@ -10,10 +10,9 @@ const CertificationPage = () => {
         {title}
       </h3>
       <div className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
-        <p className="text-gray-700 text-base px-6 mb-4 text-justify">
+        <p className="buyDescription">
           Наши продукты соответствуют высоким стандартам. Ниже приведены сканы
-          документов (кликабельно) для ознакомления с нашей компанией и
-          продукцией.
+          документов для ознакомления с нашей компанией и продукцией.
         </p>
         <div className="flex items-center justify-center">
           <div className="w-1/3 px-3">
