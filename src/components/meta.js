@@ -19,8 +19,6 @@ const Meta = ({ description, lang, meta, title }) => {
 
   const metaDescription = description || site.siteMetadata.description;
 
-  const showJivoSite = process.env.NODE_ENV !== `development`;
-
   return (
     <Helmet
       htmlAttributes={{
@@ -73,9 +71,6 @@ const Meta = ({ description, lang, meta, title }) => {
         },
       ].concat(meta)}
     >
-      {showJivoSite && (
-        <script src="//code.jivosite.com/widget/tvWxuQQ0Eh" async />
-      )}
     </Helmet>
   );
 };
