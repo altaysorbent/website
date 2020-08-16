@@ -173,7 +173,7 @@ const BuyForm = () => {
           <p className="buyDescription">
             {' '}
             <b>ТОО "Арника"</b>
-            <br></br>
+            <br />
             Срок хранения: 3 года
           </p>
         </div>
@@ -188,7 +188,7 @@ const BuyForm = () => {
             <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 mb-4 ">
               Валюта:
               <select
-                className="appearance-none w-full bg-gray-200 border border-gray-500 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 currencysize"
+                className="appearance-none w-full bg-gray-200 border border-gray-500 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 currencySize"
                 value={product.currency}
                 onChange={e =>
                   updateProductWithRecalcDelivery(
@@ -205,7 +205,8 @@ const BuyForm = () => {
               </select>
             </div>
             <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 mb-4  justify-center">
-              Количество<br></br>
+              Количество
+              <br />
               <button
                 onClick={decreaseCount}
                 className="focus:outline-none leading-none bg-green-600 hover:bg-green-700 text-white font-bold  py-1 px-2 rounded"
@@ -221,7 +222,8 @@ const BuyForm = () => {
               </button>
             </div>
             <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 mb-4 ">
-              Сумма<br></br>
+              Сумма
+              <br />
               {product.price} {product.amounts[product.currency].short}
             </div>
 
@@ -514,8 +516,8 @@ const BuyForm = () => {
                 <div className="text-grey-300">
                   <b>
                     {customer.name}
-                    <br></br> {customer.phone}
-                    <br></br> {customer.email}
+                    <br /> {customer.phone}
+                    <br /> {customer.email}
                   </b>
                 </div>
               </div>
@@ -557,7 +559,7 @@ const BuyForm = () => {
 
               <div className="flex">
                 <div className="receipttext">
-                  <br></br>
+                  <br />
 
                   <div
                     class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
@@ -599,7 +601,7 @@ const BuyForm = () => {
                   </div>
                 </div>
               </div>
-              <br></br>
+              <br />
               <button
                 onClick={createOrder}
                 className={classNames({
