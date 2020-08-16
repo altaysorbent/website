@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import Layout from '../components/layouts';
 import Meta from '../components/meta';
 
@@ -18,9 +19,9 @@ const IndexPage = () => {
                 спектром действия, изготавливается из природного минерала
                 монтмориллонита.
               </p>
-              <a href="https://altaysorbent.org/buy" class="buyButton">
+              <Link to="/buy" className="buyButton">
                 Купить
-              </a>
+              </Link>
             </div>
             <div className="w-full md:w-1/2 py-6 flex justify-end">
               <iframe
