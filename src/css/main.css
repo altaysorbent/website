@@ -138,6 +138,7 @@
     }
         
 
+
 .note {
   background: lightyellow;
   border: 1px solid yellow;
@@ -152,3 +153,6 @@
   color:black!important;
 }
 
+.currencysize{
+  width:100px;
+}
