@@ -13,7 +13,7 @@ const AdditionalInformationPage = () => {
       </h3>
       <div className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
         <div>
-          <p className="buydescription">
+          <p className="buyDescription">
             Если Вам интересно поглубже узнать о нашей пищевой добавке, то мы
             специально подготовили несколько статей:
           </p>

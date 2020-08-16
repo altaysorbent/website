@@ -112,7 +112,7 @@
      }
 
    
-     .myButton {
+     .buyButton {
       box-shadow: 0px 1px 0px 0px #fff6af;
       background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
       background-color:#ffec64;
@@ -128,20 +128,15 @@
       text-decoration:none;
       text-shadow:0px 1px 0px #ffee66;
     }
-    .myButton:hover {
+    .buyButton:hover {
       background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
       background-color:#ffab23;
     }
-    .myButton:active {
+    .buyButton:active {
       position:relative;
       top:1px;
     }
         
-.amirbox{
-  background-color:#CEF0C7!important;
-  border-radius: 25px;
-  padding:10px!important;
-}
 
 .note {
   background: lightyellow;
@@ -152,11 +147,8 @@
 
 }
 
-.buydescription{
+.buyDescription{
   font-size:14px;
   color:black!important;
 }
 
-.currencysize{
-  width:100px;
-}

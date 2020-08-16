@@ -20,7 +20,7 @@ const Description = () => {
       </TabList>
 
       <TabPanel>
-        <p className="buydescription">
+        <p className="buyDescription">
           <b>Состав:</b> <br></br>природный минерал монтмориллонит.<br></br>
           <b>Описание:</b> <br></br>порошок от светло-розового до светло-серого
           цвета, без постороннего запаха, слегка вяжущего вкуса.<br></br>
@@ -52,7 +52,7 @@ const Description = () => {
         </p>
       </TabPanel>
       <TabPanel>
-        <p className="buydescription">
+        <p className="buyDescription">
           <b> Способ применения и дозы:</b> <br></br>
           Детям: 14 лет и старше - по 1г (1 пакетик) 2-3 раза в день. Взрослым:
           по 1г (1пакетик) 3 раза в день. В средней и тяжелой степени состояния
@@ -71,11 +71,11 @@ const Description = () => {
         </p>
       </TabPanel>
       <TabPanel>
-        <p className="buydescription">
+        <p className="buyDescription">
           <b>«Алтайсорбент»</b> применяют как эффективное профилактическое и
           вспомогательное средство при лечении заболеваний, сопровождающихся
           интоксикацией, в частности:
-          <ul className="list-disc lg:ml-10 buydescription">
+          <ul className="list-disc lg:ml-10 buyDescription">
             <li>
               выведении из организма солей тяжелых металлов и радионуклидов,
             </li>

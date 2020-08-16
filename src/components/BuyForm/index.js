@@ -170,7 +170,7 @@ const BuyForm = () => {
         >
           <h3> {product.name} 1г №20</h3>
           <img src="https://altaysorbent.org/images/new-design.png"></img>
-          <p className="buydescription">
+          <p className="buyDescription">
             {' '}
             <b>ТОО "Арника"</b>
             <br></br>

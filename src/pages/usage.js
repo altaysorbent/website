@@ -11,16 +11,16 @@ const UsagePage = () => {
       <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">
         {title}
       </h3>
-      <hr></hr>
+      <hr />
       <div className="container mx-auto px-2 pt-4 text-gray-900 text-xl text-justify">
         <div>
-          <p className="buydescription">
+          <p className="buyDescription">
             <b>«Алтайсорбент»</b> применяют как эффективное профилактическое и
             вспомогательное средство при лечении заболеваний, сопровождающихся
             интоксикацией, в частности:
           </p>
         </div>
-        <ul className="list-disc lg:ml-10 buydescription">
+        <ul className="list-disc lg:ml-10 buyDescription">
           <li>
             выведении из организма солей тяжелых металлов и радионуклидов,
           </li>
