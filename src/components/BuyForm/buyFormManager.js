@@ -49,7 +49,7 @@ export default class BuyFormManager {
         count: 1,
         amounts: {
           KZT: { name: 'KZT', short: 'тг.', price: 700 },
-          RUB: { name: 'RUB', short: 'руб.', price: 125 },
+          RUB: { name: 'RUB', short: 'руб.', price: 110 },
         },
         currency: 'KZT',
         amount: 0,
