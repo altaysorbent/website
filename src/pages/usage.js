@@ -3,20 +3,24 @@ import Layout from '../components/layouts/page';
 import Meta from '../components/meta';
 
 const UsagePage = () => {
-  const title = 'Применение';
+  const title = 'Показания к применению';
   return (
     <Layout>
       <Meta title={title} />
+
       <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">
         {title}
       </h3>
-      <div className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
-        <p>
-          «Алтайсорбент» применяют как эффективное профилактическое и
-          вспомогательное средство при лечении заболеваний, сопровождающихся
-          интоксикацией, в частности:
-        </p>
-        <ul className="list-disc lg:ml-10">
+      <hr />
+      <div className="container mx-auto px-2 pt-4 text-gray-900 text-xl text-justify">
+        <div>
+          <p className="buyDescription">
+            <b>«Алтайсорбент»</b> применяют как эффективное профилактическое и
+            вспомогательное средство при лечении заболеваний, сопровождающихся
+            интоксикацией, в частности:
+          </p>
+        </div>
+        <ul className="list-disc lg:ml-10 buyDescription">
           <li>
             выведении из организма солей тяжелых металлов и радионуклидов,
           </li>
@@ -42,9 +46,12 @@ const UsagePage = () => {
           <li>пародонтозе,</li>
           <li>лечении кожных опрелостей, пролежней, ран, ожогов и др.</li>
         </ul>
+        <br />
         <p>
-          «Алтайорбент» зарегистрирован как биологически активная добавка. Не
-          является лекарственным средством.
+          <i>
+            «Алтайорбент» зарегистрирован как биологически активная добавка. Не
+            является лекарственным средством.
+          </i>
         </p>
       </div>
     </Layout>
