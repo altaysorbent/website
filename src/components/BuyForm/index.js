@@ -37,11 +37,21 @@ const BuyForm = () => {
 
   const changeCount = dlt => {
     const pnext = mgr.changeProcuctCount(product, dlt);
-    updateProduct(pnext);
+      updateProduct(pnext);
+
+      updateDelivery(mgr.clone(delivery));
+      recalculateOrder(customer, delivery);
+      execLoadDeliveryPrice();
   };
 
   const decreaseCount = () => changeCount(-1);
   const increaseCount = () => changeCount(1);
+
+  const updateProductCount = modifier => {
+      const dlt = parseInt(modifier) - product.count ;
+      console.log('updateProductCount', modifier, product.count, dlt);
+      changeCount(dlt);
+  }
 
   const recalculateOrder = (cust, dlvr) => {
     order.finished =
@@ -213,7 +223,12 @@ const BuyForm = () => {
               >
                 &minus;
               </button>
-              <span className="w-10 px-4 text-center">{product.count}</span>
+                          <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-1/2 text-center py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                              value={ product.count }
+                              onChange={e =>
+                                  updateProductCount(e.target.value)
+                              }
+                    />
               <button
                 onClick={increaseCount}
                 className="focus:outline-none leading-none bg-green-600 hover:bg-green-700 text-white font-bold  py-1 px-2 rounded"
