@@ -60,7 +60,7 @@ const Header = () => {
           }}
         >
           <p>
-            Отдел продаж
+            Отдел продаж ТОО "Актас"
             <a className="cursor-pointer ml-2" href="tel:+77779898998">
               <i className="fab fa-whatsapp" aria-hidden="true" />
               &nbsp; +7 (777) 989-89-98

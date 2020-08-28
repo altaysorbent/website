@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="w-full pt-6 text-center">
           <p className="text-white">
-            ТОО "АРНИКА" © 1994 - 2020
+            ТОО "Актас" © 1994 - 2020
             <br />
             Республика Казахстан, г. Усть-Каменогорск
           </p>
