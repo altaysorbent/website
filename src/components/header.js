@@ -59,7 +59,7 @@ const Header = () => {
             el && toToggle.push(el);
           }}
         >
-          <p>
+          <p className="flex flex-col sm:block">
             Отдел продаж ТОО "Актас"
             <a className="cursor-pointer ml-2" href="tel:+77779898998">
               <i className="fab fa-whatsapp" aria-hidden="true" />

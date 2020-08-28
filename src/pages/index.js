@@ -145,7 +145,7 @@ const IndexPage = () => {
             <h3 className="w-full my-2 text-3xl font-bold leading-tight text-center text-gray-700">
               А знаете ли Вы?
             </h3>
-            <p className="text-xl text-gray-700 leading-none mb-3 text-justify">
+            <p className="text-xl text-gray-700 mb-3 text-justify">
               Бентонитовые глины для сырья добывают на динозавровом
               месторождении в Восточно-Казахстанской Области. Своё название
               месторождение получило в связи с находкой большого количества
