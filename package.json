@@ -7,7 +7,7 @@
     "build": "gatsby build",
     "build-next": "GATSBY_ACTIVE_ENV=next gatsby build",
     "dev": "gatsby develop",
-    "prettier": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "prettier": "prettier --write \"**/*.{js,jsx,json,md,css}\"",
     "serve": "gatsby serve"
   },
   "dependencies": {

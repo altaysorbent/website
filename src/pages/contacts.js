@@ -69,7 +69,7 @@ const ContactsPage = () => {
               }}
               alt=""
             />
-            <h4 className="font-bold">ТОО "Арника"</h4>
+            <h4 className="font-bold">ТОО "Актас"</h4>
             <p>
               <i className="fas fa-map-marked-alt mr-2" /> Ауэзова 14/1 офис 306
             </p>

@@ -9,18 +9,18 @@
  *
  *
  */
- @tailwind base;
+@tailwind base;
 
- /**
+/**
   * This injects any component classes registered by plugins.
   *
   * If using `postcss-import`, use this import instead:
   *
   * @import "tailwindcss/components";
   */
- @tailwind components;
+@tailwind components;
 
- /**
+/**
   * Here you would add any of your custom component classes; stuff that you'd
   * want loaded *before* the utilities so that the utilities could still
   * override them.
@@ -36,7 +36,7 @@
   * @import "components/forms";
   */
 
- /**
+/**
   * This injects all of Tailwind's utility classes, generated based on your
   * config file.
   *
@@ -44,9 +44,9 @@
   *
   * @import "tailwindcss/utilities";
   */
- @tailwind utilities;
+@tailwind utilities;
 
- /**
+/**
   * Here you would add any custom utilities you need that don't come out of the
   * box with Tailwind.
   *
@@ -60,99 +60,49 @@
   * @import "utilities/background-patterns";
   * @import "utilities/skew-transforms";
   */
- body {
-     font-family: 'Open Sans', sans-serif;
- }
- .gradient {
-     background: linear-gradient(90deg, #2f6844 0%, #71bf8f 100%);
- }
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+.gradient {
+  background: linear-gradient(90deg, #2f6844 0%, #71bf8f 100%);
+}
 
- .constructionBanner {
-     width: 100%;
-     height: 100%;
-     background: hsla(0,0%,100%,.8);
-     position: fixed;
-     font-size: 2em;
-     text-align: center;
-     margin: 0;
-     padding: 0;
-     z-index: 999999999;
-     top: 100px;
-     left: 0;
- }
+.receipt {
+  color: black !important;
+  background-color: #cef0c7;
+  border-radius: 25px;
+  width: 100%;
+  padding: 50px;
+}
 
-     .constructionBanner h2 {
-         margin-top:200px;
-     }
-
-     .centerpic {
-         display: block;
-         margin-left: auto;
-         margin-right: auto;
-         width: 150px;
-       }
-
-
-       .receipt{
-           color:black !important;
-           background-color:#CEF0C7;
-         border-radius:25px;
-         width:100%;
-         padding:50px;
-       }
-
-
-       .receipttext{
-         font-size: 15px;
-
-       }
-
-       .agree {
-         pointer-events: none;
-     }
-
-
-     .buyButton {
-      box-shadow: 0px 1px 0px 0px #fff6af;
-      background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-      background-color:#ffec64;
-      border-radius:6px;
-      border:1px solid #ffaa22;
-      display:inline-block;
-      cursor:pointer;
-      color:#333333;
-      font-family:Arial;
-      font-size:15px;
-      font-weight:bold;
-      padding:6px 24px;
-      text-decoration:none;
-      text-shadow:0px 1px 0px #ffee66;
-    }
-    .buyButton:hover {
-      background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-      background-color:#ffab23;
-    }
-    .buyButton:active {
-      position:relative;
-      top:1px;
-    }
-
-
+.buyButton {
+  box-shadow: 0px 1px 0px 0px #fff6af;
+  background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+  background-color: #ffec64;
+  border-radius: 6px;
+  border: 1px solid #ffaa22;
+  display: inline-block;
+  cursor: pointer;
+  color: #333333;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffee66;
+}
+.buyButton:hover {
+  background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+  background-color: #ffab23;
+}
+.buyButton:active {
+  position: relative;
+  top: 1px;
+}
 
 .note {
   background: lightyellow;
   border: 1px solid yellow;
   padding: 1rem;
-  margin:15px;
+  margin: 15px;
   min-height: 450px;
-
-}
-
-.buyDescription{
-  font-size:14px;
-  color:black!important;
-}
-
-.currencySize{
-  width:100px;
 }
