@@ -48,10 +48,10 @@ export default class BuyFormManager {
         img: '/images/new-design.png',
         count: 1,
         amounts: {
-          KZT: { name: 'KZT', short: 'тг.', price: 700 },
           RUB: { name: 'RUB', short: 'руб.', price: 110 },
+          KZT: { name: 'KZT', short: 'тг.', price: 700 },
         },
-        currency: 'KZT',
+        currency: 'RUB',
         amount: 0,
         descr: 'Заказ Алтайсорбент',
         uid: uuidv4(),
