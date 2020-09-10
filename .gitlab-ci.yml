@@ -48,6 +48,7 @@ Build production:
 Deploy to Staging:
   image: alpine
   stage: deploy
+  when: manual
   before_script:
     # Generates to connect to the server with SSH key.
     - mkdir -p ~/.ssh
