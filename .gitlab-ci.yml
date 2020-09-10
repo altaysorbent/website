@@ -13,6 +13,7 @@ stages:
 Build next:
   image: node:10-alpine
   stage: build
+  when: manual
   environment:
     name: next
   before_script:
