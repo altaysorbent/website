@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Layout from '../components/layouts';
 import Meta from '../components/meta';
+import Description from '../components/description';
+import BuyForm from '../components/buyForm.js';
 
 const IndexPage = () => {
   return (
@@ -19,7 +21,7 @@ const IndexPage = () => {
                 спектром действия, изготавливается из природного минерала
                 монтмориллонита.
               </p>
-              <Link to="/buy" className="buyButton">
+              <Link to="/#buy" className="buyButton">
                 Купить
               </Link>
             </div>
@@ -139,28 +141,55 @@ const IndexPage = () => {
         </div>
       </section>
 
-      <section className="bg-white py-8">
-        <div className="container flex flex-wrap mx-auto px-2 pt-4 text-gray-700">
-          <div className="w-2/3">
-            <h3 className="w-full my-2 text-3xl font-bold leading-tight text-center text-gray-700">
-              А знаете ли Вы?
-            </h3>
-            <p className="text-xl text-gray-700 mb-3 text-justify">
-              Бентонитовые глины для сырья добывают на динозавровом
-              месторождении в Восточно-Казахстанской Области. Своё название
-              месторождение получило в связи с находкой большого количества
-              остатков динозавровых яиц
-            </p>
+      <section className="bg-white py-8 border-b">
+        <div className="container mx-auto px-2 pt-4">
+          <div className="flex flex-wrap ">
+            <div className="w-2/3 p-6">
+              <h3 className="w-full my-2 text-3xl font-bold leading-tight text-center text-gray-800">
+                А знаете ли Вы?
+              </h3>
+              <p className="text-xl text-gray-700 mb-3 text-justify">
+                Бентонитовые глины для сырья добывают на динозавровом
+                месторождении в Восточно-Казахстанской Области. Своё название
+                месторождение получило в связи с находкой большого количества
+                остатков динозавровых яиц
+              </p>
+            </div>
+            <div className="w-1/3 p-6 flex justify-center">
+              <img
+                src="/images/dino.png"
+                style={{
+                  width: '200px',
+                  height: '150px',
+                }}
+                alt=""
+              />
+            </div>
           </div>
-          <div className="w-1/3 flex justify-center">
+        </div>
+      </section>
+      <section className="bg-white py-8 text-gray-700" id="description">
+        <div className="container flex flex-wrap mx-auto px-2 pt-4">
+          <div className="w-full sm:w-1/3 p-6">
+            <h3 className="text-3xl text-gray-800 font-bold leading-none mb-6">
+              Алтайсорбент 1г №20
+            </h3>
             <img
-              src="/images/dino.png"
-              style={{
-                width: '200px',
-                height: '150px',
-              }}
+              src="/images/new-design.png"
               alt=""
+              style={{
+                maxHeight: '265px',
+                width: 'auto',
+              }}
             />
+          </div>
+          <div className="w-full sm:w-2/3 p-6">
+            <div className="mb-4">
+              <Description />
+            </div>
+          </div>
+          <div className="w-full p-6" id="buy">
+            <BuyForm />
           </div>
         </div>
       </section>

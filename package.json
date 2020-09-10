@@ -11,8 +11,11 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material-ui/styles": "^4.10.0",
     "axios": "^0.19.2",
-    "axios-jsonp": "^1.0.4",
     "classnames": "^2.2.6",
     "contentful": "^7.10.0",
     "gatsby": "^2.16.1",
@@ -26,12 +29,12 @@
     "gatsby-source-filesystem": "^2.1.33",
     "gatsby-transformer-sharp": "^2.2.23",
     "gh-pages": "^2.0.1",
+    "jsonp": "^0.2.1",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
-    "react-autocomplete": "^1.8.1",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
-    "react-input-mask": "^3.0.0-alpha.2",
+    "react-input-mask": "^2.0.4",
     "react-tabs": "^3.1.1",
     "react-yandex-maps": "^4.0.1",
     "tailwindcss": "^1.0.4"

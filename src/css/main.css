@@ -60,6 +60,10 @@
   * @import "utilities/background-patterns";
   * @import "utilities/skew-transforms";
   */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
 }
@@ -100,9 +104,13 @@ body {
 }
 
 .note {
-  background: lightyellow;
-  border: 1px solid yellow;
+  background: #d4f9e214;
+  border: 1px solid #306a454f;
   padding: 1rem;
   margin: 15px;
-  min-height: 450px;
+  height: 100%;
+}
+
+button:focus {
+  outline: none;
 }
