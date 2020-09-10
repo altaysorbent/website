@@ -59,7 +59,7 @@ Deploy to Staging:
     - sh ./scripts/deploy/gitlab-staging.sh
   only:
     refs:
-      - next
+      - branches
 
 Deploy to Production:
   image: alpine
