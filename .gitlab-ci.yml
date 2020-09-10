@@ -24,9 +24,8 @@ Build next:
     paths:
       - public
   only:
-    - branches
     refs:
-      - next
+      - branches
 
 Build production:
   image: node:10-alpine
