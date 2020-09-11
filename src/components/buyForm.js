@@ -17,7 +17,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { cdekApi } from '../services/cdekApi';
 import { altayApi } from '../services/altayApi';
-import { payboxApi } from '../services/payboxApi';
 import { uuidv4 } from '../utils/uuid';
 
 const useStyles = makeStyles(theme => ({
@@ -111,7 +110,6 @@ const BuyForm = () => {
             setDeliveryPeriodMax(result.deliveryPeriodMax);
           }
           if (error) {
-            console.log('error', error[0]);
             const text = error?.[0]?.text;
             if (text) {
               setDeliveryErrorText(text);
@@ -156,7 +154,6 @@ const BuyForm = () => {
     setName(event.target.value);
   };
   const handlePhoneChange = event => {
-    console.log('evv', event.target.value);
     setPhone(event.target.value);
   };
   const handleEmailChange = event => {
@@ -244,18 +241,12 @@ const BuyForm = () => {
         },
       })
       .then(response => {
-        console.log(response);
-        const { result } = response.data;
-        payboxApi
-          .post('payment.php', result)
-          .then(resp => {
-            console.log('asdasd', resp);
-          })
-          .catch(er => {
-            console.log('paybox er', er);
-          });
+        const { redirectUrl } = response.data;
+
+        window.location.href = redirectUrl;
       })
       .catch(err => {
+        // @todo handle error
         console.log(err);
       });
   };
