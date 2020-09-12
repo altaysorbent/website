@@ -4,6 +4,7 @@ import Layout from '../components/layouts';
 import Meta from '../components/meta';
 import Description from '../components/description';
 import BuyForm from '../components/buyForm.js';
+import { productName } from '../constants/product';
 
 const IndexPage = () => {
   return (
@@ -172,7 +173,7 @@ const IndexPage = () => {
         <div className="container flex flex-wrap mx-auto px-2 pt-4">
           <div className="w-full sm:w-1/3 p-6">
             <h3 className="text-3xl font-bold leading-none mb-6">
-              Алтайсорбент 1г №20
+              {productName}
             </h3>
             <img
               src="/images/new-design.png"
