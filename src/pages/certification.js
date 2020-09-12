@@ -6,10 +6,10 @@ const CertificationPage = () => {
   return (
     <Layout>
       <Meta title={title} />
-      <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 text-center">
+      <h3 className="text-3xl font-bold leading-none mb-3 text-center">
         {title}
       </h3>
-      <div className="container mx-auto px-2 pt-4 text-gray-800 text-xl text-justify">
+      <div className="container mx-auto px-2 pt-4 text-xl text-justify">
         <p className="buyDescription">
           Наши продукты соответствуют высоким стандартам. Ниже приведены сканы
           документов для ознакомления с нашей компанией и продукцией.

@@ -16,9 +16,19 @@ import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { cdekApi } from '../services/cdekApi';
-import { altayApi } from '../services/altayApi';
+import { fetchCityList } from '../services/cdekApi';
+import { getDeliveryPrice, createOrder } from 'services/altayApi';
 import { uuidv4 } from '../utils/uuid';
+import {
+  maximumAvailableCount,
+  minimumAvailableCount,
+  productName,
+  productPriceRub,
+  productPriceKzt,
+  DELIVERY_TYPES,
+  currencyCode,
+  CURRENCY_SYMBOLS,
+} from '../constants/product';
 
 const useStyles = makeStyles(theme => ({
   TextField: {
@@ -38,24 +48,6 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
   },
 }));
-
-let timerId = 0;
-const productName = 'Алтайсорбент 1г №20';
-const productPriceKzt = 630;
-const productPriceRub = 111;
-const minimumAvailableCount = 1;
-const maximumAvailableCount = 32;
-
-const currencyCode = 'KZT';
-
-const DELIVERY_TYPES = {
-  WAREHOUSE: 136,
-  DELIVERY: 137,
-};
-const CURRENCY_SYMBOLS = {
-  KZT: '\u20B8',
-  RUB: '\u20BD',
-};
 
 const phoneMaskValue = '+___________';
 
@@ -95,18 +87,17 @@ const BuyForm = () => {
 
   useEffect(() => {
     if (city && deliveryType && zipCode) {
-      altayApi
-        .post('cdek/calculate_price', {
-          destCityId: city.uid,
-          quantity: count,
-          currency: currencyCode,
-          tariff: deliveryType,
-        })
+      getDeliveryPrice({
+        destCityId: city.uid,
+        quantity: count,
+        currency: currencyCode,
+        tariff: deliveryType,
+      })
         .then(({ data }) => {
           const { result, error } = data.result;
           if (result) {
             setDeliveryPriceKzt(result.priceByCurrency);
-            setDeliveryPriceRub(Math.round(result.price));
+            setDeliveryPriceRub(Math.ceil(result.price));
 
             setDeliveryPeriodMin(result.deliveryPeriodMin);
             setDeliveryPeriodMax(result.deliveryPeriodMax);
@@ -122,11 +113,10 @@ const BuyForm = () => {
             }
           }
         })
-        .catch(err => {
+        .catch(() => {
           enqueueSnackbar(
             'Ошибка при расчете доставки, пожалуйста попробуйте позже'
           );
-          console.log('err', err);
         });
     }
   }, [city, deliveryType, zipCode, count]);
@@ -185,69 +175,42 @@ const BuyForm = () => {
 
   const onCitiesFetchRequested = (event, value) => {
     if (value.length >= 3) {
-      timerId && clearTimeout(timerId);
-
-      timerId = setTimeout(() => {
-        cdekApi(
-          `city/getListByTerm/jsonp.php?q=${value}`,
-          null,
-          (err, response) => {
-            if (err) {
-              console.log('Error during fetch cities from CDEK', err);
-              setDeliveryErrorText(
-                'Ошибка при загрузке списка городов, пожалуйста попробуйте позже'
-              );
-            }
-            const geonames = response?.geonames;
-
-            if (geonames) {
-              const cities = geonames.map(item => {
-                return {
-                  uid: item.id,
-                  name: item.cityName,
-                  region: item.regionName,
-                  label: item.name,
-                  zipcodes: item.postCodeArray,
-                };
-              });
-
-              setCities(cities);
-            }
-          }
-        );
-      }, 500);
+      fetchCityList(value)
+        .then(cities => {
+          setCities(cities);
+        })
+        .catch(() => {
+          setDeliveryErrorText(
+            'Ошибка при загрузке списка городов, пожалуйста попробуйте позже'
+          );
+        });
     }
   };
 
-  const createOrder = () => {
-    altayApi
-      .post('paybox/init', {
-        customer: {
-          name,
-          phone,
-          email,
-        },
-        delivery: {
-          address,
-          city: city.name,
-          cityFull: city.label,
-          cityId: city.uid,
-          zipcode: zipCode,
-          price: deliveryPriceKzt,
-          tariffId: deliveryType,
-        },
-        product: {
-          deliveryPrice: deliveryPriceKzt,
-          count,
-          totalAmount: totalSumKzt,
-          amount: productSumKzt,
-          price: productPriceKzt,
-          name: productName,
-          currency: currencyCode,
-          descr: `Заказ ${productName}`,
-          uid: uuidv4(),
-        },
-      })
+  const onCreateOrderButtonClick = () => {
+    const customer = { name, phone, email };
+    const delivery = {
+      address,
+      city: city.name,
+      cityFull: city.label,
+      cityId: city.uid,
+      zipcode: zipCode,
+      price: deliveryPriceKzt,
+      tariffId: deliveryType,
+    };
+    const product = {
+      deliveryPrice: deliveryPriceKzt,
+      count,
+      totalAmount: totalSumKzt,
+      amount: productSumKzt,
+      price: productPriceKzt,
+      name: productName,
+      currency: currencyCode,
+      descr: `Заказ ${productName}`,
+      uid: uuidv4(),
+    };
+
+    createOrder(customer, delivery, product)
       .then(response => {
         const { redirectUrl } = response.data;
 
@@ -264,11 +227,9 @@ const BuyForm = () => {
   return (
     <>
       <div className="flex flex-col-reverse lg:flex-row">
-        <div className="flex w-full  flex-wrap flex-col lg:flex-row lg:w-1/2 pl-4 mt-4 lg:mt-0">
+        <div className="flex w-full  flex-wrap flex-col lg:flex-row lg:w-1/2 lg:pl-4 mt-4 lg:mt-0">
           <div className="flex w-full lg:w-1/2 justify-center items-center">
-            <div className="w-1/2 text-xl font-bold text-gray-800">
-              Количество
-            </div>
+            <div className="w-1/2 text-xl font-bold">Количество</div>
             <div className="w-1/2 flex items-center">
               <IconButton onClick={decreaseCount} size="small" color="primary">
                 <RemoveIcon />
@@ -292,9 +253,7 @@ const BuyForm = () => {
             </div>
           </div>
           <div className="flex w-full lg:w-1/2 lg:justify-around items-center mt-4 lg:mt-0">
-            <div className="w-1/2 lg:w-auto text-xl font-bold text-gray-800">
-              Сумма
-            </div>
+            <div className="w-1/2 lg:w-auto text-xl font-bold">Сумма</div>
             <div className="w-1/2 lg:w-auto font-bold text-green-700 text-xl">
               <b>
                 {productSumKzt} {CURRENCY_SYMBOLS.KZT} (~ {productSumRub}{' '}
@@ -307,8 +266,8 @@ const BuyForm = () => {
             <b>{maximumAvailableCount}</b>
           </div>
         </div>
-        <div className="w-full lg:w-1/2 px-4 flex lg:justify-center">
-          <div className="text-gray-800 font-bold">
+        <div className="w-full lg:w-1/2 lg:px-4 flex lg:justify-center">
+          <div className="font-bold">
             <p className="mb-2">Мы принимаем платежи с карт:</p>
             <img
               src="/images/cards.png"
@@ -321,7 +280,7 @@ const BuyForm = () => {
       <div className="flex flex-wrap">
         <div className="w-full lg:w-1/2 mb-4">
           <div className="note">
-            <h3 className="text-xl text-gray-800 font-bold leading-none mb-4">
+            <h3 className="text-xl font-bold leading-none mb-4">
               1. Покупатель
             </h3>
 
@@ -401,9 +360,7 @@ const BuyForm = () => {
         </div>
         <div className="w-full lg:w-1/2 mb-4">
           <div className="note">
-            <h3 className="text-xl text-gray-800 font-bold leading-none mb-4">
-              2. Доставка
-            </h3>
+            <h3 className="text-xl font-bold leading-none mb-4">2. Доставка</h3>
 
             <div className="w-full max-w-lg mx-auto">
               <div className="flex flex-wrap mb-6">
@@ -440,7 +397,7 @@ const BuyForm = () => {
                     className="block text-gray-800"
                     htmlFor="grid-delivery-zip"
                   >
-                    Почтовый код
+                    Почтовый индекс
                   </label>
 
                   <Autocomplete
@@ -527,11 +484,11 @@ const BuyForm = () => {
       <div className="flex flex-wrap">
         <div className="w-full mb-12">
           <div className="note">
-            <h3 className="text-xl text-gray-800 font-bold mb-6 text-center">
+            <h3 className="text-xl font-bold mb-6 text-center">
               Подтвердите информацию
             </h3>
 
-            <div className="w-full max-w-4xl mx-auto text-gray-800">
+            <div className="w-full max-w-4xl mx-auto">
               <div className="flex flex-col sm:flex-row mb-6 sm:mb-0">
                 <div className="w-full sm:w-1/3 font-bold">Получатель:</div>
                 <div>
@@ -629,9 +586,9 @@ const BuyForm = () => {
               </div>
 
               <button
-                onClick={createOrder}
+                onClick={onCreateOrderButtonClick}
                 className={classNames({
-                  'text-white font-bold py-2 px-4 rounded ': true,
+                  'text-white font-bold py-2 px-4 rounded block mx-auto': true,
                   'bg-gray-500 hover:bg-blue-gray cursor-not-allowed': !isReadyToOrder,
                   'bg-green-600 hover:bg-green-700': isReadyToOrder,
                 })}

@@ -11,7 +11,7 @@ const IndexPage = () => {
       <Meta title="Главная" />
       <section id="sorbent">
         <div className="pt-20 pb-10">
-          <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+          <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center text-white">
             <div className="w-full md:w-1/2 text-center md:text-left">
               <h1 className="my-4 text-5xl font-bold leading-tight">
                 Altaysorbent - здоровья важный элемент!
@@ -30,7 +30,7 @@ const IndexPage = () => {
                 title="AltaySorbent movie"
                 width="560"
                 height="315"
-                src="https://www.youtube.com/embed/vYluBzK-ddI"
+                src="https://www.youtube.com/embed/vYluBzK-ddI?rel=0"
                 frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -80,10 +80,10 @@ const IndexPage = () => {
         <div className="container mx-auto">
           <div className="flex flex-wrap">
             <div className="w-full sm:w-2/3 p-6">
-              <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
+              <h3 className="text-3xl font-bold leading-none mb-3">
                 Уникальный продукт
               </h3>
-              <p className="text-gray-700 text-xl mb-8 text-justify">
+              <p className="text-xl mb-8 text-justify">
                 Алтайсорбент – натуральный сорбент из элитных бентонитовых глин
                 (содержание минерала монтмориллонита не менее 95 - 98%). В
                 процессе производства бентонитовые глины обрабатываются по
@@ -119,10 +119,10 @@ const IndexPage = () => {
             </div>
             <div className="w-full sm:w-2/3 p-6 ">
               <div className="align-middle">
-                <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
+                <h3 className="text-3xl font-bold leading-none mb-3">
                   Идеальный Сорбент
                 </h3>
-                <p className="text-gray-700 text-xl mb-2 lg:mb-8 text-black text-justify">
+                <p className="text-xl mb-2 lg:mb-8 text-justify">
                   «Алтайсорбент» не только очищает организм, но и регулирует
                   баланс макро и микроэлементов.
                   <br />
@@ -145,10 +145,10 @@ const IndexPage = () => {
         <div className="container mx-auto px-2 pt-4">
           <div className="flex flex-wrap ">
             <div className="w-2/3 p-6">
-              <h3 className="w-full my-2 text-3xl font-bold leading-tight text-center text-gray-800">
+              <h3 className="w-full my-2 text-3xl font-bold leading-tight text-center">
                 А знаете ли Вы?
               </h3>
-              <p className="text-xl text-gray-700 mb-3 text-justify">
+              <p className="text-xl mb-3 text-justify">
                 Бентонитовые глины для сырья добывают на динозавровом
                 месторождении в Восточно-Казахстанской Области. Своё название
                 месторождение получило в связи с находкой большого количества
@@ -168,10 +168,10 @@ const IndexPage = () => {
           </div>
         </div>
       </section>
-      <section className="bg-white py-8 text-gray-700" id="description">
+      <section className="bg-white py-8" id="description">
         <div className="container flex flex-wrap mx-auto px-2 pt-4">
           <div className="w-full sm:w-1/3 p-6">
-            <h3 className="text-3xl text-gray-800 font-bold leading-none mb-6">
+            <h3 className="text-3xl font-bold leading-none mb-6">
               Алтайсорбент 1г №20
             </h3>
             <img
