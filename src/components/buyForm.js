@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
 import classNames from 'classnames';
+import { useSnackbar } from 'notistack';
 
 import {
   TextField,
@@ -41,9 +42,9 @@ const useStyles = makeStyles(theme => ({
 let timerId = 0;
 const productName = 'Алтайсорбент 1г №20';
 const productPriceKzt = 630;
-const productPriceRub = 110;
+const productPriceRub = 111;
 const minimumAvailableCount = 1;
-const maximumAvailableCount = 64;
+const maximumAvailableCount = 32;
 
 const currencyCode = 'KZT';
 
@@ -60,6 +61,7 @@ const phoneMaskValue = '+___________';
 
 const BuyForm = () => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [count, setCount] = useState(1);
   const [name, setName] = useState('');
@@ -121,6 +123,9 @@ const BuyForm = () => {
           }
         })
         .catch(err => {
+          enqueueSnackbar(
+            'Ошибка при расчете доставки, пожалуйста попробуйте позже'
+          );
           console.log('err', err);
         });
     }
@@ -188,7 +193,10 @@ const BuyForm = () => {
           null,
           (err, response) => {
             if (err) {
-              console.log('Error during fetch cities from CDEK');
+              console.log('Error during fetch cities from CDEK', err);
+              setDeliveryErrorText(
+                'Ошибка при загрузке списка городов, пожалуйста попробуйте позже'
+              );
             }
             const geonames = response?.geonames;
 
@@ -246,8 +254,10 @@ const BuyForm = () => {
         window.location.href = redirectUrl;
       })
       .catch(err => {
-        // @todo handle error
-        console.log(err);
+        enqueueSnackbar(
+          'Ошибка при создании заказа, пожалуйста, попробуйте позже'
+        );
+        console.log('Error during order creation', err);
       });
   };
 
@@ -514,7 +524,6 @@ const BuyForm = () => {
           </div>
         </div>
       </div>
-
       <div className="flex flex-wrap">
         <div className="w-full mb-12">
           <div className="note">
@@ -556,7 +565,7 @@ const BuyForm = () => {
                 <div className="w-full sm:w-1/3 font-bold">
                   Стоимость доставки:
                 </div>
-                {zipCode && (
+                {zipCode && deliveryPriceKzt > 0 && (
                   <div>
                     <p>
                       до {zipCode}, г.{city?.name}, {address} -{' '}

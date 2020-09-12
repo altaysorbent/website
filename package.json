@@ -30,6 +30,7 @@
     "gatsby-transformer-sharp": "^2.2.23",
     "gh-pages": "^2.0.1",
     "jsonp": "^0.2.1",
+    "notistack": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
