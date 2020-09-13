@@ -70,7 +70,7 @@ const Meta = ({ description, lang, meta, title }) => {
           charset: `UTF-8`,
         },
       ].concat(meta)}
-    ></Helmet>
+    />
   );
 };
 

@@ -5,7 +5,7 @@ import '../../css/main.css';
 import Footer from '../footer';
 const PageLayout = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen text-gray-800">
       <Header />
       <section className="flex flex-col flex-grow bg-white border-b py-8">
         {children}
