@@ -60,7 +60,7 @@ const Header = () => {
           }}
         >
           <p className="flex flex-col sm:block">
-            Отдел продаж ТОО "Актас"
+            Отдел продаж
             <a className="cursor-pointer ml-2" href="tel:+77779898998">
               <i className="fab fa-whatsapp" aria-hidden="true" />
               &nbsp; +7 (777) 989-89-98
@@ -99,7 +99,7 @@ const Header = () => {
           >
             <li className="mr-3">
               <Link
-                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
+                className="no-underline hover:text-underline cursor-pointer focus:outline-none"
                 to="/"
               >
                 Главная
@@ -107,18 +107,10 @@ const Header = () => {
             </li>
             <li className="mr-3">
               <Link
-                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
-                to="/buy"
-              >
-                Купить
-              </Link>
-            </li>
-            <li className="mr-3">
-              <Link
                 className="no-underline hover:text-underline cursor-pointer focus:outline-none"
-                to="/usage"
+                to="/delivery"
               >
-                Применение
+                Доставка и оплата
               </Link>
             </li>
             <li className="mr-3">
@@ -131,7 +123,7 @@ const Header = () => {
             </li>
             <li className="mr-3">
               <Link
-                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
+                className="no-underline hover:text-underline cursor-pointer focus:outline-none"
                 to="/certification"
               >
                 Сертификация
@@ -139,7 +131,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                className="inline-block no-underline hover:text-underline cursor-pointer focus:outline-none"
+                className="no-underline hover:text-underline cursor-pointer focus:outline-none"
                 to="/contacts"
               >
                 Контакты
