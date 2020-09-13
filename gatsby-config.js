@@ -39,6 +39,7 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-material-ui`,
     `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-purgecss`,
