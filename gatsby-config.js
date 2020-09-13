@@ -9,7 +9,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `Altaysorbent`,
+    title: `Алтайсорбент`,
     description: `Алтайсорбент - 100% натуральный кремнесодержащий энтеросорбент с широким спектром действия`,
   },
   plugins: [
@@ -39,6 +39,7 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-material-ui`,
     `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-purgecss`,
@@ -74,8 +75,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-  proxy: {
-    prefix: '/api',
-    url: 'http://localhost:1337',
-  },
 };
