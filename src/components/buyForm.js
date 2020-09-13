@@ -119,7 +119,7 @@ const BuyForm = () => {
           );
         });
     }
-  }, [city, deliveryType, zipCode, count]);
+  }, [city, deliveryType, zipCode, count, enqueueSnackbar]);
 
   useEffect(() => {
     if (!city) {

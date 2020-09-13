@@ -9,8 +9,8 @@ const CertificationPage = () => {
       <h3 className="text-3xl font-bold leading-none mb-3 text-center">
         {title}
       </h3>
-      <div className="container mx-auto px-2 pt-4 text-xl text-justify">
-        <p className="buyDescription">
+      <div className="container mx-auto px-2 pt-4 text-xl max-w-5xl text-justify">
+        <p>
           Наши продукты соответствуют высоким стандартам. Ниже приведены сканы
           документов для ознакомления с нашей компанией и продукцией.
         </p>

@@ -90,7 +90,14 @@ const DeliveryCalculator = () => {
           );
         });
     }
-  }, [count, zipCode, city, deliveryType]);
+  }, [count, zipCode, city, deliveryType, enqueueSnackbar]);
+
+  useEffect(() => {
+    if (!city) {
+      setZipCodes([]);
+    }
+    setZipCode(null);
+  }, [city]);
 
   const onCitiesFetchRequested = (event, value) => {
     if (value.length >= 3) {

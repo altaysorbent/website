@@ -5,7 +5,7 @@ import { navigate } from 'gatsby';
 
 const UsagePage = () => {
   const title = 'Подтверждение заказа';
-  const [orderId, setOrderId] = useState(0);
+  const [, setOrderId] = useState(0);
 
   useEffect(() => {
     const currentUrl = new URL(window.location.href);
