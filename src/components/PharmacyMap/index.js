@@ -7,6 +7,7 @@ import {
   ZoomControl,
 } from 'react-yandex-maps';
 import * as contentful from 'contentful';
+import Spinner from 'components/spinner';
 
 const PlaceMark = props => {
   const {
@@ -46,6 +47,7 @@ const PlaceMark = props => {
 
 const Map = props => {
   const [ymaps, setYmaps] = useState(null);
+  const [showSpinner, setShowSpinner] = useState(true);
 
   const { placeMarks, bounds } = props;
 
@@ -60,48 +62,54 @@ const Map = props => {
   };
 
   return (
-    <YMaps
-      query={{
-        load:
-          'Map,Placemark,control.ZoomControl,util.bounds,geoObject.addon.balloon',
-      }}
-    >
-      <YMap
-        defaultState={{
-          center: [49.945177, 82.612766],
-          zoom: 16,
-          controls: [],
-          behaviors: ['default', 'scrollZoom'],
+    <>
+      <YMaps
+        query={{
+          load:
+            'Map,Placemark,control.ZoomControl,util.bounds,geoObject.addon.balloon',
         }}
-        style={{
-          width: '100%',
-          height: '400px',
-        }}
-        instanceRef={ref => {
-          disableBehaviors(ref);
-          setCenter(ref);
-        }}
-        onLoad={ymaps => setYmaps(ymaps)}
       >
-        <ZoomControl
-          options={{
-            size: 'small',
+        <YMap
+          defaultState={{
+            center: [49.945177, 82.612766],
+            zoom: 16,
+            controls: [],
+            behaviors: ['default', 'scrollZoom'],
           }}
-        />
-        {placeMarks}
-      </YMap>
-    </YMaps>
+          style={{
+            width: '100%',
+            height: '500px',
+          }}
+          instanceRef={ref => {
+            disableBehaviors(ref);
+            setCenter(ref);
+          }}
+          onLoad={ymaps => {
+            setYmaps(ymaps);
+            setShowSpinner(false);
+          }}
+        >
+          <ZoomControl
+            options={{
+              size: 'small',
+            }}
+          />
+          {placeMarks}
+        </YMap>
+      </YMaps>
+      <Spinner show={showSpinner} containerStyle={{ height: '339px' }} />
+    </>
   );
 };
+const client = contentful.createClient({
+  // This is the space ID. A space is like a project folder in Contentful terms
+  space: `57e4k2ca6fmc`,
+  // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+  accessToken: `Lh4LbfbNBL_vd6Vy22vMWSmiPiVdhYwenpfNzfyAyjg`,
+});
 
 const PharmacyMap = () => {
   const [pharmacies, setPharmacies] = useState([]);
-  const client = contentful.createClient({
-    // This is the space ID. A space is like a project folder in Contentful terms
-    space: `57e4k2ca6fmc`,
-    // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-    accessToken: `Lh4LbfbNBL_vd6Vy22vMWSmiPiVdhYwenpfNzfyAyjg`,
-  });
 
   useEffect(() => {
     client

@@ -1,6 +1,15 @@
+const activeEnv =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+
+console.log(`Using environment config: '${activeEnv}'`);
+
+require('dotenv').config({
+  path: `.env.${activeEnv}`,
+});
+
 module.exports = {
   siteMetadata: {
-    title: `Altaysorbent`,
+    title: `Алтайсорбент`,
     description: `Алтайсорбент - 100% натуральный кремнесодержащий энтеросорбент с широким спектром действия`,
   },
   plugins: [
@@ -30,6 +39,7 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-material-ui`,
     `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-purgecss`,
@@ -60,6 +70,7 @@ module.exports = {
         webvisor: true,
       },
     },
+    'gatsby-plugin-resolve-src',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

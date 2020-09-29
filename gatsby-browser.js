@@ -6,3 +6,6 @@
 
 // You can delete this file if you're not using it
 import '@fortawesome/fontawesome-free/css/all.css';
+import wrapper from './wrap-root-element';
+
+export const wrapRootElement = wrapper;

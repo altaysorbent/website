@@ -10,21 +10,45 @@ stages:
   - build
   - deploy
 
-Build:
+Build next:
   image: node:10-alpine
   stage: build
+  when: manual
+  environment:
+    name: next
+  before_script:
+    - yarn install
+  script:
+    - yarn run build-next
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - public
+  only:
+    refs:
+      - branches
+
+Build production:
+  image: node:10-alpine
+  stage: build
+  environment:
+    name: production
   before_script:
     - yarn install
   script:
     - yarn run build
   artifacts:
-    expire_in: 1 week
+    expire_in: 1 day
     paths:
       - public
+  only:
+    refs:
+      - master
 
 Deploy to Staging:
   image: alpine
   stage: deploy
+  when: manual
   before_script:
     # Generates to connect to the server with SSH key.
     - mkdir -p ~/.ssh
@@ -34,7 +58,9 @@ Deploy to Staging:
   script:
     - apk add --no-cache rsync openssh
     - sh ./scripts/deploy/gitlab-staging.sh
-  when: manual
+  only:
+    refs:
+      - branches
 
 Deploy to Production:
   image: alpine
@@ -48,7 +74,6 @@ Deploy to Production:
   script:
     - apk add --no-cache rsync openssh
     - sh ./scripts/deploy/gitlab-production.sh
-  when: manual
   only:
     refs:
       - master
