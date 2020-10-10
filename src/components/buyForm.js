@@ -47,6 +47,20 @@ const useStyles = makeStyles(theme => ({
     width: '30px',
     textAlign: 'center',
   },
+  ResultTable: {
+    '& th': {
+      paddingRight: 20,
+      textAlign: 'left',
+    },
+    '& tr:last-child': {
+      '& th': {
+        paddingTop: 20,
+      },
+      '& td': {
+        paddingTop: 20,
+      },
+    },
+  },
 }));
 
 const phoneMaskValue = '+___________';
@@ -488,63 +502,60 @@ const BuyForm = () => {
               Подтвердите информацию
             </h3>
 
-            <div className="w-full max-w-4xl mx-auto">
-              <div className="flex flex-col sm:flex-row mb-6 sm:mb-0">
-                <div className="w-full sm:w-1/3 font-bold">Получатель:</div>
-                <div>
-                  <p>{name}</p>
-                  <p>{phone}</p>
-                  <p>{email}</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row mb-6 sm:mb-0">
-                <div className="w-full sm:w-1/3 font-bold">Товар:</div>
-                <div>{productName}</div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row mb-6 sm:mb-0">
-                <div className="w-full sm:w-1/3 font-bold">Количество:</div>
-                <div>{count} уп.</div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row mb-6 sm:mb-0">
-                <div className="w-full sm:w-1/3 font-bold">
-                  Стоимость товара:
-                </div>
-                <div>
-                  {productSumKzt} {CURRENCY_SYMBOLS.KZT} (~ {productSumRub}{' '}
-                  {CURRENCY_SYMBOLS.RUB})
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row mb-6 sm:mb-0">
-                <div className="w-full sm:w-1/3 font-bold">
-                  Стоимость доставки:
-                </div>
-                {zipCode && deliveryPriceKzt > 0 && (
-                  <div>
-                    <p>
-                      до {zipCode}, г.{city?.name}, {address} -{' '}
-                      {deliveryPriceKzt}
-                      {CURRENCY_SYMBOLS.KZT} (~{deliveryPriceRub}
+            <div className="w-full max-w-3xl mx-auto">
+              <table className={classes.ResultTable}>
+                <tbody>
+                  <tr>
+                    <th>Получатель:</th>
+                    <td>
+                      <p>{name}</p>
+                      <p>{phone}</p>
+                      <p>{email}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Товар:</th>
+                    <td>{productName}</td>
+                  </tr>
+                  <tr>
+                    <th>Количество:</th>
+                    <td>{count} уп.</td>
+                  </tr>
+                  <tr>
+                    <th>Стоимость товара:</th>
+                    <td>
+                      {productSumKzt} {CURRENCY_SYMBOLS.KZT} (~ {productSumRub}{' '}
                       {CURRENCY_SYMBOLS.RUB})
-                    </p>
-                    <p>
-                      (приблизительное время в пути от {deliveryPeriodMin} - до{' '}
-                      {deliveryPeriodMax} дня/дней)
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              <div className="flex flex-col sm:flex-row">
-                <div className="w-full sm:w-1/3 font-bold">Всего к оплате:</div>
-                <div>
-                  {totalSumKzt} {CURRENCY_SYMBOLS.KZT} (~ {totalSumRub}{' '}
-                  {CURRENCY_SYMBOLS.RUB})
-                </div>
-              </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Стоимость доставки:</th>
+                    <td>
+                      {zipCode && deliveryPriceKzt > 0 && (
+                        <>
+                          <p>
+                            до {zipCode}, г.{city?.name}, {address} -{' '}
+                            {deliveryPriceKzt}
+                            {CURRENCY_SYMBOLS.KZT} (~{deliveryPriceRub}
+                            {CURRENCY_SYMBOLS.RUB})
+                          </p>
+                          <p>
+                            (приблизительное время в пути от {deliveryPeriodMin}{' '}
+                            - до {deliveryPeriodMax} дня/дней)
+                          </p>
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Всего к оплате:</th>
+                    <td className="font-bold">
+                      {totalSumKzt} {CURRENCY_SYMBOLS.KZT} (~ {totalSumRub}{' '}
+                      {CURRENCY_SYMBOLS.RUB})
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
               <p className="text-red-900 my-4">
                 Сумма оплачивается в валюте KZT (Казахстанский тенге).
