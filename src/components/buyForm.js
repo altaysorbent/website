@@ -352,14 +352,14 @@ const BuyForm = () => {
                   mask="+99999999999"
                   value={phone}
                   onChange={handlePhoneChange}
-                  maskPlaceholder="+799912345678"
+                  maskPlaceholder="+79991234567"
                   required
                 >
                   {() => (
                     <TextField
                       variant="outlined"
                       className={classes.TextField}
-                      placeholder="+799912345678"
+                      placeholder="+79991234567"
                       type="text"
                       fullWidth
                       size="small"
@@ -405,7 +405,7 @@ const BuyForm = () => {
                     focused={false}
                     className={classes.RadioGroupLabel}
                   >
-                    Город отправления
+                    Склад отправления (влияет на стоимость доставки)
                   </FormLabel>
                   <RadioGroup
                     name="senderCityId"
@@ -418,7 +418,7 @@ const BuyForm = () => {
                       control={
                         <Radio color="primary" className={classes.Radio} />
                       }
-                      label="Санкт-Петербург (Россия)"
+                      label="Санкт-Петербург"
                     />
                     <FormControlLabel
                       value={SENDER_CITY_IDS.UKG}
@@ -426,7 +426,7 @@ const BuyForm = () => {
                       control={
                         <Radio color="primary" className={classes.Radio} />
                       }
-                      label="Усть-Каменогорск (Казахстан)"
+                      label="Усть-Каменогорск"
                     />
                   </RadioGroup>
                 </FormControl>
