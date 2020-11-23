@@ -12,10 +12,10 @@ import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 
 import {
   CURRENCY_SYMBOLS,
-  currencyCode,
   DELIVERY_TYPES,
   maximumAvailableCount,
   minimumAvailableCount,
+  SENDER_CITY_IDS,
 } from '../../constants/product';
 import { fetchCityList } from '../../services/cdekApi';
 import { useSnackbar } from 'notistack';
@@ -27,6 +27,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'row',
     marginTop: '1rem',
+  },
+  senderCity: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: '0.75rem',
   },
   label: {
     fontSize: '1.25rem',
@@ -42,6 +47,7 @@ const DeliveryCalculator = () => {
   const [zipCode, setZipCode] = useState(null);
   const [count, setCount] = useState(minimumAvailableCount);
   const [deliveryType, setDeliveryType] = useState(DELIVERY_TYPES.DELIVERY);
+  const [senderCity, setSenderCity] = useState(SENDER_CITY_IDS.SPB);
 
   const [deliveryPriceKzt, setDeliveryPriceKzt] = useState(0);
   const [deliveryPriceRub, setDeliveryPriceRub] = useState(0);
@@ -49,17 +55,17 @@ const DeliveryCalculator = () => {
   const [deliveryPeriodMax, setDeliveryPeriodMax] = useState(0);
 
   useEffect(() => {
-    if (count && zipCode && city && deliveryType) {
+    if (count && zipCode && city && deliveryType && senderCity) {
       getDeliveryPrice({
-        destCityId: city.uid,
+        senderCityId: senderCity,
+        receiverCityId: city.uid,
         quantity: count,
-        currency: currencyCode,
-        tariff: deliveryType,
+        tariffId: deliveryType,
       })
         .then(({ data }) => {
-          const { result, error } = data.result;
+          const { result, error } = data;
           if (result) {
-            setDeliveryPriceKzt(result.priceByCurrency);
+            setDeliveryPriceKzt(Math.ceil(result.priceByCurrency));
             setDeliveryPriceRub(Math.ceil(result.price));
 
             setDeliveryPeriodMin(result.deliveryPeriodMin);
@@ -90,7 +96,7 @@ const DeliveryCalculator = () => {
           );
         });
     }
-  }, [count, zipCode, city, deliveryType, enqueueSnackbar]);
+  }, [count, zipCode, city, deliveryType, senderCity, enqueueSnackbar]);
 
   useEffect(() => {
     if (!city) {
@@ -149,8 +155,36 @@ const DeliveryCalculator = () => {
   const handleDeliveryTypeChange = event =>
     setDeliveryType(+event.target.value);
 
+  const handleSenderCityChange = e => setSenderCity(+e.target.value);
+
   return (
     <div className="flex flex-wrap max-w-3xl mx-auto text-xl">
+      <div className="w-full ">
+        <h4 className="text-xl">Город отправления</h4>
+        <RadioGroup
+          name="senderCityId"
+          value={senderCity}
+          onChange={handleSenderCityChange}
+          className={classes.senderCity}
+        >
+          <FormControlLabel
+            value={SENDER_CITY_IDS.SPB}
+            control={<Radio color="primary" />}
+            label="Санкт-Петербург (Россия)"
+            classes={{
+              label: classes.label,
+            }}
+          />
+          <FormControlLabel
+            value={SENDER_CITY_IDS.UKG}
+            control={<Radio color="primary" />}
+            label="Усть-Каменогорск (Казахстан)"
+            classes={{
+              label: classes.label,
+            }}
+          />
+        </RadioGroup>
+      </div>
       <div className="flex w-full md:w-1/5 md:pr-3 flex-col">
         <div className="w-full">Количество</div>
         <div className="w-full flex items-center">
@@ -174,7 +208,7 @@ const DeliveryCalculator = () => {
       </div>
       <div className="w-full md:w-3/5 md:pr-3 mb-6 md:mb-0">
         <label className="block text-gray-800" htmlFor="grid-delivery-city">
-          Город
+          Город назначения
         </label>
 
         <Autocomplete

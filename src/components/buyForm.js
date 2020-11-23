@@ -18,7 +18,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { fetchCityList } from '../services/cdekApi';
 import { getDeliveryPrice, createOrder } from 'services/altayApi';
-import { uuidv4 } from '../utils/uuid';
+
 import {
   maximumAvailableCount,
   minimumAvailableCount,
@@ -26,8 +26,9 @@ import {
   productPriceRub,
   productPriceKzt,
   DELIVERY_TYPES,
-  currencyCode,
   CURRENCY_SYMBOLS,
+  SENDER_CITY_IDS,
+  defaultProductId,
 } from '../constants/product';
 
 const useStyles = makeStyles(theme => ({
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   ControlLabel: {
     marginLeft: '-7px',
   },
-  DeliveryTypeLabel: {
+  RadioGroupLabel: {
     marginBottom: '10px',
   },
   CountInput: {
@@ -77,6 +78,7 @@ const BuyForm = () => {
   const [zipCode, setZipCode] = useState(null);
   const [address, setAddress] = useState('');
   const [deliveryType, setDeliveryType] = useState(DELIVERY_TYPES.DELIVERY);
+  const [senderCity, setSenderCity] = useState(SENDER_CITY_IDS.SPB);
   const [deliveryPriceKzt, setDeliveryPriceKzt] = useState(0);
   const [deliveryPriceRub, setDeliveryPriceRub] = useState(0);
   const [deliveryPeriodMin, setDeliveryPeriodMin] = useState(0);
@@ -100,17 +102,17 @@ const BuyForm = () => {
   const totalSumRub = productSumRub + deliveryPriceRub;
 
   useEffect(() => {
-    if (city && deliveryType && zipCode) {
+    if (city && deliveryType && zipCode && senderCity) {
       getDeliveryPrice({
-        destCityId: city.uid,
+        senderCityId: senderCity,
+        receiverCityId: city.uid,
         quantity: count,
-        currency: currencyCode,
-        tariff: deliveryType,
+        tariffId: deliveryType,
       })
         .then(({ data }) => {
-          const { result, error } = data.result;
+          const { result, error } = data;
           if (result) {
-            setDeliveryPriceKzt(result.priceByCurrency);
+            setDeliveryPriceKzt(Math.ceil(result.priceByCurrency));
             setDeliveryPriceRub(Math.ceil(result.price));
 
             setDeliveryPeriodMin(result.deliveryPeriodMin);
@@ -133,7 +135,7 @@ const BuyForm = () => {
           );
         });
     }
-  }, [city, deliveryType, zipCode, count, enqueueSnackbar]);
+  }, [city, deliveryType, zipCode, count, senderCity, enqueueSnackbar]);
 
   useEffect(() => {
     if (!city) {
@@ -187,6 +189,8 @@ const BuyForm = () => {
   const handleDeliveryTypeChange = event =>
     setDeliveryType(+event.target.value);
 
+  const handleSenderCityChange = e => setSenderCity(+e.target.value);
+
   const onCitiesFetchRequested = (event, value) => {
     if (value.length >= 3) {
       fetchCityList(value)
@@ -208,20 +212,19 @@ const BuyForm = () => {
       city: city.name,
       cityFull: city.label,
       cityId: city.uid,
-      zipcode: zipCode,
+      zip: zipCode,
       price: deliveryPriceKzt,
       tariffId: deliveryType,
+      senderCityId: senderCity,
     };
     const product = {
       deliveryPrice: deliveryPriceKzt,
       count,
-      totalAmount: totalSumKzt,
+      total: totalSumKzt,
       amount: productSumKzt,
       price: productPriceKzt,
       name: productName,
-      currency: currencyCode,
-      descr: `Заказ ${productName}`,
-      uid: uuidv4(),
+      id: defaultProductId,
     };
 
     createOrder(customer, delivery, product)
@@ -231,9 +234,28 @@ const BuyForm = () => {
         window.location.href = redirectUrl;
       })
       .catch(err => {
-        enqueueSnackbar(
-          'Ошибка при создании заказа, пожалуйста, попробуйте позже'
-        );
+        if (err?.response?.status === 400) {
+          const messages = err.response.data.message;
+          const phoneError = messages.some(message =>
+            message.includes('phone')
+          );
+          if (phoneError) {
+            enqueueSnackbar(
+              'Неправильно заполнен телефон, пожалуйста, укажите телефон в формате +79991234567',
+              {
+                anchorOrigin: {
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                },
+              }
+            );
+          }
+        } else {
+          enqueueSnackbar(
+            'Ошибка при создании заказа, пожалуйста, попробуйте позже'
+          );
+        }
+
         console.log('Error during order creation', err);
       });
   };
@@ -377,13 +399,46 @@ const BuyForm = () => {
             <h3 className="text-xl font-bold leading-none mb-4">2. Доставка</h3>
 
             <div className="w-full max-w-lg mx-auto">
+              <div className="w-full mb-6">
+                <FormControl component="fieldset">
+                  <FormLabel
+                    focused={false}
+                    className={classes.RadioGroupLabel}
+                  >
+                    Город отправления
+                  </FormLabel>
+                  <RadioGroup
+                    name="senderCityId"
+                    value={senderCity}
+                    onChange={handleSenderCityChange}
+                  >
+                    <FormControlLabel
+                      value={SENDER_CITY_IDS.SPB}
+                      className={classes.ControlLabel}
+                      control={
+                        <Radio color="primary" className={classes.Radio} />
+                      }
+                      label="Санкт-Петербург (Россия)"
+                    />
+                    <FormControlLabel
+                      value={SENDER_CITY_IDS.UKG}
+                      className={classes.ControlLabel}
+                      control={
+                        <Radio color="primary" className={classes.Radio} />
+                      }
+                      label="Усть-Каменогорск (Казахстан)"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </div>
+
               <div className="flex flex-wrap mb-6">
                 <div className="w-full md:w-2/3 md:pr-3 mb-6 md:mb-0">
                   <label
                     className="block text-gray-800"
                     htmlFor="grid-delivery-city"
                   >
-                    Город
+                    Город назначения
                   </label>
 
                   <Autocomplete
@@ -457,7 +512,7 @@ const BuyForm = () => {
                 <FormControl component="fieldset">
                   <FormLabel
                     focused={false}
-                    className={classes.DeliveryTypeLabel}
+                    className={classes.RadioGroupLabel}
                   >
                     Способ доставки
                   </FormLabel>
