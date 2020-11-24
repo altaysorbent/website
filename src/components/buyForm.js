@@ -399,7 +399,7 @@ const BuyForm = () => {
             <h3 className="text-xl font-bold leading-none mb-4">2. Доставка</h3>
 
             <div className="w-full max-w-lg mx-auto">
-              <div className="w-full mb-6">
+              <div className="w-full mb-4">
                 <FormControl component="fieldset">
                   <FormLabel
                     focused={false}
@@ -408,6 +408,7 @@ const BuyForm = () => {
                     Склад отправления (влияет на стоимость доставки)
                   </FormLabel>
                   <RadioGroup
+                    row
                     name="senderCityId"
                     value={senderCity}
                     onChange={handleSenderCityChange}
@@ -517,6 +518,7 @@ const BuyForm = () => {
                     Способ доставки
                   </FormLabel>
                   <RadioGroup
+                    row
                     name="deliveryType"
                     value={deliveryType}
                     onChange={handleDeliveryTypeChange}
