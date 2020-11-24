@@ -35,7 +35,7 @@ const ContactsPage = () => {
           }}
           style={{
             width: '100%',
-            height: '500px',
+            height: '600px',
           }}
           instanceRef={ref => {
             disableBehaviors(ref);
@@ -55,7 +55,7 @@ const ContactsPage = () => {
         <div
           className="relative w-full h-full"
           style={{
-            height: '500px',
+            height: '600px',
             width: '100%',
           }}
         >
@@ -79,17 +79,26 @@ const ContactsPage = () => {
               Прием, подтверждение заказов по почте - ежедневно с 10:00 до 20:00
               по Москве
             </p>
-            <p className="py-1">
-              Консультации по телефону или WhatsApp по будням с 7 до 14.00 по
-              Москве
-              <i className="fas fa-phone-volume ml-2" />
-              <a className="ml-2" href="tel:+77779898998">
-                +7 (777) 989-89-98
-              </a>
-            </p>
+            <p className="py-1">Консультации по телефонам:</p>
+            <ul className="mb-2">
+              <li>
+                <span className="text-green-800">
+                  <i className="fas fa-phone-volume ml-2" />
+                  <a href="tel:+77779898998">+7 (777) 989-89-98</a>
+                </span>{' '}
+                - Казахстан
+              </li>
+              <li>
+                <span className="text-green-800">
+                  <i className="fas fa-phone-volume ml-2" />
+                  <a href="tel:+79956254555">+7 (995) 625-45-55</a>
+                </span>{' '}
+                - Россия
+              </li>
+            </ul>
             <p>
               <i className="fas fa-map-marked-alt mr-2" />
-              Ауэзова 14/1 офис 306
+              г. Усть-Каменогорск, Ауэзова 14/1 офис 306
             </p>
             <p>
               <i className="fas fa-phone-square-alt mr-2" />
