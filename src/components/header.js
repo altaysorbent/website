@@ -54,17 +54,23 @@ const Header = () => {
           </Link>
         </div>
         <div
-          className="ml-0 lg:ml-6 "
+          className="ml-0 lg:ml-6 flex flex-col sm:flex-row"
           ref={el => {
             el && toToggle.push(el);
           }}
         >
-          <p className="flex flex-col sm:block">
+          <div className="flex flex-col">
             <a className="cursor-pointer ml-2" href="tel:+77779898998">
               <i className="fab fa-whatsapp" aria-hidden="true" />
               &nbsp; +7 (777) 989-89-98
             </a>
-          </p>
+          </div>
+          <div className="flex flex-col sm:ml-4 mt-2 sm:mt-0">
+            <a className="cursor-pointer ml-2" href="tel:+79956254555">
+              <i className="fas fa-mobile-alt" aria-hidden="true" />
+              &nbsp; +7 (995) 625-45-55
+            </a>
+          </div>
         </div>
 
         <div className="block lg:hidden pr-4">
