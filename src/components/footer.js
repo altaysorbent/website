@@ -7,8 +7,6 @@ const Footer = () => {
         <div className="w-full pt-6 text-center">
           <p className="text-white">
             <a href="https://altaysorbent.org">Алтайсорбент</a> © 1994 - 2020
-            <br />
-            Республика Казахстан, г. Усть-Каменогорск
           </p>
           <div className="text-white mt-4">
             <a

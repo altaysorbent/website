@@ -1,119 +1,82 @@
 import React from 'react';
-import { Map as YMap, Placemark, YMaps } from 'react-yandex-maps';
-import Layout from 'components/layouts';
+import Layout from 'components/layouts/page';
 import Meta from 'components/meta';
 
 const ContactsPage = () => {
-  const Map = () => {
-    const placemark = (
-      <Placemark
-        geometry={[49.945177, 82.612766]}
-        options={{
-          preset: 'islands#redMedicalIcon',
-        }}
-      />
-    );
-
-    const disableBehaviors = ref => {
-      ref &&
-        ref.behaviors.disable([
-          'drag',
-          'multiTouch',
-          'scrollZoom',
-          'dblClickZoom',
-          'rightMouseButtonMagnifier',
-        ]);
-    };
-
-    return (
-      <YMaps>
-        <YMap
-          defaultState={{
-            center: [49.945177, 82.609331],
-            zoom: 16,
-            controls: [],
-          }}
-          style={{
-            width: '100%',
-            height: '600px',
-          }}
-          instanceRef={ref => {
-            disableBehaviors(ref);
-          }}
-        >
-          {placemark}
-        </YMap>
-      </YMaps>
-    );
-  };
-
+  const title = 'Контактная информация';
   return (
     <Layout>
-      <Meta title="Контакты" />
+      <Meta title={title} />
 
-      <section className="py-6">
-        <div
-          className="relative w-full h-full"
-          style={{
-            height: '600px',
-            width: '100%',
-          }}
-        >
-          <Map />
-          <div className="flex flex-col justify-center shadow inset-y-0 left-0 bg-white absolute py-6 px-4 my-10 lg:py-12 lg:px-8 lg:my-24 lg:ml-4 lg:ml-32 max-w-xl">
-            <img
-              className="mx-auto mb-2"
-              src="/images/logo_black.png"
-              style={{
-                width: '85px',
-              }}
-              alt=""
-            />
-            <p className="font-bold">
-              ТОО "Актас" - Генеральный дистрибьютор ТОО "Арника"
-            </p>
-            <p className="py-1">
-              Режим работы интернет магазина - круглосуточно
-            </p>
-            <p className="py-1">
-              Прием, подтверждение заказов по почте - ежедневно с 10:00 до 20:00
-              по Москве
-            </p>
-            <p className="py-1">Консультации по телефонам:</p>
-            <ul className="mb-2">
-              <li>
-                <span className="text-green-800">
-                  <i className="fas fa-phone-volume ml-2" />
-                  <a href="tel:+77779898998">+7 (777) 989-89-98</a>
-                </span>{' '}
-                - Казахстан
-              </li>
-              <li>
-                <span className="text-green-800">
-                  <i className="fas fa-phone-volume ml-2" />
-                  <a href="tel:+79956254555">+7 (995) 625-45-55</a>
-                </span>{' '}
-                - Россия
-              </li>
-            </ul>
-            <p>
-              <i className="fas fa-map-marked-alt mr-2" />
-              г. Усть-Каменогорск, Ауэзова 14/1 офис 306
-            </p>
-            <p>
-              <i className="fas fa-phone-square-alt mr-2" />
-              Отдел производства ТОО "Арника":
-              <a className="ml-2" href="tel:+77232221078">
-                +7 (7232) 22-10-78
-              </a>
-            </p>
-            <p>
-              <i className="fas fa-envelope mr-2" />
-              <a href="mailto:sales@altaysorbent.org">sales@altaysorbent.org</a>
-            </p>
-          </div>
+      <h3 className="text-3xl font-bold leading-none mb-3 text-center">
+        {title}
+      </h3>
+      <hr />
+      <div className="container mx-auto px-2 pt-4 max-w-5xl text-xl">
+        <div className="mb-6">
+          <p className="py-1">Режим работы интернет магазина - круглосуточно</p>
+          <p className="py-1">
+            Прием, подтверждение заказов по почте{' '}
+            <a className="text-green-800" href="mailto:sales@altaysorbent.org">
+              sales@altaysorbent.org
+            </a>{' '}
+            - ежедневно с 10:00 до 20:00 по Москве
+          </p>
+          <p className="py-1">
+            Консультации по телефону по будням с 11:00 до 20:00 -{' '}
+            <span className="text-green-800">
+              <i className="fas fa-phone-volume ml-2" />
+              <a href="tel:+79956254555">+7 (995) 625-45-55</a>
+            </span>{' '}
+          </p>
+          <p>
+            Консультации по телефону или WhatsApp по будням с 7:00 до 14:00 по
+            Москве:
+            <span className="text-green-800">
+              <i className="fas fa-phone-volume ml-2" />
+              <a href="tel:+77779898998">+7 (777) 989-89-98</a>
+            </span>
+          </p>
         </div>
-      </section>
+        <h4 className="text-2xl font-bold mb-2">Российская Федерация</h4>
+        <div className="ml-4 mb-4">
+          <p>
+            <b>ИП Садоян Роман Андреевич</b>
+          </p>
+          <p>ОГРН 320784700145055</p>
+          <p>
+            Телефон:{' '}
+            <span className="text-green-800">
+              <i className="fas fa-phone-volume ml-2" />
+              <a href="tel:+79956254555">+7 (995) 625-45-55</a>
+            </span>{' '}
+          </p>
+        </div>
+        <h4 className="text-2xl font-bold mb-2">Республика Казахстан</h4>
+        <div className="ml-4">
+          <p>
+            <b>Товарищество с ограниченной ответственностью "АКТАС"</b>
+          </p>
+          <p>БИН: 921240000388</p>
+          <p>
+            Адрес: Республика Казахстан, г.Усть-Каменогорск, проспект Ауэзова,
+            14/1, офис 308
+          </p>
+          <p>
+            Телефон:{' '}
+            <span className="text-green-800">
+              <i className="fas fa-phone-volume ml-2" />
+              <a href="tel:+77779898998">+7 (777) 989-89-98</a>
+            </span>
+          </p>
+          <p>
+            Отдел производства - ТОО "Арника":
+            <a className="ml-2 text-green-800" href="tel:+77232221078">
+              +7 (7232) 22-10-78
+            </a>
+          </p>
+        </div>
+      </div>
     </Layout>
   );
 };
