@@ -44,8 +44,8 @@ const Header = () => {
 
   return (
     <nav className="w-full z-30 text-white sticky" ref={headerRef}>
-      <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
-        <div className="lg:pl-0 pl-2 flex items-center">
+      <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4">
+        <div className="lg:pl-0 pl-2 flex items-center order-1">
           <Link
             className="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
             to="/"
@@ -54,26 +54,26 @@ const Header = () => {
           </Link>
         </div>
         <div
-          className="ml-0 lg:ml-6 flex flex-col sm:flex-row"
+          className="ml-0 lg:ml-6 flex flex-col w-full sm:w-auto mt-4 sm:mt-0 order-3 lg:order-2 text-center lg:text-left"
           ref={el => {
             el && toToggle.push(el);
           }}
         >
           <div className="flex flex-col">
-            <a className="cursor-pointer ml-2" href="tel:+77779898998">
+            <a className="cursor-pointer " href="tel:+77779898998">
               <i className="fab fa-whatsapp" aria-hidden="true" />
-              &nbsp; +7 (777) 989-89-98
+              &nbsp; +7 (777) 989-89-98 &nbsp; Казахстан
             </a>
           </div>
-          <div className="flex flex-col sm:ml-4 mt-2 sm:mt-0">
-            <a className="cursor-pointer ml-2" href="tel:+79956254555">
+          <div className="flex flex-col mt-2 sm:mt-0">
+            <a className="cursor-pointer" href="tel:+79956254555">
               <i className="fas fa-mobile-alt" aria-hidden="true" />
-              &nbsp; +7 (995) 625-45-55
+              &nbsp; +7 (995) 625-45-55 &nbsp; Россия
             </a>
           </div>
         </div>
 
-        <div className="block lg:hidden pr-4">
+        <div className="block lg:hidden pr-4 order-2 sm:order-3">
           <button
             onClick={toggleMenu}
             className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-teal-500 appearance-none focus:outline-none"
@@ -91,7 +91,7 @@ const Header = () => {
 
         <div
           className={[
-            'w-full flex-grow mt-2 bg-white p-4 z-20',
+            'w-full flex-grow mt-2 bg-white p-4 z-20 order-3',
             'lg:mt-0 lg:flex lg:items-center lg:w-auto lg:block lg:bg-transparent lg:p-0',
             showMenu ? 'block text-black' : 'hidden text-white',
           ].join(' ')}
@@ -116,14 +116,6 @@ const Header = () => {
                 to="/delivery"
               >
                 Доставка и оплата
-              </Link>
-            </li>
-            <li className="mr-3">
-              <Link
-                className="no-underline hover:text-underline cursor-pointer focus:outline-none"
-                to="/additional-information"
-              >
-                Дополнительная информация
               </Link>
             </li>
             <li className="mr-3">
