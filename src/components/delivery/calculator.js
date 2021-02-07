@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { useSnackbar } from 'notistack';
 
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import {
-  FormControlLabel,
-  IconButton,
-  Radio,
-  RadioGroup,
-  TextField,
-} from '@material-ui/core';
+import { FormControlLabel, IconButton, Radio, RadioGroup, TextField } from '@material-ui/core';
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { makeStyles } from '@material-ui/styles';
+
+import { fetchCityList } from '../../services/cdekApi';
+import { getDeliveryPrice } from '../../services/altayApi';
 
 import {
   CURRENCY_SYMBOLS,
   DELIVERY_TYPES,
-  maximumAvailableCount,
+  maximumAvailableCountCDEK,
   minimumAvailableCount,
   SENDER_CITY_IDS,
 } from '../../constants/product';
-import { fetchCityList } from '../../services/cdekApi';
-import { useSnackbar } from 'notistack';
-import { makeStyles } from '@material-ui/styles';
-import { getDeliveryPrice } from '../../services/altayApi';
 
 const useStyles = makeStyles(theme => ({
   deliveryType: {
@@ -78,22 +73,16 @@ const DeliveryCalculator = () => {
                 variant: 'error',
               });
             } else {
-              enqueueSnackbar(
-                'Ошибка при расчете доставки, пожалуйста попробуйте позже',
-                {
-                  variant: 'error',
-                }
-              );
+              enqueueSnackbar('Ошибка при расчете доставки, пожалуйста попробуйте позже', {
+                variant: 'error',
+              });
             }
           }
         })
         .catch(() => {
-          enqueueSnackbar(
-            'Ошибка при расчете доставки, пожалуйста попробуйте позже',
-            {
-              variant: 'error',
-            }
-          );
+          enqueueSnackbar('Ошибка при расчете доставки, пожалуйста попробуйте позже', {
+            variant: 'error',
+          });
         });
     }
   }, [count, zipCode, city, deliveryType, senderCity, enqueueSnackbar]);
@@ -112,12 +101,9 @@ const DeliveryCalculator = () => {
           setCities(cities);
         })
         .catch(() => {
-          enqueueSnackbar(
-            'Ошибка при загрузке списка городов, пожалуйста попробуйте позже',
-            {
-              variant: 'error',
-            }
-          );
+          enqueueSnackbar('Ошибка при загрузке списка городов, пожалуйста попробуйте позже', {
+            variant: 'error',
+          });
         });
     }
   };
@@ -140,20 +126,16 @@ const DeliveryCalculator = () => {
     setCount(count => (count === minimumAvailableCount ? 1 : count - 1));
   };
   const increaseCount = () => {
-    setCount(count => (count < maximumAvailableCount ? count + 1 : count));
+    setCount(count => (count < maximumAvailableCountCDEK ? count + 1 : count));
   };
   const handleSetCount = e => {
     const newCount = +e.target.value;
-    if (
-      newCount >= minimumAvailableCount &&
-      newCount <= maximumAvailableCount
-    ) {
+    if (newCount >= minimumAvailableCount && newCount <= maximumAvailableCountCDEK) {
       setCount(newCount);
     }
   };
 
-  const handleDeliveryTypeChange = event =>
-    setDeliveryType(+event.target.value);
+  const handleDeliveryTypeChange = event => setDeliveryType(+event.target.value);
 
   const handleSenderCityChange = e => setSenderCity(+e.target.value);
 
@@ -237,9 +219,7 @@ const DeliveryCalculator = () => {
           renderInput={params => <TextField {...params} variant="outlined" />}
           onChange={handleZipCodeChange}
           size="small"
-          noOptionsText={
-            city ? 'Выберите значение из списка' : 'Сначала укажите город'
-          }
+          noOptionsText={city ? 'Выберите значение из списка' : 'Сначала укажите город'}
         />
       </div>
       <div className="w-full ">
@@ -270,8 +250,8 @@ const DeliveryCalculator = () => {
       {deliveryPriceRub > 0 && deliveryPriceKzt > 0 && (
         <div className="w-full mt-4 text-green-800">
           <p>
-            Стоимость доставки составит - {deliveryPriceKzt}{' '}
-            {CURRENCY_SYMBOLS.KZT} (~{deliveryPriceRub} {CURRENCY_SYMBOLS.RUB})
+            Стоимость доставки составит - {deliveryPriceKzt} {CURRENCY_SYMBOLS.KZT} (~{deliveryPriceRub}{' '}
+            {CURRENCY_SYMBOLS.RUB})
           </p>
           <p>
             Срок доставки от {deliveryPeriodMin} до {deliveryPeriodMax} дней/дня

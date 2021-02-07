@@ -104,6 +104,7 @@ body {
 @media (min-width: 640px) {
   .note {
     margin: 1rem;
+    padding: 2rem 3rem 3rem;
   }
 }
 
