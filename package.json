@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "license": "MIT",
   "scripts": {
-    "build-master": "gatsby build",
+    "build": "gatsby build",
     "build-next": "GATSBY_ACTIVE_ENV=next gatsby build",
     "dev": "gatsby develop",
     "prettier": "prettier --write \"**/*.{js,jsx,json,md,css}\"",
