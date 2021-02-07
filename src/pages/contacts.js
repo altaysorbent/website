@@ -8,9 +8,7 @@ const ContactsPage = () => {
     <Layout>
       <Meta title={title} />
 
-      <h3 className="text-3xl font-bold leading-none mb-3 text-center">
-        {title}
-      </h3>
+      <h3 className="text-3xl font-bold leading-none mb-3 text-center">{title}</h3>
       <hr />
       <div className="container mx-auto px-2 pt-4 max-w-5xl text-xl">
         <div className="mb-6">
@@ -30,8 +28,7 @@ const ContactsPage = () => {
             </span>{' '}
           </p>
           <p>
-            Консультации по телефону или WhatsApp по будням с 7:00 до 14:00 по
-            Москве:
+            Консультации по телефону или WhatsApp по будням с 7:00 до 14:00 по Москве:
             <span className="text-green-800">
               <i className="fas fa-phone-volume ml-2" />
               <a href="tel:+77779898998">+7 (777) 989-89-98</a>
@@ -58,10 +55,7 @@ const ContactsPage = () => {
             <b>Товарищество с ограниченной ответственностью "АКТАС"</b>
           </p>
           <p>БИН: 921240000388</p>
-          <p>
-            Адрес: Республика Казахстан, г.Усть-Каменогорск, проспект Ауэзова,
-            14/1, офис 306
-          </p>
+          <p>Адрес: Республика Казахстан, г.Усть-Каменогорск, проспект Ауэзова, 14/1, офис 306</p>
           <p>
             Телефон:{' '}
             <span className="text-green-800">

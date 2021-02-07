@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import {
-  Map as YMap,
-  Placemark as YPlaceMark,
-  YMaps,
-  ZoomControl,
-} from 'react-yandex-maps';
+import { Map as YMap, Placemark as YPlaceMark, YMaps, ZoomControl } from 'react-yandex-maps';
 import * as contentful from 'contentful';
 import Spinner from 'components/spinner';
 
@@ -65,8 +60,7 @@ const Map = props => {
     <>
       <YMaps
         query={{
-          load:
-            'Map,Placemark,control.ZoomControl,util.bounds,geoObject.addon.balloon',
+          load: 'Map,Placemark,control.ZoomControl,util.bounds,geoObject.addon.balloon',
         }}
       >
         <YMap

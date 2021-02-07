@@ -9,20 +9,11 @@ const Footer = () => {
             <a href="https://altaysorbent.org">Алтайсорбент</a> © 1994 - 2020
           </p>
           <div className="text-white mt-4">
-            <a
-              className="mr-4"
-              rel="noopener noreferrer"
-              target="_blank"
-              href="/files/privacy-policy.pdf"
-            >
+            <a className="mr-4" rel="noopener noreferrer" target="_blank" href="/files/privacy-policy.pdf">
               Политика конфиденциальности
             </a>
 
-            <a
-              rel="noopener noreferrer"
-              target="_blank"
-              href="/files/public-offer-agreement.pdf"
-            >
+            <a rel="noopener noreferrer" target="_blank" href="/files/public-offer-agreement.pdf">
               Договор оферта
             </a>
           </div>

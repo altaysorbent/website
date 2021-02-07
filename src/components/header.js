@@ -46,10 +46,7 @@ const Header = () => {
     <nav className="w-full z-30 text-white sticky" ref={headerRef}>
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4">
         <div className="lg:pl-0 pl-2 flex items-center order-1">
-          <Link
-            className="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-            to="/"
-          >
+          <Link className="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" to="/">
             <img ref={logoRef} src="/images/logo_white.png" alt="" />
           </Link>
         </div>
@@ -78,11 +75,7 @@ const Header = () => {
             onClick={toggleMenu}
             className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-teal-500 appearance-none focus:outline-none"
           >
-            <svg
-              className="fill-current h-3 w-3"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <title>Menu</title>
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
             </svg>
@@ -103,34 +96,22 @@ const Header = () => {
             }}
           >
             <li className="mr-3">
-              <Link
-                className="no-underline hover:text-underline cursor-pointer focus:outline-none"
-                to="/"
-              >
+              <Link className="no-underline hover:text-underline cursor-pointer focus:outline-none" to="/">
                 Главная
               </Link>
             </li>
             <li className="mr-3">
-              <Link
-                className="no-underline hover:text-underline cursor-pointer focus:outline-none"
-                to="/delivery"
-              >
+              <Link className="no-underline hover:text-underline cursor-pointer focus:outline-none" to="/delivery">
                 Доставка и оплата
               </Link>
             </li>
             <li className="mr-3">
-              <Link
-                className="no-underline hover:text-underline cursor-pointer focus:outline-none"
-                to="/certification"
-              >
+              <Link className="no-underline hover:text-underline cursor-pointer focus:outline-none" to="/certification">
                 Сертификация
               </Link>
             </li>
             <li>
-              <Link
-                className="no-underline hover:text-underline cursor-pointer focus:outline-none"
-                to="/contacts"
-              >
+              <Link className="no-underline hover:text-underline cursor-pointer focus:outline-none" to="/contacts">
                 Контакты
               </Link>
             </li>

@@ -6,12 +6,7 @@ const altayApi = axios.create({
   baseURL: ALTAY_BASE_URL,
 });
 
-const getDeliveryPrice = ({
-  senderCityId,
-  receiverCityId,
-  quantity,
-  tariffId,
-}) => {
+const getDeliveryPrice = ({ senderCityId, receiverCityId, quantity, tariffId }) => {
   const params = new URLSearchParams();
   params.append('senderCityId', senderCityId);
   params.append('receiverCityId', receiverCityId);
