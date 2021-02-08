@@ -340,7 +340,7 @@ const BuyForm = () => {
                 <MaximumAmountNotice />
               </div>
               <div className="w-full sm:w-1/2 mb-6">
-                <div className="text-xl font-bold leading-none mb-4">Стоимость (без учета доставки)</div>
+                <div className="font-bold mb-4">Стоимость товара (без учета доставки)</div>
                 <div className="font-bold text-green-700 text-xl">
                   <b>
                     {productSumKzt} {CURRENCY_SYMBOLS.KZT} (~ {productSumRub} {CURRENCY_SYMBOLS.RUB})

@@ -26,18 +26,21 @@ const UsagePage = () => {
             <b>
               {KAZPOST_DELIVERY_PRICE.KZT}
               {CURRENCY_SYMBOLS.KZT}
-            </b>
-          </p>
-          <p className="mb-2">
-            Возможность доставки в другие страны (через <b>{DELIVERY_COMPANIES.CDEK}</b>) можно узнать воспользовавшись
-            калькулятором ниже.
+            </b>{' '}
+            до почтового отделения.
           </p>
           <div className="mb-2">
             <MaximumAmountNotice />
           </div>
+          <p className="mb-2">
+            Возможность доставки в другие страны (через <b>{DELIVERY_COMPANIES.CDEK}</b>) можно узнать воспользовавшись
+            калькулятором ниже.
+          </p>
         </div>
         <div className="mt-6 border-2 border-green-700 p-6">
-          <p className="mb-4">Для расчета стоимости доставки воспользуйтесь калькулятором доставки</p>
+          <p className="mb-4">
+            Для расчета стоимости доставки <b>{DELIVERY_COMPANIES.CDEK}</b> воспользуйтесь калькулятором доставки
+          </p>
           <DeliveryCalculator />
         </div>
         <div className="mt-6">

@@ -159,12 +159,12 @@ const IndexPage = () => {
               }}
             />
           </div>
-          <div className="w-full md:w-2/3 p-6">
+          <div className="w-full md:w-2/3 p-6" id="buy">
             <div className="mb-4">
               <Description />
             </div>
           </div>
-          <div className="w-full p-6" id="buy">
+          <div className="w-full p-6">
             <BuyForm />
           </div>
         </div>

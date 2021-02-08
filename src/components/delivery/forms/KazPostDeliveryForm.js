@@ -63,6 +63,7 @@ const KazPostDeliveryForm = ({
           fullWidth
           size="small"
         />
+        <p className="text-red-900 mt-4">Доставка осуществляется в районное почтовое отделение</p>
       </div>
     </>
   );

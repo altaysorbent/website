@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="w-full pt-6 text-center">
           <p className="text-white">
-            <a href="https://altaysorbent.org">Алтайсорбент</a> © 1994 - 2020
+            <a href="https://altaysorbent.org">Алтайсорбент</a> © 1994 - 2021
           </p>
           <div className="text-white mt-4">
             <a className="mr-4" rel="noopener noreferrer" target="_blank" href="/files/privacy-policy.pdf">
