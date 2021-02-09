@@ -22,17 +22,14 @@ const UsagePage = () => {
     <Layout>
       <Meta title={title} />
 
-      <h3 className="text-3xl font-bold leading-none mb-3 text-center">
-        {title}
-      </h3>
+      <h3 className="text-3xl font-bold leading-none mb-3 text-center">{title}</h3>
       <hr />
       <div className="container mx-auto px-2 pt-4 text-gray-800 text-xl text-justify">
         <h4 className="text-xl leading-none mb-3 text-center font-bold">
           Благодарим за приобретение продукции Алтайсорбент!
         </h4>
         <h4 className="text-xl leading-none mb-3 text-center font-bold">
-          Наш менеджер свяжется с вами в ближайшее время для подтверждения
-          заказа!
+          Наш менеджер свяжется с вами в ближайшее время для подтверждения заказа!
         </h4>
       </div>
     </Layout>

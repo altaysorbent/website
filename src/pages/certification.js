@@ -3,18 +3,15 @@ import Layout from '../components/layouts/page';
 import Meta from '../components/meta';
 const CertificationPage = () => {
   const title = 'Сертификация';
-  const linkClassName =
-    'mx-auto text-green-700 border-b border-green-700 cursor-pointer ml-2';
+  const linkClassName = 'mx-auto text-green-700 border-b border-green-700 cursor-pointer ml-2';
   return (
     <Layout>
       <Meta title={title} />
-      <h3 className="text-3xl font-bold leading-none mb-3 text-center">
-        {title}
-      </h3>
+      <h3 className="text-3xl font-bold leading-none mb-3 text-center">{title}</h3>
       <div className="container mx-auto px-2 pt-4 text-xl max-w-5xl text-justify">
         <p>
-          Наши продукты соответствуют высоким стандартам. Ниже приведены сканы
-          документов для ознакомления с нашей компанией и продукцией.
+          Наши продукты соответствуют высоким стандартам. Ниже приведены сканы документов для ознакомления с нашей
+          компанией и продукцией.
         </p>
         <div className="flex items-center justify-center">
           <div className="w-1/3 px-3">
@@ -24,10 +21,7 @@ const CertificationPage = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                alt="Свидетельство о регистрации"
-                src="/images/certificates/sertificate-eas.jpg"
-              />
+              <img alt="Свидетельство о регистрации" src="/images/certificates/sertificate-eas.jpg" />
             </a>
           </div>
           <div className="w-1/3 px-3">
@@ -37,10 +31,7 @@ const CertificationPage = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                alt="Протокол испытаний"
-                src="/images/certificates/test-report.jpg"
-              />
+              <img alt="Протокол испытаний" src="/images/certificates/test-report.jpg" />
             </a>
           </div>
           <div className="w-1/3 px-3">
@@ -50,17 +41,13 @@ const CertificationPage = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img
-                alt="Протокол испытаний"
-                src="/images/certificates/test-report-2.jpg"
-              />
+              <img alt="Протокол испытаний" src="/images/certificates/test-report-2.jpg" />
             </a>
           </div>
         </div>
         <div className="mt-12">
           <p>
-            Если Вам интересно поглубже узнать о нашей пищевой добавке, то мы
-            специально подготовили несколько статей:
+            Если Вам интересно поглубже узнать о нашей пищевой добавке, то мы специально подготовили несколько статей:
           </p>
         </div>
         <ul className="list-disc lg:ml-10">

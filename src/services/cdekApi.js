@@ -8,18 +8,14 @@ const cdekApi = (url, config = {}, handler) => {
 
 const getCityList = query => {
   return new Promise((resolve, reject) => {
-    cdekApi(
-      `city/getListByTerm/jsonp.php?q=${query}`,
-      null,
-      (err, response) => {
-        if (err) {
-          console.log('Error during fetch cities from CDEK', err);
-          reject(err);
-        }
-
-        resolve(response);
+    cdekApi(`city/getListByTerm/jsonp.php?q=${query}`, null, (err, response) => {
+      if (err) {
+        console.log('Error during fetch cities from CDEK', err);
+        reject(err);
       }
-    );
+
+      resolve(response);
+    });
   });
 };
 
