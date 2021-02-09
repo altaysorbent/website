@@ -1,10 +1,9 @@
 FROM node:lts-alpine3.12 AS builder
-ARG SOURCE_BRANCH
-ENV SOURCE_BRANCH="$SOURCE_BRANCH"
+ARG STAGE=next
 WORKDIR /app
 COPY . .
 RUN yarn install
-RUN yarn build
+RUN if [ "$STAGE" = "production" ] ; then yarn build; else yarn build-next; fi
 
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
