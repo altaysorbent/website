@@ -36,6 +36,24 @@ const IndexPage = () => {
                 allowFullScreen
               />
             </div>
+            <div className="w-full text-xl">
+              <p className="mb-2">
+                «Наша задача состоит в том , чтобы найти правильный баланс между приемом лекарств и использованием
+                натуральных сорбентов, которые способны защитить наш организм и свести к минимуму негативные последствия
+                лечения»
+              </p>
+              <p>
+                Выдержка из статьи{' '}
+                <a
+                  className="border-b border-white cursor-pointer"
+                  href="https://drive.google.com/file/d/16MZJyKY5JfSE9dLjebn5Ww4YQWHYiWKJ/view?usp=sharing"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  «Принцип баланса в медицине»
+                </a>
+              </p>
+            </div>
           </div>
         </div>
         <div className="relative">
