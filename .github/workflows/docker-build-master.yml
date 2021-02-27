@@ -29,7 +29,7 @@ jobs:
           push: true
           tags: core01/altaysorbent-website:latest
           build-args: |
-            stage=production
+            NEXT_PUBLIC_API_URL=https://api.altaysorbent.org/
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
