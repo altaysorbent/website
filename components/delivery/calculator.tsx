@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { AxiosResponse } from 'axios';
 import { useSnackbar } from 'notistack';
 
 import {
@@ -22,7 +23,7 @@ import {
   minimumAvailableCount,
   SENDER_CITY_IDS,
 } from 'constants/product';
-import { AxiosResponse } from 'axios';
+
 import { IDestinationCity } from 'interfaces/destinationCity.interface';
 
 const useStyles = makeStyles(() => ({

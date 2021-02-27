@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import { DELIVERY_TYPES, SENDER_CITY_IDS } from 'constants/product';
-import { ICDEKCityItem } from '../../../interfaces/cdekCityItem.interface';
+import { ICDEKCityItem } from 'interfaces/cdekCityItem.interface';
 
 const useStyles = makeStyles(() => ({
   Radio: {

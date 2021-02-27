@@ -1,6 +1,8 @@
 import React from 'react';
-import styles from './index.module.css';
+
 import { CSSProperties } from '@material-ui/styles';
+
+import styles from './index.module.css';
 
 interface ISpinnerProps {
   show: boolean;
