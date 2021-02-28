@@ -220,15 +220,9 @@ const BuyForm = (): JSX.Element => {
     }
   };
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-  const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
-  };
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+  const handleNameChange = (event) => setName(event.target.value);
+  const handlePhoneChange = (event) => setPhone(event.target.value);
+  const handleEmailChange = (event) => setEmail(event.target.value);
 
   const onDeliveryCompanyChange = (event) => {
     setDestinationZipCode('');
@@ -262,19 +256,15 @@ const BuyForm = (): JSX.Element => {
     setDeliveryErrorText(null);
     setDestinationZipCode(newPostCode);
   };
-  const handleAddressChange = (event) =>
-    setDestinationAddress(event.target.value);
-  const handleDeliveryTypeChange = (event) =>
-    setDeliveryType(+event.target.value);
+  const handleAddressChange = (e) => setDestinationAddress(e.target.value);
+  const handleDeliveryTypeChange = (e) => setDeliveryType(+e.target.value);
 
   const onCDEKSenderCityChange = (e) => setSenderCity(+e.target.value);
 
   const onCDEKDestinationCitiesFetch = (event, value) => {
     if (value.length >= 3) {
       fetchCityList(value)
-        .then((cities) => {
-          setCities(cities);
-        })
+        .then((cities) => setCities(cities))
         .catch(() => {
           setDeliveryErrorText(
             'Ошибка при загрузке списка городов, пожалуйста попробуйте позже'
