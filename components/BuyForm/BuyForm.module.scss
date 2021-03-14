@@ -23,8 +23,6 @@
     -webkit-appearance: none;
     margin: 0;
   }
-
-
 }
 
 .countInputErrorText {
@@ -34,24 +32,25 @@
 .resultTable {
   & th {
     padding-right: 20px;
-    text-align: left
+    text-align: left;
   }
 
   & tr:last-child {
-    & th, td {
+    & th,
+    td {
       padding-top: 20px;
     }
   }
 }
 
 .submit {
-  @apply text-center
+  @apply text-center;
 }
 
 .submitButton {
   @apply bg-green-600 text-white font-bold py-2 px-4 rounded;
 
   &:hover {
-    @apply bg-green-700
+    @apply bg-green-700;
   }
 }

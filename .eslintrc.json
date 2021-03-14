@@ -38,10 +38,13 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "react/jsx-sort-props": [2, {
-      "callbacksLast": true,
-      "shorthandLast": true,
-      "ignoreCase": false
-    }]
+    "react/jsx-sort-props": [
+      2,
+      {
+        "callbacksLast": true,
+        "shorthandLast": true,
+        "ignoreCase": false
+      }
+    ]
   }
 }
