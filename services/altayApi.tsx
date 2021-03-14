@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { ICustomer } from 'interfaces/customer.interface';
-import { IDelivery } from 'interfaces/delivery.interface';
-import { IProduct } from 'interfaces/product.interface';
+import { ICustomer } from 'interfaces/Customer.interface';
+import { IDelivery } from 'interfaces/Delivery.interface';
+import { IProduct } from 'interfaces/Product.interface';
 
 const ALTAY_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -10,10 +10,10 @@ const altayApi = axios.create({
 });
 
 interface IDeliveryPrice {
-  senderCityId: number;
+  senderCityId: string;
   receiverCityId: number;
   quantity: number;
-  tariffId: number;
+  tariffId: string;
 }
 
 const getDeliveryPrice = ({
@@ -23,9 +23,9 @@ const getDeliveryPrice = ({
   tariffId,
 }: IDeliveryPrice): Promise<void | AxiosResponse> => {
   const params = new URLSearchParams();
-  params.append('senderCityId', `${senderCityId}`);
+  params.append('senderCityId', senderCityId);
   params.append('receiverCityId', `${receiverCityId}`);
-  params.append('tariffId', `${tariffId}`);
+  params.append('tariffId', tariffId);
   params.append('quantity', `${quantity}`);
 
   return altayApi

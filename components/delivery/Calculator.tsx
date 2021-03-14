@@ -22,9 +22,9 @@ import {
   maximumAvailableCountCDEK,
   minimumAvailableCount,
   SENDER_CITY_IDS,
-} from 'constants/product';
+} from 'constants/Product';
 
-import { IDestinationCity } from 'interfaces/destinationCity.interface';
+import { IDestinationCity } from 'interfaces/DestinationCity.interface';
 
 const useStyles = makeStyles(() => ({
   deliveryType: {
@@ -160,55 +160,55 @@ const DeliveryCalculator = (): JSX.Element => {
   };
 
   const handleDeliveryTypeChange = (event) =>
-    setDeliveryType(+event.target.value);
+    setDeliveryType(event.target.value);
 
-  const handleSenderCityChange = (e) => setSenderCity(+e.target.value);
+  const handleSenderCityChange = (e) => setSenderCity(e.target.value);
 
   return (
     <div className="flex flex-wrap max-w-3xl mx-auto text-xl">
       <div className="w-full ">
         <h4 className="text-xl">Город отправления</h4>
         <RadioGroup
+          className={classes.senderCity}
           name="senderCityId"
           value={senderCity}
           onChange={handleSenderCityChange}
-          className={classes.senderCity}
         >
           <FormControlLabel
-            value={SENDER_CITY_IDS.SPB}
+            classes={{
+              label: classes.label,
+            }}
             control={<Radio color="primary" />}
             label="Санкт-Петербург (Россия)"
-            classes={{
-              label: classes.label,
-            }}
+            value={SENDER_CITY_IDS.SPB}
           />
           <FormControlLabel
-            value={SENDER_CITY_IDS.UKG}
-            control={<Radio color="primary" />}
-            label="Усть-Каменогорск (Казахстан)"
             classes={{
               label: classes.label,
             }}
+            control={<Radio color="primary" />}
+            label="Усть-Каменогорск (Казахстан)"
+            value={SENDER_CITY_IDS.UKG}
           />
         </RadioGroup>
       </div>
       <div className="flex w-full md:w-1/5 md:pr-3 flex-col">
         <div className="w-full">Количество</div>
         <div className="w-full flex items-center">
-          <IconButton onClick={decreaseCount} size="small" color="primary">
+          <IconButton color="primary" size="small" onClick={decreaseCount}>
             <RemoveIcon />
           </IconButton>
 
           <TextField
-            onChange={handleSetCount}
+            inputProps={{}}
+            size="small"
             type="text"
             value={count}
             variant="outlined"
-            size="small"
-            inputProps={{}}
+            onChange={handleSetCount}
           />
 
-          <IconButton onClick={increaseCount} size="small" color="primary">
+          <IconButton color="primary" size="small" onClick={increaseCount}>
             <AddIcon />
           </IconButton>
         </div>
@@ -219,17 +219,17 @@ const DeliveryCalculator = (): JSX.Element => {
         </label>
 
         <Autocomplete
-          options={cities}
           getOptionLabel={(option) => option.label || ''}
-          value={city}
-          renderInput={(params) => <TextField {...params} variant="outlined" />}
-          onChange={handleCityChange}
-          onInputChange={onCitiesFetchRequested}
-          size="small"
           noOptionsText="Введите первые буквы города"
+          options={cities}
+          renderInput={(params) => <TextField {...params} variant="outlined" />}
+          size="small"
+          value={city}
+          autoComplete
           autoHighlight
           autoSelect
-          autoComplete
+          onChange={handleCityChange}
+          onInputChange={onCitiesFetchRequested}
         />
       </div>
       <div className="w-full md:w-1/5 ">
@@ -238,39 +238,39 @@ const DeliveryCalculator = (): JSX.Element => {
         </label>
 
         <Autocomplete
-          options={zipCodes}
           getOptionLabel={(option) => option || ''}
-          value={zipCode}
-          renderInput={(params) => <TextField {...params} variant="outlined" />}
-          onChange={handleZipCodeChange}
-          size="small"
           noOptionsText={
             city ? 'Выберите значение из списка' : 'Сначала укажите город'
           }
+          options={zipCodes}
+          renderInput={(params) => <TextField {...params} variant="outlined" />}
+          size="small"
+          value={zipCode}
+          onChange={handleZipCodeChange}
         />
       </div>
       <div className="w-full ">
         <RadioGroup
+          className={classes.deliveryType}
           name="deliveryType"
           value={deliveryType}
           onChange={handleDeliveryTypeChange}
-          className={classes.deliveryType}
         >
           <FormControlLabel
-            value={DELIVERY_TYPES.DELIVERY}
+            classes={{
+              label: classes.label,
+            }}
             control={<Radio color="primary" />}
             label="Доставка до квартиры"
-            classes={{
-              label: classes.label,
-            }}
+            value={DELIVERY_TYPES.DELIVERY}
           />
           <FormControlLabel
-            value={DELIVERY_TYPES.WAREHOUSE}
-            control={<Radio color="primary" />}
-            label="Самовывоз со склада"
             classes={{
               label: classes.label,
             }}
+            control={<Radio color="primary" />}
+            label="Самовывоз со склада"
+            value={DELIVERY_TYPES.WAREHOUSE}
           />
         </RadioGroup>
       </div>

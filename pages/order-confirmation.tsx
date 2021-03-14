@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import Layout from 'components/layouts/page';
-import Meta from 'components/meta';
+import Meta from 'components/Meta';
 
 const UsagePage = (): JSX.Element => {
   const router = useRouter();

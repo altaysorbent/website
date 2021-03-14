@@ -4,7 +4,7 @@ import {
   DELIVERY_COMPANIES,
   maximumAvailableCountCDEK,
   maximumAvailableCountKazPost,
-} from 'constants/product';
+} from 'constants/Product';
 
 const MaximumAmountNotice = (): JSX.Element => (
   <div className="text-red-700">

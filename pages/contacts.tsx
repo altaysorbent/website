@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from 'components/layouts/page';
-import Meta from 'components/meta';
+import Meta from 'components/Meta';
 
 const ContactsPage = (): JSX.Element => {
   const title = 'Контактная информация';

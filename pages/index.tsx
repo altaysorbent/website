@@ -2,11 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 
 import Layout from 'components/layouts';
-import Meta from 'components/meta';
-import Description from 'components/description';
-import BuyForm from 'components/buyForm';
+import Meta from 'components/Meta';
+import Description from 'components/Description';
+import BuyForm from 'components/BuyForm/BuyForm';
 
-import { productName } from 'constants/product';
+import { productName } from 'constants/Product';
 
 const IndexPage = (): JSX.Element => {
   return (
@@ -30,12 +30,12 @@ const IndexPage = (): JSX.Element => {
             </div>
             <div className="w-full md:w-1/2 py-6 flex justify-end">
               <iframe
-                title="AltaySorbent movie"
-                width="560"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                frameBorder="0"
                 height="315"
                 src="https://www.youtube.com/embed/vYluBzK-ddI?rel=0"
-                frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                title="AltaySorbent movie"
+                width="560"
                 allowFullScreen
               />
             </div>
@@ -62,16 +62,16 @@ const IndexPage = (): JSX.Element => {
         </div>
         <div className="relative">
           <svg
-            viewBox="0 0 1428 174"
             version="1.1"
+            viewBox="0 0 1428 174"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
           >
-            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+            <g fill="none" fillRule="evenodd" stroke="none" strokeWidth="1">
               <g
-                transform="translate(-2.000000, 44.000000)"
                 fill="#FFFFFF"
                 fillRule="nonzero"
+                transform="translate(-2.000000, 44.000000)"
               >
                 <path
                   d="M0,0 C90.7283404,0.927527913 147.912752,27.187927 291.910178,59.9119003 C387.908462,81.7278826 543.605069,89.334785 759,82.7326078 C469.336065,156.254352 216.336065,153.6679 0,74.9732496"
@@ -88,9 +88,9 @@ const IndexPage = (): JSX.Element => {
                 />
               </g>
               <g
-                transform="translate(-4.000000, 76.000000)"
                 fill="#FFFFFF"
                 fillRule="nonzero"
+                transform="translate(-4.000000, 76.000000)"
               >
                 <path d="M0.457,34.035 C57.086,53.198 98.208,65.809 123.822,71.865 C181.454,85.495 234.295,90.29 272.033,93.459 C311.355,96.759 396.635,95.801 461.025,91.663 C486.76,90.01 518.727,86.372 556.926,80.752 C595.747,74.596 622.372,70.008 636.799,66.991 C663.913,61.324 712.501,49.503 727.605,46.128 C780.47,34.317 818.839,22.532 856.324,15.904 C922.689,4.169 955.676,2.522 1011.185,0.432 C1060.705,1.477 1097.39,3.129 1121.236,5.387 C1161.703,9.219 1208.621,17.821 1235.4,22.304 C1285.855,30.748 1354.351,47.432 1440.886,72.354 L1441.191,104.352 L1.121,104.031 L0.457,34.035 Z" />
               </g>
@@ -117,26 +117,26 @@ const IndexPage = (): JSX.Element => {
             </div>
             <div className="w-full md:w-1/3 p-6 flex justify-center">
               <img
-                src="/images/naturs.png"
+                alt=""
                 className="mx-auto"
+                src="/images/naturs.png"
                 style={{
                   height: '300px',
                   width: 'auto',
                 }}
-                alt=""
               />
             </div>
           </div>
           <div className="flex flex-wrap flex-col md:flex-row">
             <div className="w-full md:w-1/3 p-6 align-middle">
               <img
-                src="/images/yoga.jpg"
+                alt=""
                 className="mx-auto"
+                src="/images/yoga.jpg"
                 style={{
                   height: '300px',
                   width: 'auto',
                 }}
-                alt=""
               />
             </div>
             <div className="w-full md:w-2/3 p-6 ">
@@ -179,12 +179,12 @@ const IndexPage = (): JSX.Element => {
             </div>
             <div className="w-full md:w-1/3 p-6 flex justify-center">
               <img
+                alt=""
                 src="/images/dino.png"
                 style={{
                   width: '200px',
                   height: '150px',
                 }}
-                alt=""
               />
             </div>
           </div>
@@ -197,8 +197,8 @@ const IndexPage = (): JSX.Element => {
               {productName}
             </h3>
             <img
-              src="/images/new-design.png"
               alt=""
+              src="/images/new-design.png"
               style={{
                 maxHeight: '265px',
                 width: 'auto',

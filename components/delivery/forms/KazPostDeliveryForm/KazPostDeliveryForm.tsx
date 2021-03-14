@@ -1,23 +1,12 @@
 import React from 'react';
-
+import { useFormContext } from 'react-hook-form';
 import { TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles(() => ({
-  TextField: {
-    backgroundColor: '#fff',
-  },
-}));
+import styles from './KazPostDeliveryForm.module.scss';
 
-const KazPostDeliveryForm = ({
-  destinationCity,
-  onDestinationCityChange,
-  destinationZipCode,
-  onDestinationZipCodeChange,
-  onDestinationAddressChange,
-  destinationAddress,
-}): JSX.Element => {
-  const classes = useStyles();
+const kazPostDeliveryForm = (): JSX.Element => {
+  const { register, errors } = useFormContext();
+
   return (
     <>
       <div className="flex flex-wrap mb-6">
@@ -26,13 +15,17 @@ const KazPostDeliveryForm = ({
             Населённый пункт
           </label>
           <TextField
-            onChange={onDestinationCityChange}
+            className={styles.textField}
+            error={!!errors?.city}
+            helperText={errors?.city?.message}
+            inputRef={register({
+              required: 'Обязательно укажите населенный пункт',
+            })}
+            name="city"
             placeholder="г. Усть-Каменогорск"
-            className={classes.TextField}
-            value={destinationCity}
+            size="small"
             variant="outlined"
             fullWidth
-            size="small"
           />
         </div>
         <div className="w-full md:w-1/3 ">
@@ -40,13 +33,17 @@ const KazPostDeliveryForm = ({
             Почтовый индекс
           </label>
           <TextField
-            onChange={onDestinationZipCodeChange}
+            className={styles.textField}
+            error={!!errors?.zip}
+            helperText={errors?.zip?.message}
+            inputRef={register({
+              required: 'Обязательно укажите индекс',
+            })}
+            name="zip"
             placeholder="F02D8D5 или 070004"
-            className={classes.TextField}
-            value={destinationZipCode}
+            size="small"
             variant="outlined"
             fullWidth
-            size="small"
           />
         </div>
       </div>
@@ -55,13 +52,17 @@ const KazPostDeliveryForm = ({
           Адрес получателя
         </label>
         <TextField
-          onChange={onDestinationAddressChange}
+          className={styles.textField}
+          error={!!errors?.address}
+          helperText={errors?.address?.message}
+          inputRef={register({
+            required: 'Обязательно укажите адрес',
+          })}
+          name="address"
           placeholder="пр. Назарбаева 28, кв 90"
-          className={classes.TextField}
-          value={destinationAddress}
+          size="small"
           variant="outlined"
           fullWidth
-          size="small"
         />
         <p className="text-red-900 mt-4">
           Доставка осуществляется в районное почтовое отделение
@@ -71,4 +72,4 @@ const KazPostDeliveryForm = ({
   );
 };
 
-export default KazPostDeliveryForm;
+export default kazPostDeliveryForm;

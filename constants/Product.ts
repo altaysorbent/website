@@ -8,8 +8,8 @@ const currencyCode = 'KZT';
 const defaultProductId = 20;
 
 interface DeliveryTypes {
-  WAREHOUSE: number;
-  DELIVERY: number;
+  WAREHOUSE: string;
+  DELIVERY: string;
 }
 
 interface DeliveryCompanies {
@@ -23,8 +23,8 @@ interface KazPostDeliveryPrice {
 }
 
 interface SenderCityIds {
-  SPB: number;
-  UKG: number;
+  SPB: string;
+  UKG: string;
 }
 
 interface CurrencySymbols {
@@ -33,8 +33,8 @@ interface CurrencySymbols {
 }
 
 const DELIVERY_TYPES: DeliveryTypes = {
-  WAREHOUSE: 136,
-  DELIVERY: 137,
+  WAREHOUSE: '136',
+  DELIVERY: '137',
 };
 
 const DELIVERY_COMPANIES: DeliveryCompanies = {
@@ -53,8 +53,8 @@ const KAZPOST_DELIVERY_PRICE: KazPostDeliveryPrice = {
 };
 
 const SENDER_CITY_IDS: SenderCityIds = {
-  SPB: 137,
-  UKG: 11903,
+  SPB: '137',
+  UKG: '11903',
 };
 
 const CURRENCY_SYMBOLS: CurrencySymbols = {

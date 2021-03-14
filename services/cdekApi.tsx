@@ -1,8 +1,8 @@
 import jsonp from 'jsonp';
-import { ICDEKCityItem } from 'interfaces/cdekCityItem.interface';
-import { ICDEKGeoname } from '../interfaces/cdekGeoname.interface';
+import { ICDEKCityItem } from 'interfaces/CdekCityItem.interface';
+import { ICDEKGeoname } from '../interfaces/CdekGeoname.interface';
 
-const CDEK_BASE_URL = 'https://api.cdek.ru/';
+const CDEK_BASE_URL = 'https://api.cdek.ru';
 
 interface CityList {
   geonames: ICDEKGeoname[];
@@ -12,14 +12,14 @@ const cdekApi = (
   url: string,
   config = {},
   handler: (err, response) => void
-) => {
+): any => {
   return jsonp(CDEK_BASE_URL + url, config, handler);
 };
 
 const getCityList = (query: string): Promise<CityList> => {
   return new Promise((resolve, reject) => {
     cdekApi(
-      `city/getListByTerm/jsonp.php?q=${query}`,
+      `/city/getListByTerm/jsonp.php?q=${query}`,
       null,
       (err, response) => {
         if (err) {
@@ -41,6 +41,7 @@ const fetchCityList = (query: string): Promise<ICDEKCityItem[]> => {
       getCityList(query)
         .then((response) => {
           let cities = [];
+
           const geonames = response?.geonames;
           if (geonames) {
             cities = geonames.map((item) => {

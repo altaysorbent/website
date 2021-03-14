@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from 'components/layouts/page';
-import Meta from 'components/meta';
+import Meta from 'components/Meta';
 
 const CertificationPage = (): JSX.Element => {
   const title = 'Сертификация';
@@ -23,8 +23,8 @@ const CertificationPage = (): JSX.Element => {
             <a
               className="cursor-pointer"
               href="/images/certificates/sertificate-eas.jpg"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <img
                 alt="Свидетельство о регистрации"
@@ -36,8 +36,8 @@ const CertificationPage = (): JSX.Element => {
             <a
               className="cursor-pointer"
               href="/images/certificates/test-report.jpg"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <img
                 alt="Протокол испытаний"
@@ -49,8 +49,8 @@ const CertificationPage = (): JSX.Element => {
             <a
               className="cursor-pointer"
               href="/images/certificates/test-report-2.jpg"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <img
                 alt="Протокол испытаний"
@@ -69,9 +69,9 @@ const CertificationPage = (): JSX.Element => {
               Природа против болезней и старости -
               <a
                 className={linkClassName}
+                href="https://drive.google.com/file/d/1dhmSmjziJt5zoAT12HP1cOCfIYKLHeoh/view?usp=sharing"
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://drive.google.com/file/d/1dhmSmjziJt5zoAT12HP1cOCfIYKLHeoh/view?usp=sharing"
               >
                 читать»
               </a>
@@ -80,9 +80,9 @@ const CertificationPage = (): JSX.Element => {
               Бентонитовые глины -
               <a
                 className={linkClassName}
+                href="https://drive.google.com/file/d/1FqydJPlLO5FIO9S8PeIMot0f2y_QWOPV/view?usp=sharing"
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://drive.google.com/file/d/1FqydJPlLO5FIO9S8PeIMot0f2y_QWOPV/view?usp=sharing"
               >
                 читать»
               </a>
@@ -91,9 +91,9 @@ const CertificationPage = (): JSX.Element => {
               Матрица жизни -
               <a
                 className={linkClassName}
+                href="https://drive.google.com/file/d/1pMajZd5H2yVyIpoIz0KyPtUcLRoKWwPG/view?usp=sharing"
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://drive.google.com/file/d/1pMajZd5H2yVyIpoIz0KyPtUcLRoKWwPG/view?usp=sharing"
               >
                 читать»
               </a>
@@ -102,9 +102,9 @@ const CertificationPage = (): JSX.Element => {
               Принцип баланса в медицине -
               <a
                 className={linkClassName}
+                href="https://drive.google.com/file/d/16MZJyKY5JfSE9dLjebn5Ww4YQWHYiWKJ/view?usp=sharing"
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://drive.google.com/file/d/16MZJyKY5JfSE9dLjebn5Ww4YQWHYiWKJ/view?usp=sharing"
               >
                 читать»
               </a>
@@ -113,9 +113,9 @@ const CertificationPage = (): JSX.Element => {
               Отзывы о продукции -
               <a
                 className={linkClassName}
+                href="https://irecommend.ru/content/altaisorbent-maloizvestnyi-no-ochen-khoroshii-sorbent"
                 rel="noopener noreferrer"
                 target="_blank"
-                href="https://irecommend.ru/content/altaisorbent-maloizvestnyi-no-ochen-khoroshii-sorbent"
               >
                 irecommend.ru
               </a>
@@ -124,9 +124,9 @@ const CertificationPage = (): JSX.Element => {
               Бентониты в экологии. Л. С. Васильянова -
               <a
                 className={linkClassName}
+                href="http://www.vestnik.nauka.kz/wp-content/uploads/2016/10/5-%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D1%8F%D0%BD%D0%BE%D0%B2%D0%B0.pdf"
                 rel="noopener noreferrer"
                 target="_blank"
-                href="http://www.vestnik.nauka.kz/wp-content/uploads/2016/10/5-%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D1%8F%D0%BD%D0%BE%D0%B2%D0%B0.pdf"
               >
                 vestnik.nauka.kz
               </a>

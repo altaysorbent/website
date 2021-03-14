@@ -7,7 +7,7 @@ import {
   ZoomControl,
 } from 'react-yandex-maps';
 import * as contentful from 'contentful';
-import Spinner from 'components/spinner';
+import Spinner from 'components/Spinner';
 
 interface IPLaceMarkProps {
   pharmacy: {
@@ -89,13 +89,13 @@ const Map = (props): JSX.Element => {
             controls: [],
             behaviors: ['default', 'scrollZoom'],
           }}
-          style={{
-            width: '100%',
-            height: '500px',
-          }}
           instanceRef={(ref) => {
             disableBehaviors(ref);
             setCenter(ref);
+          }}
+          style={{
+            width: '100%',
+            height: '500px',
           }}
           onLoad={(ymaps) => {
             setYmaps(ymaps);
@@ -110,7 +110,7 @@ const Map = (props): JSX.Element => {
           {placeMarks}
         </YMap>
       </YMaps>
-      <Spinner show={showSpinner} containerStyle={{ height: '339px' }} />
+      <Spinner containerStyle={{ height: '339px' }} show={showSpinner} />
     </>
   );
 };
@@ -139,9 +139,9 @@ const PharmacyMap = (): JSX.Element => {
   const bounds = [];
   const PlaceMarks = pharmacies.map((pharmacy) => {
     bounds.push([pharmacy.fields.location.lat, pharmacy.fields.location.lon]);
-    return <PlaceMark pharmacy={pharmacy.fields} key={pharmacy.sys.id} />;
+    return <PlaceMark key={pharmacy.sys.id} pharmacy={pharmacy.fields} />;
   });
-  return <Map placeMarks={PlaceMarks} bounds={bounds} />;
+  return <Map bounds={bounds} placeMarks={PlaceMarks} />;
 };
 
 export default PharmacyMap;

@@ -1,15 +1,15 @@
 import React from 'react';
 
-import DeliveryCalculator from 'components/delivery/calculator';
-import MaximumAmountNotice from 'components/delivery/maximumAmountNotice';
+import DeliveryCalculator from 'components/delivery/Calculator';
+import MaximumAmountNotice from 'components/delivery/MaximumAmountNotice';
 import Layout from 'components/layouts/page';
-import Meta from 'components/meta';
+import Meta from 'components/Meta';
 
 import {
   CURRENCY_SYMBOLS,
   DELIVERY_COMPANIES,
   KAZPOST_DELIVERY_PRICE,
-} from 'constants/product';
+} from 'constants/Product';
 
 const UsagePage = (): JSX.Element => {
   const title = 'Доставка и оплата';

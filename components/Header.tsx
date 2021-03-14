@@ -49,7 +49,7 @@ const Header = (): JSX.Element => {
         <div className="lg:pl-0 pl-2 flex items-center order-1">
           <Link href="/">
             <a className="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
-              <img ref={logoRef} src="/images/logo_white.png" alt="" />
+              <img alt="" ref={logoRef} src="/images/logo_white.png" />
             </a>
           </Link>
         </div>
@@ -75,8 +75,8 @@ const Header = (): JSX.Element => {
 
         <div className="block lg:hidden pr-4 order-2 sm:order-3">
           <button
-            onClick={toggleMenu}
             className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-teal-500 appearance-none focus:outline-none"
+            onClick={toggleMenu}
           >
             <svg
               className="fill-current h-3 w-3"

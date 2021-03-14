@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from 'components/layouts';
-import Meta from 'components/meta';
-import PharmacyMap from 'components/pharmacyMap';
+import Meta from 'components/Meta';
+import PharmacyMap from 'components/PharmacyMap';
 
 const WhereToBuyPage = (): JSX.Element => {
   return (

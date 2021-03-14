@@ -14,27 +14,27 @@ const Meta = ({ description, title }: Props): JSX.Element => {
   return (
     <Head>
       <title>{pageTitle}</title>
-      <meta key="description" name="description" content={metaDescription} />
-      <meta key="og:title" property="og:title" content={pageTitle} />
+      <meta content={metaDescription} key="description" name="description" />
+      <meta content={pageTitle} key="og:title" property="og:title" />
       <meta
+        content={metaDescription}
         key="og:description"
         property="og:description"
-        content={metaDescription}
       />
-      <meta key="twitter:card" name="twitter:card" content="summary" />
-      <meta key="twitter:title" name="twitter:title" content={pageTitle} />
+      <meta content="summary" key="twitter:card" name="twitter:card" />
+      <meta content={pageTitle} key="twitter:title" name="twitter:title" />
       <meta
+        content={metaDescription}
         key="twitter:description"
         name="twitter:description"
-        content={metaDescription}
       />
-      <meta key="httpEquiv" httpEquiv="X-UA-Compatible" content="ie=edge" />
+      <meta content="ie=edge" httpEquiv="X-UA-Compatible" key="httpEquiv" />
       <meta
+        content="width=device-width, initial-scale=1.0"
         key="viewport"
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
       />
-      <meta key="charSet" charSet="UTF-8" />
+      <meta charSet="UTF-8" key="charSet" />
     </Head>
   );
 };
