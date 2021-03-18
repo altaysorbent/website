@@ -37,9 +37,9 @@ import {
 } from 'constants/Product';
 
 import { ICDEKCityItem } from 'interfaces/CdekCityItem.interface';
-import classes from './BuyForm.module.scss';
-
 import { IBuyForm } from 'interfaces/BuyForm.interface';
+
+import classes from './BuyForm.module.scss';
 
 const BuyForm = (): JSX.Element => {
   const { enqueueSnackbar } = useSnackbar();

@@ -1,14 +1,26 @@
-import React from 'react';
-import Link from 'next/link';
+import React, { useRef } from 'react';
 
+import BuyForm from 'components/BuyForm/BuyForm';
+import Description from 'components/Description';
 import Layout from 'components/layouts';
 import Meta from 'components/Meta';
-import Description from 'components/Description';
-import BuyForm from 'components/BuyForm/BuyForm';
 
 import { productName } from 'constants/Product';
 
 const IndexPage = (): JSX.Element => {
+  const buyFormRef = useRef<HTMLDivElement>(null);
+
+  const onBuyButtonClick = () => {
+    if (buyFormRef) {
+      const windowOffset = window.scrollY;
+      const offset = buyFormRef.current.getBoundingClientRect().top;
+      window.scrollTo({
+        top: offset + windowOffset - 45,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <Layout>
       <Meta title="Главная" />
@@ -24,9 +36,9 @@ const IndexPage = (): JSX.Element => {
                 спектром действия, изготавливается из природного минерала
                 монтмориллонита.
               </p>
-              <Link href="/#buy">
-                <a className="buyButton">Купить</a>
-              </Link>
+              <button className="buyButton" onClick={onBuyButtonClick}>
+                Купить
+              </button>
             </div>
             <div className="w-full md:w-1/2 py-6 flex justify-end">
               <iframe
@@ -210,7 +222,7 @@ const IndexPage = (): JSX.Element => {
               <Description />
             </div>
           </div>
-          <div className="w-full p-6">
+          <div className="w-full p-6" ref={buyFormRef}>
             <BuyForm />
           </div>
         </div>
