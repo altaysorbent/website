@@ -15,7 +15,7 @@ const IndexPage = (): JSX.Element => {
       const windowOffset = window.scrollY;
       const offset = buyFormRef.current.getBoundingClientRect().top;
       window.scrollTo({
-        top: offset + windowOffset - 45,
+        top: offset + windowOffset - 145,
         behavior: 'smooth',
       });
     }
