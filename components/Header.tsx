@@ -64,13 +64,13 @@ const Header = (): JSX.Element => {
         >
           <div className="flex flex-col">
             <a className="cursor-pointer " href="tel:+77779898998">
-              <FontAwesomeIcon icon={faWhatsapp} />
+              <FontAwesomeIcon height={16} icon={faWhatsapp} />
               &nbsp; +7 (777) 989-89-98 &nbsp; Казахстан
             </a>
           </div>
           <div className="flex flex-col mt-2 sm:mt-0">
             <a className="cursor-pointer" href="tel:+79956254555">
-              <FontAwesomeIcon icon={faMobileAlt} />
+              <FontAwesomeIcon height={16} icon={faMobileAlt} />
               &nbsp; +7 (995) 625-45-55 &nbsp; Россия
             </a>
           </div>
