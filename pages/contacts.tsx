@@ -1,4 +1,7 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhoneVolume, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
+
 import Layout from 'components/layouts/page';
 import Meta from 'components/Meta';
 
@@ -25,7 +28,7 @@ const ContactsPage = (): JSX.Element => {
           <p className="py-1">
             Консультации по телефону по будням с 11:00 до 20:00 -{' '}
             <span className="text-green-800">
-              <i className="fas fa-phone-volume ml-2" />
+              <FontAwesomeIcon className="mx-2" icon={faMobileAlt} />
               <a href="tel:+79956254555">+7 (995) 625-45-55</a>
             </span>{' '}
           </p>
@@ -33,7 +36,7 @@ const ContactsPage = (): JSX.Element => {
             Консультации по телефону или WhatsApp по будням с 7:00 до 14:00 по
             Москве:
             <span className="text-green-800">
-              <i className="fas fa-phone-volume ml-2" />
+              <FontAwesomeIcon className="mx-2" icon={faMobileAlt} />
               <a href="tel:+77779898998">+7 (777) 989-89-98</a>
             </span>
           </p>
@@ -47,7 +50,7 @@ const ContactsPage = (): JSX.Element => {
           <p>
             Телефон:{' '}
             <span className="text-green-800">
-              <i className="fas fa-phone-volume ml-2" />
+              <FontAwesomeIcon className="mx-2" icon={faMobileAlt} />
               <a href="tel:+79956254555">+7 (995) 625-45-55</a>
             </span>{' '}
           </p>
@@ -65,15 +68,16 @@ const ContactsPage = (): JSX.Element => {
           <p>
             Телефон:{' '}
             <span className="text-green-800">
-              <i className="fas fa-phone-volume ml-2" />
+              <FontAwesomeIcon className="mx-2" icon={faMobileAlt} />
               <a href="tel:+77779898998">+7 (777) 989-89-98</a>
             </span>
           </p>
           <p>
             Отдел производства - ТОО «Арника»:
-            <a className="ml-2 text-green-800" href="tel:+77232221078">
-              +7 (7232) 22-10-78
-            </a>
+            <span className="text-green-800">
+              <FontAwesomeIcon className="mx-2" icon={faPhoneVolume} />
+              <a href="tel:+77232221078">+7 (7232) 22-10-78</a>
+            </span>
           </p>
         </div>
       </div>

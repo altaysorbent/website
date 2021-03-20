@@ -1,6 +1,9 @@
 import React, { createRef, useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Header = (): JSX.Element => {
   const logoRef: React.RefObject<HTMLImageElement> = createRef();
@@ -61,13 +64,13 @@ const Header = (): JSX.Element => {
         >
           <div className="flex flex-col">
             <a className="cursor-pointer " href="tel:+77779898998">
-              <FontAwesomeIcon icon={['fab', 'whatsapp']} />
+              <FontAwesomeIcon icon={faWhatsapp} />
               &nbsp; +7 (777) 989-89-98 &nbsp; Казахстан
             </a>
           </div>
           <div className="flex flex-col mt-2 sm:mt-0">
             <a className="cursor-pointer" href="tel:+79956254555">
-              <FontAwesomeIcon icon={'mobile-alt'} />
+              <FontAwesomeIcon icon={faMobileAlt} />
               &nbsp; +7 (995) 625-45-55 &nbsp; Россия
             </a>
           </div>
