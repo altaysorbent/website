@@ -15,6 +15,12 @@ export default class MyDocument extends Document {
         <body className="leading-normal tracking-normal text-white gradient">
           <Main />
           <NextScript />
+          <script
+            src={
+              '//cleversite.ru/cleversite/widget_new.php?supercode=1&clid=98241KifBK&siteNew=125298'
+            }
+            async
+          />
         </body>
       </Html>
     );
