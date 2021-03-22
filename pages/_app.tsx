@@ -16,6 +16,16 @@ const MyApp: FunctionComponent<AppProps> = ({
     }
   }, []);
 
+  useEffect(() => {
+    (window as any).replainSettings = {
+      id: '619d692a-b9b9-463c-a096-984b195ecf0a',
+    };
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://widget.replain.cc/dist/client.js';
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <StylesProvider injectFirst>
       <SnackbarProvider
