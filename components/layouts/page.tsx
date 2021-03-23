@@ -9,7 +9,7 @@ interface Props {
 
 const PageLayout = ({ children }: Props): JSX.Element => {
   return (
-    <div className="flex flex-col min-h-screen text-gray-800">
+    <div className="flex flex-col min-h-screen text-gray-700">
       <Header />
       <section className="flex flex-col flex-grow bg-white border-b py-8">
         {children}

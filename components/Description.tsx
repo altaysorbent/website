@@ -4,8 +4,8 @@ import { Tab, Tabs, TabList, TabPanel, resetIdCounter } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 const Description = (): JSX.Element => {
-  const tabClassName = 'font-bold text-xl mb-2 text-gray-800';
-  const tabPanelClassName = 'sm:text-base text-xl';
+  const tabClassName = 'font-bold text-xl mb-2 text-gray-700';
+  const tabPanelClassName = 'text-xl leading-relaxed';
 
   resetIdCounter();
 

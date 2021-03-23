@@ -214,7 +214,7 @@ const DeliveryCalculator = (): JSX.Element => {
         </div>
       </div>
       <div className="w-full md:w-3/5 md:pr-3 mb-6 md:mb-0">
-        <label className="block text-gray-800" htmlFor="grid-delivery-city">
+        <label className="block text-gray-700" htmlFor="grid-delivery-city">
           Город назначения
         </label>
 
@@ -233,7 +233,7 @@ const DeliveryCalculator = (): JSX.Element => {
         />
       </div>
       <div className="w-full md:w-1/5 ">
-        <label className="block text-gray-800" htmlFor="grid-delivery-zip">
+        <label className="block text-gray-700" htmlFor="grid-delivery-zip">
           Индекс
         </label>
 

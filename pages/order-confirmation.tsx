@@ -25,7 +25,7 @@ const UsagePage = (): JSX.Element => {
         {title}
       </h3>
       <hr />
-      <div className="container mx-auto px-2 pt-4 text-gray-800 text-xl text-justify">
+      <div className="container mx-auto px-2 pt-4 text-gray-700 text-xl text-justify">
         <h4 className="text-xl leading-none mb-3 text-center font-bold">
           Благодарим за приобретение продукции Алтайсорбент!
         </h4>

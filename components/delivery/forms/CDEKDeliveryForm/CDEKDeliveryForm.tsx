@@ -117,13 +117,19 @@ const CDEKDeliveryForm = ({
             as={
               <RadioGroup row>
                 <FormControlLabel
-                  className={styles.controlLabel}
+                  classes={{
+                    root: styles.controlLabelRoot,
+                    label: styles.controlLabel,
+                  }}
                   control={<Radio className={styles.radio} color="primary" />}
                   label="Санкт-Петербург"
                   value={SENDER_CITY_IDS.SPB}
                 />
                 <FormControlLabel
-                  className={styles.controlLabel}
+                  classes={{
+                    root: styles.controlLabelRoot,
+                    label: styles.controlLabel,
+                  }}
                   control={<Radio className={styles.radio} color="primary" />}
                   label="Усть-Каменогорск"
                   value={SENDER_CITY_IDS.UKG}
@@ -140,7 +146,7 @@ const CDEKDeliveryForm = ({
 
       <div className="flex flex-wrap mb-6">
         <div className="w-full md:w-2/3 md:pr-3 mb-6 md:mb-0">
-          <label className="block text-gray-800" htmlFor="grid-delivery-city">
+          <label className="block text-gray-700" htmlFor="grid-delivery-city">
             Населённый пункт
           </label>
 
@@ -175,7 +181,7 @@ const CDEKDeliveryForm = ({
           />
         </div>
         <div className="w-full md:w-1/3 ">
-          <label className="block text-gray-800" htmlFor="grid-delivery-zip">
+          <label className="block text-gray-700" htmlFor="grid-delivery-zip">
             Почтовый индекс
           </label>
           <Controller
@@ -211,7 +217,7 @@ const CDEKDeliveryForm = ({
         </div>
       </div>
       <div className="w-full mb-6">
-        <label className="block text-gray-800" htmlFor="grid-delivery-address">
+        <label className="block text-gray-700" htmlFor="grid-delivery-address">
           Адрес получателя
         </label>
         <TextField
@@ -237,13 +243,19 @@ const CDEKDeliveryForm = ({
             as={
               <RadioGroup row>
                 <FormControlLabel
-                  className={styles.controlLabel}
+                  classes={{
+                    root: styles.controlLabelRoot,
+                    label: styles.controlLabel,
+                  }}
                   control={<Radio className={styles.radio} color="primary" />}
                   label="Доставка до квартиры"
                   value={DELIVERY_TYPES.DELIVERY}
                 />
                 <FormControlLabel
-                  className={styles.controlLabel}
+                  classes={{
+                    root: styles.controlLabelRoot,
+                    label: styles.controlLabel,
+                  }}
                   control={<Radio className={styles.radio} color="primary" />}
                   label="Самовывоз со склада"
                   value={DELIVERY_TYPES.WAREHOUSE}

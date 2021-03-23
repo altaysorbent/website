@@ -6,11 +6,16 @@
   padding: 5px;
 }
 
-.controlLabel {
+.controlLabelRoot {
   margin-left: -7px;
 }
 
+.controlLabel {
+  @apply text-xl;
+}
+
 .radioGroupLabel {
+  @apply text-xl text-gray-700;
   margin-bottom: 10px;
 }
 

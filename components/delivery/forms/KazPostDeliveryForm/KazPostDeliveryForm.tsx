@@ -11,7 +11,7 @@ const kazPostDeliveryForm = (): JSX.Element => {
     <>
       <div className="flex flex-wrap mb-6">
         <div className="w-full md:w-2/3 md:pr-3 mb-6 md:mb-0">
-          <label className="block text-gray-800" htmlFor="grid-delivery-city">
+          <label className="block text-gray-700" htmlFor="grid-delivery-city">
             Населённый пункт
           </label>
           <TextField
@@ -29,7 +29,7 @@ const kazPostDeliveryForm = (): JSX.Element => {
           />
         </div>
         <div className="w-full md:w-1/3 ">
-          <label className="block text-gray-800" htmlFor="grid-delivery-zip">
+          <label className="block text-gray-700" htmlFor="grid-delivery-zip">
             Почтовый индекс
           </label>
           <TextField
@@ -48,7 +48,7 @@ const kazPostDeliveryForm = (): JSX.Element => {
         </div>
       </div>
       <div className="w-full mb-6">
-        <label className="block text-gray-800" htmlFor="grid-delivery-address">
+        <label className="block text-gray-700" htmlFor="grid-delivery-address">
           Адрес получателя
         </label>
         <TextField

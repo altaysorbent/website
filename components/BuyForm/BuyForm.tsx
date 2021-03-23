@@ -207,22 +207,20 @@ const BuyForm = (): JSX.Element => {
     <>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-xl">
             <div className="w-full lg:w-2/3 mb-4">
               <div className="note">
                 <div className="w-full flex flex-wrap flex-col sm:flex-row">
                   <div className="w-full sm:w-1/2 mb-6">
-                    <h3 className="text-xl font-bold leading-none mb-4">
-                      Товар
-                    </h3>
+                    <h3 className="font-bold leading-none mb-4">Товар</h3>
                     <div className="w-full">
-                      <h4 className="text-lg leading-none mb-4">
+                      <h4 className="leading-none mb-4">
                         Алтайсорбент 1г/20 шт.
                       </h4>
                     </div>
                   </div>
                   <div className="w-full sm:w-1/2 flex flex-col sm:items-center">
-                    <div className="text-xl font-bold">Количество</div>
+                    <div className="font-bold">Количество</div>
                     <div className="flex items-center">
                       <IconButton
                         color="primary"
@@ -271,7 +269,7 @@ const BuyForm = (): JSX.Element => {
                     <div className="font-bold mb-4">
                       Стоимость товара (без учета доставки)
                     </div>
-                    <div className="font-bold text-green-700 text-xl">
+                    <div className="font-bold text-green-700">
                       <b>
                         {productSumKzt} {CURRENCY_SYMBOLS.KZT} (~{' '}
                         {productSumRub} {CURRENCY_SYMBOLS.RUB})
@@ -294,12 +292,10 @@ const BuyForm = (): JSX.Element => {
             <div className="w-full lg:w-2/3 mb-4">
               <div className="note">
                 <div className="w-full mx-auto">
-                  <h3 className="text-xl font-bold leading-none mb-4">
-                    Покупатель
-                  </h3>
+                  <h3 className="font-bold leading-none mb-4">Покупатель</h3>
                   <div className="w-full mb-6">
                     <label
-                      className="block text-gray-800"
+                      className="block text-gray-700"
                       htmlFor="grid-customer-name"
                     >
                       Ф.И.О.
@@ -320,7 +316,7 @@ const BuyForm = (): JSX.Element => {
                   </div>
                   <div className="w-full mb-6">
                     <label
-                      className="block text-gray-800"
+                      className="block text-gray-700"
                       htmlFor="grid-order-phone"
                     >
                       Номер телефона
@@ -345,7 +341,7 @@ const BuyForm = (): JSX.Element => {
                   </div>
                   <div className="w-full">
                     <label
-                      className="block text-gray-800"
+                      className="block text-gray-700"
                       htmlFor="grid-order-email"
                     >
                       E-mail
@@ -375,9 +371,7 @@ const BuyForm = (): JSX.Element => {
             <div className="w-full lg:w-2/3 mb-4">
               <div className="note">
                 <div className="w-full mx-auto">
-                  <h3 className="text-xl font-bold leading-none mb-4">
-                    Доставка
-                  </h3>
+                  <h3 className="font-bold leading-none mb-4">Доставка</h3>
                   <div className="w-full mb-4">
                     <FormControl component="fieldset">
                       <FormLabel
@@ -390,7 +384,10 @@ const BuyForm = (): JSX.Element => {
                         as={
                           <RadioGroup row>
                             <FormControlLabel
-                              className={classes.controlLabel}
+                              classes={{
+                                root: classes.controlLabelRoot,
+                                label: classes.controlLabel,
+                              }}
                               control={
                                 <Radio
                                   className={classes.radio}
@@ -401,7 +398,10 @@ const BuyForm = (): JSX.Element => {
                               value={DELIVERY_COMPANIES_IDS.CDEK}
                             />
                             <FormControlLabel
-                              className={classes.controlLabel}
+                              classes={{
+                                root: classes.controlLabelRoot,
+                                label: classes.controlLabel,
+                              }}
                               control={
                                 <Radio
                                   className={classes.radio}
@@ -449,7 +449,7 @@ const BuyForm = (): JSX.Element => {
             </div>
             <div className="w-full lg:w-2/3 mb-12">
               <div className="note">
-                <h3 className="text-xl font-bold mb-6 text-center">
+                <h3 className="font-bold mb-6 text-center">
                   Подтвердите информацию
                 </h3>
 
@@ -516,7 +516,7 @@ const BuyForm = (): JSX.Element => {
                     Сумма оплачивается в валюте KZT (Казахстанский тенге).
                   </p>
 
-                  <div className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md text-base my-6">
+                  <div className="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md text-lg my-6">
                     <div className="flex">
                       <div className="py-1">
                         <svg
