@@ -16,6 +16,14 @@ const MyApp: FunctionComponent<AppProps> = ({
     }
   }, []);
 
+  useEffect(() => {
+    (window as any).ChatraID = 'frymbj2afQB6g72sb';
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://call.chatra.io/chatra.js';
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <StylesProvider injectFirst>
       <SnackbarProvider
