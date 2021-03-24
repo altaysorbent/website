@@ -51,7 +51,6 @@ export async function getAllPostsWithSlug() {
     }`
   );
 
-  console.log('aaaa', entries);
   return extractPostEntries(entries);
 }
 
