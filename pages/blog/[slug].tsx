@@ -39,8 +39,8 @@ const BlogPage = ({ post }: IProps): JSX.Element => {
         {title}
       </h3>
 
-      <div className="container px-2">
-        <div className="max-w-4xl mx-auto mt-2 mb-4 text-center">
+      <div className="container  mx-auto px-2">
+        <div className="max-w-4xl mt-2 mb-4 text-center">
           <time className="text-lg">
             <span className="capitalize">{postDay}</span>, {postDate}
           </time>
