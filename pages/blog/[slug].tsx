@@ -46,7 +46,7 @@ const BlogPage = ({ post }: IProps): JSX.Element => {
           </time>
         </div>
         <hr className="my-8 w-full" />
-        <div className="max-w-4xl mx-auto my-2 text-lg">
+        <div className="max-w-4xl mx-auto my-2 text-xl">
           <PostRichText
             className="text-gray-800 leading-relaxed"
             json={content.json}

@@ -23,7 +23,7 @@ const PostItem = ({ post }: IProps): JSX.Element => {
           <span className="capitalize">{postDay}</span>, {postDate}
         </dd>
       </dl>
-      <div className="space-y-5 xl:col-span-3 text-lg">
+      <div className="space-y-5 xl:col-span-3 text-xl">
         <div className="space-y-6">
           <h2 className="text-2xl font-bold tracking-tight">
             <Link href={`/blog/${post.slug}`}>{post.title}</Link>
