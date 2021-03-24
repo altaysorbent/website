@@ -22,7 +22,7 @@ interface IProps {
 const BlogPage = ({ post }: IProps): JSX.Element => {
   const router = useRouter();
 
-  if (!router.isFallback && !post) {
+  if (!post) {
     return <ErrorPage statusCode={404} />;
   }
 
@@ -75,7 +75,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: allPosts?.map(({ slug }) => `/blog/${slug}`) ?? [],
-    fallback: true,
+    fallback: false,
   };
 };
 
