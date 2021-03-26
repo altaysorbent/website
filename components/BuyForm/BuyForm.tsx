@@ -14,6 +14,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
+import { Alert } from '@material-ui/lab';
 
 import CDEKDeliveryForm from 'components/delivery/forms/CDEKDeliveryForm/CDEKDeliveryForm';
 import KazPostDeliveryForm from 'components/delivery/forms/KazPostDeliveryForm/KazPostDeliveryForm';
@@ -266,6 +267,9 @@ const BuyForm = (): JSX.Element => {
                   </div>
                   <div className="w-full my-6">
                     <MaximumAmountNotice />
+                    <Alert className="mt-4 font-bold" severity="warning">
+                      С 1 апреля 2021 года цена на товар повысится на 10%!
+                    </Alert>
                   </div>
                   <div className="w-full sm:w-1/2 mb-6">
                     <div className="font-bold mb-4">
