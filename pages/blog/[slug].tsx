@@ -2,7 +2,6 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { postImageSizes } from 'constants/Post';
@@ -53,7 +52,7 @@ const BlogPage = ({ post }: IProps): JSX.Element => {
         <div className="max-w-4xl mx-auto my-2 text-xl">
           {hasPostImage && (
             <div className="mb-8">
-              <Image
+              <img
                 alt={title}
                 height={postImageSizes.height}
                 src={image.post}

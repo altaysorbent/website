@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { previewImageSizes } from 'constants/Post';
@@ -36,7 +35,7 @@ const PostItem = ({ post }: IProps): JSX.Element => {
         <div className="mb-8">
           <Link href={postUrl}>
             <a>
-              <Image
+              <img
                 alt={post.title}
                 height={previewImageSizes.height}
                 src={post.image.preview}
