@@ -68,7 +68,7 @@ const BlogPage = ({ post }: IProps): JSX.Element => {
           <hr className="mt-8 mb-12 w-full" />
           <div className="flex justify-between flex-col-reverse sm:flex-row">
             <div className="flex items-center">
-              <Link href="/blog" scroll={false}>
+              <Link href="/blog">
                 <a className="text-green-700">← Назад в блог</a>
               </Link>
             </div>
