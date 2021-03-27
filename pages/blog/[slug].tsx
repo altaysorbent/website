@@ -63,7 +63,7 @@ const BlogPage = ({ post }: IProps): JSX.Element => {
 
           <PostRichText
             className="text-gray-800 leading-relaxed"
-            json={content.json}
+            content={content}
           />
           <hr className="mt-8 mb-12 w-full" />
           <div className="flex justify-between flex-col-reverse sm:flex-row">

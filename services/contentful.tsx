@@ -11,12 +11,37 @@ const client = contentful.createClient({
   accessToken,
 });
 
+const POST_GRAPHQL_LIST_FIELDS = `
+annotation{
+  json
+}
+content {
+  json
+}
+date
+image: preview {
+  preview: url(transform: {width: ${previewImageSizes.width}, height: ${previewImageSizes.height}, resizeStrategy: FIT, format: JPG, quality: 90})
+}
+slug
+title
+`;
 const POST_GRAPHQL_FIELDS = `
 annotation{
   json
 }
 content {
   json
+  links {
+    assets {
+      block {
+        title
+        url
+        sys {
+          id
+        }
+      }
+    }
+  }
 }
 date
 image: preview {
@@ -50,7 +75,7 @@ export async function getAllPostsWithSlug() {
     `query {
       postsCollection {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          ${POST_GRAPHQL_LIST_FIELDS}
         }
       }
     }`
@@ -80,7 +105,7 @@ export async function getAllPostsForBlog() {
     `query {
       postsCollection(order: date_DESC, preview: false) {
         items {
-          ${POST_GRAPHQL_FIELDS}
+          ${POST_GRAPHQL_LIST_FIELDS}
         }
       }
     }`

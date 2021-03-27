@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import Link from 'next/link';
 
 import BuyForm from 'components/BuyForm/BuyForm';
 import Description from 'components/Description';
@@ -60,14 +61,11 @@ const IndexPage = (): JSX.Element => {
               </p>
               <p>
                 Выдержка из статьи{' '}
-                <a
-                  className="border-b border-white cursor-pointer"
-                  href="https://drive.google.com/file/d/16MZJyKY5JfSE9dLjebn5Ww4YQWHYiWKJ/view?usp=sharing"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  «Принцип баланса в медицине»
-                </a>
+                <Link href={`/blog/princip-balansa-v-medicine`}>
+                  <a className="border-b border-white cursor-pointer">
+                    «Принцип баланса в медицине»
+                  </a>
+                </Link>
               </p>
             </div>
           </div>
