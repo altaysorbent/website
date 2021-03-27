@@ -1,0 +1,22 @@
+.richText {
+  text-align: justify;
+
+  a {
+    @apply text-green-700 border-b border-green-700;
+  }
+  ul {
+    li {
+      @apply mb-2;
+    }
+    @apply list-inside list-disc mb-8 ml-8 mt-4;
+  }
+  ol {
+    li {
+      @apply mb-2;
+    }
+    @apply list-inside list-decimal mb-8 mt-4;
+  }
+  img {
+    @apply mx-auto;
+  }
+}

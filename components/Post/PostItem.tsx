@@ -45,7 +45,7 @@ const PostItem = ({ post }: IProps): JSX.Element => {
           </Link>
         </div>
       )}
-      <PostRichText className="mb-4" json={post.annotation.json} />
+      <PostRichText className="mb-4" content={post.annotation} />
 
       <div className="font-medium">
         <Link href={postUrl}>
