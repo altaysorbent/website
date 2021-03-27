@@ -1,4 +1,5 @@
 import * as contentful from 'contentful';
+import { postImageSizes, previewImageSizes } from 'constants/Post';
 
 const spaceId = `57e4k2ca6fmc`;
 const accessToken = `Lh4LbfbNBL_vd6Vy22vMWSmiPiVdhYwenpfNzfyAyjg`;
@@ -11,15 +12,19 @@ const client = contentful.createClient({
 });
 
 const POST_GRAPHQL_FIELDS = `
-title
-slug
-date
-content {
-  json
-}
 annotation{
   json
 }
+content {
+  json
+}
+date
+image: preview {
+  preview: url(transform: {width: ${previewImageSizes.width}, height: ${previewImageSizes.height}, resizeStrategy: FIT, format: JPG, quality: 90})
+  post: url(transform: {width: ${postImageSizes.width}, height: ${postImageSizes.width}, resizeStrategy: FIT, format: JPG, quality: 90})
+}
+slug
+title
 `;
 
 function extractPostEntries(fetchResponse) {

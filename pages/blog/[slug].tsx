@@ -2,7 +2,10 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
+import Image from 'next/image';
 import Link from 'next/link';
+
+import { postImageSizes } from 'constants/Post';
 
 import Layout from 'components/layouts/page';
 import Meta from 'components/Meta';
@@ -26,8 +29,9 @@ const BlogPage = ({ post }: IProps): JSX.Element => {
     return <ErrorPage statusCode={404} />;
   }
 
-  const { title, content } = post;
+  const { title, content, image } = post;
 
+  const hasPostImage = image?.post;
   const postUrl = `${process.env.NEXT_PUBLIC_DOMAIN_URL}${router.asPath}`;
   const postDay = getPostDay(post.date);
   const postDate = getPostDate(post.date);
@@ -47,6 +51,17 @@ const BlogPage = ({ post }: IProps): JSX.Element => {
         </div>
         <hr className="my-8 w-full" />
         <div className="max-w-4xl mx-auto my-2 text-xl">
+          {hasPostImage && (
+            <div className="mb-8">
+              <Image
+                alt={title}
+                height={postImageSizes.height}
+                src={image.post}
+                width={postImageSizes.width}
+              />
+            </div>
+          )}
+
           <PostRichText
             className="text-gray-800 leading-relaxed"
             json={content.json}

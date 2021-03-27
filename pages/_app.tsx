@@ -1,7 +1,7 @@
 import React, { useEffect, FunctionComponent } from 'react';
-import { StylesProvider } from '@material-ui/core/styles';
 import { AppProps } from 'next/app';
 import { SnackbarProvider } from 'notistack';
+import { StylesProvider } from '@material-ui/core/styles';
 import 'styles/main.css';
 
 const MyApp: FunctionComponent<AppProps> = ({

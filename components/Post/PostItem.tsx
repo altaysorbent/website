@@ -1,5 +1,8 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+
+import { previewImageSizes } from 'constants/Post';
 
 import PostRichText from 'components/Post/PostRichText';
 
@@ -15,26 +18,40 @@ const PostItem = ({ post }: IProps): JSX.Element => {
   const postDay = getPostDay(post.date);
   const postDate = getPostDate(post.date);
 
+  const hasPreviewImage = post.image?.preview;
+  const postUrl = `/blog/${post.slug}`;
+
   return (
-    <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-baseline">
-      <dl>
+    <article className="text-xl">
+      <h2 className="text-2xl font-bold tracking-tight">
+        <Link href={postUrl}>{post.title}</Link>
+      </h2>
+      <dl className="my-4">
         <dt className="sr-only">Дата публикации</dt>
-        <dd className="text-base font-medium text-gray-700">
+        <dd className="text-lg font-medium text-gray-600">
           <span className="capitalize">{postDay}</span>, {postDate}
         </dd>
       </dl>
-      <div className="space-y-5 xl:col-span-3 text-xl">
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold tracking-tight">
-            <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-          </h2>
-          <PostRichText json={post.annotation.json} />
-        </div>
-        <div className="font-medium">
-          <Link href={`/blog/${post.slug}`}>
-            <a className="mx-auto text-green-700">Читать далее →</a>
+      {hasPreviewImage && (
+        <div className="mb-8">
+          <Link href={postUrl}>
+            <a>
+              <Image
+                alt={post.title}
+                height={previewImageSizes.height}
+                src={post.image.preview}
+                width={previewImageSizes.width}
+              />
+            </a>
           </Link>
         </div>
+      )}
+      <PostRichText className="mb-4" json={post.annotation.json} />
+
+      <div className="font-medium">
+        <Link href={postUrl}>
+          <a className="mx-auto text-green-700">Читать далее →</a>
+        </Link>
       </div>
     </article>
   );
