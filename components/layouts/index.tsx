@@ -9,7 +9,7 @@ interface Props {
 
 const Layout = ({ children }: Props): JSX.Element => {
   return (
-    <div className="text-gray-800">
+    <div className="text-gray-700">
       <Header />
       {children}
       <Footer />

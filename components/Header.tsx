@@ -46,6 +46,38 @@ const Header = (): JSX.Element => {
     };
   }, [handleScroll]);
 
+  const menuElements = [
+    {
+      href: '/',
+      title: 'Главная',
+    },
+    {
+      href: '/blog',
+      title: 'Блог',
+    },
+    {
+      href: '/delivery',
+      title: 'Доставка и оплата',
+    },
+    {
+      href: '/certification',
+      title: 'Сертификация',
+    },
+    {
+      href: '/contacts',
+      title: 'Контакты',
+    },
+  ];
+  const menuItems = menuElements.map((item) => (
+    <li className="mr-3 last:mr-0" key={item.href}>
+      <Link href={item.href}>
+        <a className="no-underline hover:text-underline cursor-pointer focus:outline-none">
+          {item.title}
+        </a>
+      </Link>
+    </li>
+  ));
+
   return (
     <nav className="w-full z-30 text-white sticky" ref={headerRef}>
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4">
@@ -57,7 +89,7 @@ const Header = (): JSX.Element => {
           </Link>
         </div>
         <div
-          className="ml-0 lg:ml-6 flex flex-col w-full sm:w-auto mt-4 sm:mt-0 order-3 lg:order-2 text-center lg:text-left"
+          className="ml-0 flex flex-col w-full text-center order-3 mt-4 sm:text-left sm:w-auto sm:mr-auto sm:mt-0 sm:ml-6 lg:order-2 lg:text-left text-lg"
           ref={(el) => {
             el && toToggle.push(el);
           }}
@@ -78,7 +110,7 @@ const Header = (): JSX.Element => {
 
         <div className="block lg:hidden pr-4 order-2 sm:order-3">
           <button
-            className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-teal-500 appearance-none focus:outline-none"
+            className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-700 hover:border-teal-500 appearance-none focus:outline-none"
             onClick={toggleMenu}
           >
             <svg
@@ -100,39 +132,12 @@ const Header = (): JSX.Element => {
           ].join(' ')}
         >
           <ul
-            className="list-reset lg:flex justify-end flex-1 items-center"
+            className="list-reset lg:flex justify-end flex-1 items-center text-lg"
             ref={(el) => {
               toToggle.push(el);
             }}
           >
-            <li className="mr-3">
-              <Link href="/">
-                <a className="no-underline hover:text-underline cursor-pointer focus:outline-none">
-                  Главная
-                </a>
-              </Link>
-            </li>
-            <li className="mr-3">
-              <Link href="/delivery">
-                <a className="no-underline hover:text-underline cursor-pointer focus:outline-none">
-                  Доставка и оплата
-                </a>
-              </Link>
-            </li>
-            <li className="mr-3">
-              <Link href="/certification">
-                <a className="no-underline hover:text-underline cursor-pointer focus:outline-none">
-                  Сертификация
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/contacts">
-                <a className="no-underline hover:text-underline cursor-pointer focus:outline-none">
-                  Контакты
-                </a>
-              </Link>
-            </li>
+            {menuItems}
           </ul>
         </div>
       </div>
