@@ -1,6 +1,10 @@
 name: docker-build
 
 on:
+  repository_dispatch:
+    branches:
+      - next
+    types: [ publish-event ]
   push:
     branches:
       - next
