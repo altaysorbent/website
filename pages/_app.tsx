@@ -2,6 +2,7 @@ import React, { useEffect, FunctionComponent } from 'react';
 import { AppProps } from 'next/app';
 import { SnackbarProvider } from 'notistack';
 import { StylesProvider } from '@material-ui/core/styles';
+import { YMInitializer } from 'react-yandex-metrika';
 import 'styles/main.css';
 
 const MyApp: FunctionComponent<AppProps> = ({
@@ -35,6 +36,7 @@ const MyApp: FunctionComponent<AppProps> = ({
         maxSnack={3}
       >
         <Component {...pageProps} />
+        <YMInitializer accounts={[54266673]} />
       </SnackbarProvider>
     </StylesProvider>
   );

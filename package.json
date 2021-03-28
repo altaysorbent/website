@@ -51,6 +51,7 @@
     "react-share": "^4.4.0",
     "react-tabs": "^3.2.0",
     "react-yandex-maps": "^4.6.0",
+    "react-yandex-metrika": "^2.6.0",
     "tailwindcss": "^2.0.4"
   },
   "devDependencies": {
