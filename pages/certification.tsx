@@ -13,6 +13,7 @@ const CertificationPage = (): JSX.Element => {
       <h3 className="text-3xl font-bold leading-none mb-3 text-center">
         {title}
       </h3>
+      <hr />
       <div className="container mx-auto px-2 pt-4 text-xl max-w-5xl text-justify">
         <p className="mb-12">
           Наши продукты соответствуют высоким стандартам. Ниже приведены сканы

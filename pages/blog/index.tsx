@@ -18,9 +18,9 @@ const Blog = ({ posts }: IProps): JSX.Element => {
   return (
     <Layout>
       <Meta title={title} />
-      <div className="container px-2 text-gray-700 max-w-4xl mx-auto mt-2 mb-4 divide-y divide-gray-200">
-        <div className="pt-6 pb-8 space-y-2 md:space-y-5">
-          <h3 className="text-4xl font-bold leading-none my-6">{title}</h3>
+      <div className="container px-2 text-gray-700 max-w-4xl mx-auto mb-4 divide-y divide-gray-200">
+        <div className="pb-8 space-y-2 md:space-y-5">
+          <h3 className="text-4xl font-bold leading-none mb-6">{title}</h3>
           <p className="text-xl">
             Всё самое интересное про здоровье, монтморилонит и бентонитовые
             глины динозаврового месторождения

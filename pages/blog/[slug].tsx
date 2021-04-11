@@ -38,7 +38,7 @@ const BlogPage = ({ post }: IProps): JSX.Element => {
   return (
     <Layout>
       <Meta title={title} />
-      <h3 className="text-gray-800 text-4xl font-bold leading-none my-6 text-center">
+      <h3 className="text-gray-700 text-4xl font-bold leading-none my-6 text-center">
         {title}
       </h3>
 
@@ -62,7 +62,7 @@ const BlogPage = ({ post }: IProps): JSX.Element => {
           )}
 
           <PostRichText
-            className="text-gray-800 leading-relaxed"
+            className="text-gray-700 leading-relaxed"
             content={content}
           />
           <hr className="mt-8 mb-12 w-full" />
