@@ -1,27 +1,11 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { Button } from '@material-ui/core';
 
-import BuyForm from 'components/BuyForm/BuyForm';
-import Description from 'components/Description';
 import Layout from 'components/layouts';
 import Meta from 'components/Meta';
 
-import { productName } from 'constants/Product';
-
 const IndexPage = (): JSX.Element => {
-  const buyFormRef = useRef<HTMLDivElement>(null);
-
-  const onBuyButtonClick = () => {
-    if (buyFormRef) {
-      const windowOffset = window.scrollY;
-      const offset = buyFormRef.current.getBoundingClientRect().top;
-      window.scrollTo({
-        top: offset + windowOffset - 145,
-        behavior: 'smooth',
-      });
-    }
-  };
-
   return (
     <Layout>
       <Meta title="Главная" />
@@ -37,9 +21,11 @@ const IndexPage = (): JSX.Element => {
                 спектром действия, изготавливается из природного минерала
                 монтмориллонита.
               </p>
-              <button className="buyButton" onClick={onBuyButtonClick}>
-                Купить
-              </button>
+              <Link href="/buy">
+                <Button color="secondary" size="large" variant="contained">
+                  Купить
+                </Button>
+              </Link>
             </div>
             <div className="w-full md:w-1/2 py-6 flex justify-end">
               <iframe
@@ -197,31 +183,6 @@ const IndexPage = (): JSX.Element => {
                 }}
               />
             </div>
-          </div>
-        </div>
-      </section>
-      <section className="bg-white py-8" id="description">
-        <div className="container flex flex-wrap mx-auto px-2 pt-4">
-          <div className="w-full md:w-1/3 p-6 items-center flex flex-col">
-            <h3 className="text-3xl font-bold leading-none mb-6">
-              {productName}
-            </h3>
-            <img
-              alt=""
-              src="/images/new-design.png"
-              style={{
-                maxHeight: '265px',
-                width: 'auto',
-              }}
-            />
-          </div>
-          <div className="w-full md:w-2/3 p-6" id="buy">
-            <div className="mb-4">
-              <Description />
-            </div>
-          </div>
-          <div className="w-full p-6" ref={buyFormRef}>
-            <BuyForm />
           </div>
         </div>
       </section>

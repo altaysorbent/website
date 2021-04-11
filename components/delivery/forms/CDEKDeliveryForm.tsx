@@ -12,11 +12,10 @@ import {
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import { DELIVERY_TYPES, SENDER_CITY_IDS } from 'constants/Product';
-import styles from './CDEKDeliveryForm.module.scss';
 import { getDeliveryPrice } from 'services/altayApi';
 import { AxiosResponse } from 'axios';
 import { ICDEKCityItem } from 'interfaces/CdekCityItem.interface';
-import { IBuyForm } from 'interfaces/BuyForm.interface';
+import { IOrderForm } from 'interfaces/OrderForm.interface';
 
 interface Props {
   cities: CityOption[];
@@ -33,7 +32,7 @@ interface CityOption {
   label: string;
 }
 
-interface ICDEKForm extends IBuyForm {
+interface ICDEKForm extends IOrderForm {
   city: ICDEKCityItem;
 }
 
@@ -64,10 +63,10 @@ const CDEKDeliveryForm = ({
   const zipcodes = city?.zipcodes || [];
 
   useEffect(() => {
-    if (!city && zip) {
+    if (zip && zipcodes.some((zipcode) => zipcode === zip) === false) {
       setValue('zip', null);
     }
-  }, [city, zip]);
+  }, [city, zipcodes, zip]);
 
   useEffect(() => {
     if (uid && deliveryType && senderCityId && zip) {
@@ -103,6 +102,11 @@ const CDEKDeliveryForm = ({
           }
         })
         .catch(({ message }) => onError(message));
+    } else {
+      onDeliveryPriceKztChange(0);
+      onDeliveryPriceRubChange(0);
+      onDeliveryPeriodMinChange(0);
+      onDeliveryPeriodMaxChange(0);
     }
   }, [uid, deliveryType, senderCityId, zip, count]);
 
@@ -110,27 +114,19 @@ const CDEKDeliveryForm = ({
     <>
       <div className="w-full mb-4">
         <FormControl component="fieldset">
-          <FormLabel className={styles.radioGroupLabel} focused={false}>
+          <FormLabel focused={false} required>
             Склад отправления (влияет на стоимость доставки)
           </FormLabel>
           <Controller
             as={
               <RadioGroup row>
                 <FormControlLabel
-                  classes={{
-                    root: styles.controlLabelRoot,
-                    label: styles.controlLabel,
-                  }}
-                  control={<Radio className={styles.radio} color="primary" />}
+                  control={<Radio color="primary" />}
                   label="Санкт-Петербург"
                   value={SENDER_CITY_IDS.SPB}
                 />
                 <FormControlLabel
-                  classes={{
-                    root: styles.controlLabelRoot,
-                    label: styles.controlLabel,
-                  }}
-                  control={<Radio className={styles.radio} color="primary" />}
+                  control={<Radio color="primary" />}
                   label="Усть-Каменогорск"
                   value={SENDER_CITY_IDS.UKG}
                 />
@@ -144,12 +140,11 @@ const CDEKDeliveryForm = ({
         </FormControl>
       </div>
 
-      <div className="flex flex-wrap mb-6">
+      <div className="flex flex-wrap mb-4">
         <div className="w-full md:w-2/3 md:pr-3 mb-6 md:mb-0">
-          <label className="block text-gray-700" htmlFor="grid-delivery-city">
+          <FormLabel focused={false} required>
             Населённый пункт
-          </label>
-
+          </FormLabel>
           <Controller
             control={control}
             name="city"
@@ -161,13 +156,13 @@ const CDEKDeliveryForm = ({
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    className={styles.textField}
                     error={!!errors?.city}
                     helperText={(errors?.city as FieldError)?.message}
                     variant="outlined"
                   />
                 )}
                 size="small"
+                value={city || null}
                 autoComplete
                 autoHighlight
                 autoSelect
@@ -181,9 +176,9 @@ const CDEKDeliveryForm = ({
           />
         </div>
         <div className="w-full md:w-1/3 ">
-          <label className="block text-gray-700" htmlFor="grid-delivery-zip">
+          <FormLabel focused={false} required>
             Почтовый индекс
-          </label>
+          </FormLabel>
           <Controller
             control={control}
             name="zip"
@@ -199,7 +194,6 @@ const CDEKDeliveryForm = ({
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    className={styles.textField}
                     error={!!errors?.zip}
                     helperText={errors?.zip?.message}
                     variant="outlined"
@@ -216,12 +210,11 @@ const CDEKDeliveryForm = ({
           />
         </div>
       </div>
-      <div className="w-full mb-6">
-        <label className="block text-gray-700" htmlFor="grid-delivery-address">
+      <div className="w-full mb-4">
+        <FormLabel focused={false} required>
           Адрес получателя
-        </label>
+        </FormLabel>
         <TextField
-          className={styles.textField}
           error={!!errors?.address}
           helperText={errors?.address?.message}
           inputRef={register({
@@ -236,27 +229,19 @@ const CDEKDeliveryForm = ({
       </div>
       <div className="w-full">
         <FormControl component="fieldset">
-          <FormLabel className={styles.radioGroupLabel} focused={false}>
+          <FormLabel focused={false} required>
             Способ доставки
           </FormLabel>
           <Controller
             as={
               <RadioGroup row>
                 <FormControlLabel
-                  classes={{
-                    root: styles.controlLabelRoot,
-                    label: styles.controlLabel,
-                  }}
-                  control={<Radio className={styles.radio} color="primary" />}
+                  control={<Radio color="primary" />}
                   label="Доставка до квартиры"
                   value={DELIVERY_TYPES.DELIVERY}
                 />
                 <FormControlLabel
-                  classes={{
-                    root: styles.controlLabelRoot,
-                    label: styles.controlLabel,
-                  }}
-                  control={<Radio className={styles.radio} color="primary" />}
+                  control={<Radio color="primary" />}
                   label="Самовывоз со склада"
                   value={DELIVERY_TYPES.WAREHOUSE}
                 />

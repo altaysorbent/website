@@ -48,12 +48,12 @@ const Header = (): JSX.Element => {
 
   const menuElements = [
     {
-      href: '/',
-      title: 'Главная',
-    },
-    {
       href: '/blog',
       title: 'Блог',
+    },
+    {
+      href: '/buy',
+      title: 'Купить',
     },
     {
       href: '/delivery',

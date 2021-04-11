@@ -1,16 +1,16 @@
 import React from 'react';
 
-import {
-  DELIVERY_COMPANIES,
-  maximumAvailableCountCDEK,
-  maximumAvailableCountKazPost,
-} from 'constants/Product';
+import { maximumAvailableCount } from 'constants/Product';
 
-const MaximumAmountNotice = (): JSX.Element => (
-  <div className="text-red-900">
-    Максимально возможное количество упаковок для заказа через{' '}
-    {DELIVERY_COMPANIES.CDEK} - <b>{maximumAvailableCountCDEK}</b>, через{' '}
-    {DELIVERY_COMPANIES.KAZPOST} - <b>{maximumAvailableCountKazPost}</b>
+interface IProps {
+  className?: string;
+}
+const MaximumAmountNotice = ({ className = '' }: IProps): JSX.Element => (
+  <div className={`${className} text-red-900`}>
+    <p>
+      Максимально возможное количество упаковок для заказа -{' '}
+      {maximumAvailableCount} штуки
+    </p>
   </div>
 );
 

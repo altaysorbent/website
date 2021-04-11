@@ -1,9 +1,26 @@
 import React, { useEffect, FunctionComponent } from 'react';
 import { AppProps } from 'next/app';
 import { SnackbarProvider } from 'notistack';
-import { StylesProvider } from '@material-ui/core/styles';
 import { YMInitializer } from 'react-yandex-metrika';
+
+import {
+  StylesProvider,
+  createMuiTheme,
+  ThemeProvider,
+} from '@material-ui/core/styles';
+
 import 'styles/main.css';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#47885e',
+    },
+    secondary: {
+      main: '#ffab23',
+    },
+  },
+});
 
 const MyApp: FunctionComponent<AppProps> = ({
   Component,
@@ -27,17 +44,20 @@ const MyApp: FunctionComponent<AppProps> = ({
 
   return (
     <StylesProvider injectFirst>
-      <SnackbarProvider
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        autoHideDuration={5000}
-        maxSnack={3}
-      >
-        <Component {...pageProps} />
-        <YMInitializer accounts={[54266673]} />
-      </SnackbarProvider>
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          autoHideDuration={5000}
+          maxSnack={3}
+        >
+          <Component {...pageProps} />
+
+          <YMInitializer accounts={[54266673]} />
+        </SnackbarProvider>
+      </ThemeProvider>
     </StylesProvider>
   );
 };
