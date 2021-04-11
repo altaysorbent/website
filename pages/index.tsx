@@ -14,7 +14,7 @@ const IndexPage = (): JSX.Element => {
           <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center text-white">
             <div className="w-full md:w-1/2 text-center md:text-left">
               <h1 className="my-4 text-5xl font-bold leading-tight">
-                Altaysorbent - здоровья важный элемент!
+                Алтайсорбент - здоровья важный элемент!
               </h1>
               <p className="leading-normal text-2xl mb-2">
                 100% натуральный кремнесодержащий энтеросорбент с широким
