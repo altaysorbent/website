@@ -19,7 +19,7 @@ import { getDeliveryPrice } from 'services/altayApi';
 import {
   CURRENCY_SYMBOLS,
   DELIVERY_TYPES,
-  maximumAvailableCountCDEK,
+  maximumAvailableCount,
   minimumAvailableCount,
   SENDER_CITY_IDS,
 } from 'constants/Product';
@@ -145,15 +145,13 @@ const DeliveryCalculator = (): JSX.Element => {
     setCount((count) => (count === minimumAvailableCount ? 1 : count - 1));
   };
   const increaseCount = () => {
-    setCount((count) =>
-      count < maximumAvailableCountCDEK ? count + 1 : count
-    );
+    setCount((count) => (count < maximumAvailableCount ? count + 1 : count));
   };
   const handleSetCount = (e) => {
     const newCount = +e.target.value;
     if (
       newCount >= minimumAvailableCount &&
-      newCount <= maximumAvailableCountCDEK
+      newCount <= maximumAvailableCount
     ) {
       setCount(newCount);
     }

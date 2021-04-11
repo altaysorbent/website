@@ -4,13 +4,10 @@ import { CSSProperties, makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(() => ({
   container: {
-    height: '100%',
-    width: '100%',
     background: 'rgba(255, 255, 255, 0.8)',
     zIndex: 100,
   },
   spinner: {
-    margin: '40vh auto',
     width: '50px',
     height: '40px',
     textAlign: 'center',
@@ -52,7 +49,7 @@ const useStyles = makeStyles(() => ({
 
 interface ISpinnerProps {
   show: boolean;
-  containerStyle: CSSProperties;
+  containerStyle?: CSSProperties;
 }
 
 const Spinner = ({
