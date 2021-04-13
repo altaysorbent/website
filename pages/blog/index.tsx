@@ -1,4 +1,5 @@
 import React from 'react';
+import { GetStaticPropsResult } from 'next';
 
 import Layout from 'components/layouts/page';
 import Meta from 'components/Meta';
@@ -38,7 +39,7 @@ const Blog = ({ posts }: IProps): JSX.Element => {
   );
 };
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<GetStaticPropsResult<IProps>> {
   const posts = (await getAllPostsForBlog()) ?? [];
 
   return {

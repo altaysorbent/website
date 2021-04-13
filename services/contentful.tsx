@@ -59,7 +59,7 @@ function extractPost(fetchResponse) {
   return fetchResponse?.data?.postsCollection?.items?.[0];
 }
 
-async function fetchGraphQL(query) {
+async function fetchGraphQL(query: string): Promise<Response> {
   return fetch(`https://graphql.contentful.com/content/v1/spaces/${spaceId}`, {
     method: 'POST',
     headers: {
@@ -84,7 +84,7 @@ export async function getAllPostsWithSlug() {
   return extractPostEntries(entries);
 }
 
-export async function getPostAndMorePosts(slug) {
+export async function getPostAndMorePosts(slug: string) {
   const entry = await fetchGraphQL(
     `query {
       postsCollection(where: { slug: "${slug}" }, limit: 1) {

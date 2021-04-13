@@ -5,7 +5,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 
 interface Props {
-  children?: JSX.Element[];
+  children?: JSX.Element[] | JSX.Element;
 }
 
 const Layout = ({ children }: Props): JSX.Element => {

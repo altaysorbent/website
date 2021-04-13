@@ -1,8 +1,15 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS } from '@contentful/rich-text-types';
+import { BLOCKS, Document } from '@contentful/rich-text-types';
 import styles from './PostRichText.module.scss';
 
-const PostRichText = ({ content, className = '' }) => {
+interface IProps {
+  content: {
+    json: Document;
+    links: any;
+  };
+  className: string;
+}
+const PostRichText = ({ content, className = '' }: IProps): JSX.Element => {
   const options = {
     renderNode: {
       [BLOCKS.LIST_ITEM]: (node) => {
