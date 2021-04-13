@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = (): JSX.Element => {
   return (
-    <section className="py-6">
+    <section className="py-6 text-lg">
       <div className="container mx-auto">
         <div className="w-full pt-6 text-center">
           <p className="text-white">

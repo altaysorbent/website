@@ -2,21 +2,21 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from '@material-ui/core';
 
-import Layout from 'components/layouts';
+import IndexLayout from 'components/layouts';
 import Meta from 'components/Meta';
 
 const IndexPage = (): JSX.Element => {
   return (
-    <Layout>
+    <IndexLayout>
       <Meta title="Главная" />
       <section id="sorbent">
         <div className="py-10">
           <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center text-white">
             <div className="w-full md:w-1/2 text-center md:text-left">
-              <h1 className="my-4 text-5xl font-bold leading-tight">
+              <h1 className="mb-4 text-5xl font-bold leading-tight">
                 Алтайсорбент - здоровья важный элемент!
               </h1>
-              <p className="leading-normal text-2xl mb-2">
+              <p className="text-xl mb-10">
                 100% натуральный кремнесодержащий энтеросорбент с широким
                 спектром действия, изготавливается из природного минерала
                 монтмориллонита.
@@ -186,7 +186,7 @@ const IndexPage = (): JSX.Element => {
           </div>
         </div>
       </section>
-    </Layout>
+    </IndexLayout>
   );
 };
 
