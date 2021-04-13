@@ -1,9 +1,12 @@
+import { Document } from '@contentful/rich-text-types';
+
 export interface IPost {
   annotation: {
-    json: string[];
+    json: Document;
   };
   content: {
-    json: string[];
+    json: Document;
+    links: any;
   };
   date: string;
   image: {

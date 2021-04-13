@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps = async ({
   params,
   preview = false,
 }) => {
-  const data = await getPostAndMorePosts(params.slug);
+  const data = await getPostAndMorePosts(params.slug as string);
 
   return {
     props: {

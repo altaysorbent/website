@@ -5,7 +5,7 @@ import styles from './PostRichText.module.scss';
 interface IProps {
   content: {
     json: Document;
-    links: any;
+    links?: any;
   };
   className: string;
 }
