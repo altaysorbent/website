@@ -3,7 +3,9 @@ import { AxiosResponse } from 'axios';
 import { useSnackbar } from 'notistack';
 
 import {
+  CircularProgress,
   FormControlLabel,
+  FormLabel,
   IconButton,
   Radio,
   RadioGroup,
@@ -11,7 +13,6 @@ import {
 } from '@material-ui/core';
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { makeStyles } from '@material-ui/styles';
 
 import { fetchCityList } from 'services/cdekApi';
 import { getDeliveryPrice } from 'services/altayApi';
@@ -26,25 +27,8 @@ import {
 
 import { IDestinationCity } from 'interfaces/DestinationCity.interface';
 
-const useStyles = makeStyles(() => ({
-  deliveryType: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginTop: '1rem',
-  },
-  senderCity: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginBottom: '0.75rem',
-  },
-  label: {
-    fontSize: '1.25rem',
-  },
-}));
-
 const DeliveryCalculator = (): JSX.Element => {
   const { enqueueSnackbar } = useSnackbar();
-  const classes = useStyles();
 
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState(null);
@@ -53,6 +37,7 @@ const DeliveryCalculator = (): JSX.Element => {
   const [count, setCount] = useState(minimumAvailableCount);
   const [deliveryType, setDeliveryType] = useState(DELIVERY_TYPES.DELIVERY);
   const [senderCity, setSenderCity] = useState(SENDER_CITY_IDS.SPB);
+  const [loading, setLoading] = useState(false);
 
   const [deliveryPriceKzt, setDeliveryPriceKzt] = useState(0);
   const [deliveryPriceRub, setDeliveryPriceRub] = useState(0);
@@ -61,6 +46,7 @@ const DeliveryCalculator = (): JSX.Element => {
 
   useEffect(() => {
     if (count && zipCode && city && deliveryType && senderCity) {
+      setLoading(true);
       getDeliveryPrice({
         senderCityId: senderCity,
         receiverCityId: city.uid,
@@ -99,7 +85,8 @@ const DeliveryCalculator = (): JSX.Element => {
               variant: 'error',
             }
           );
-        });
+        })
+        .finally(() => setLoading(false));
     }
   }, [count, zipCode, city, deliveryType, senderCity, enqueueSnackbar]);
 
@@ -167,23 +154,17 @@ const DeliveryCalculator = (): JSX.Element => {
       <div className="w-full ">
         <h4 className="text-xl">Город отправления</h4>
         <RadioGroup
-          className={classes.senderCity}
           name="senderCityId"
           value={senderCity}
+          row
           onChange={handleSenderCityChange}
         >
           <FormControlLabel
-            classes={{
-              label: classes.label,
-            }}
             control={<Radio color="primary" />}
             label="Санкт-Петербург (Россия)"
             value={SENDER_CITY_IDS.SPB}
           />
           <FormControlLabel
-            classes={{
-              label: classes.label,
-            }}
             control={<Radio color="primary" />}
             label="Усть-Каменогорск (Казахстан)"
             value={SENDER_CITY_IDS.UKG}
@@ -191,16 +172,17 @@ const DeliveryCalculator = (): JSX.Element => {
         </RadioGroup>
       </div>
       <div className="flex w-full md:w-1/5 md:pr-3 flex-col">
-        <div className="w-full">Количество</div>
+        <div className="w-full text-center">
+          <FormLabel focused={false}>Количество</FormLabel>
+        </div>
         <div className="w-full flex items-center">
           <IconButton color="primary" size="small" onClick={decreaseCount}>
             <RemoveIcon />
           </IconButton>
 
           <TextField
-            inputProps={{}}
             size="small"
-            type="text"
+            type="number"
             value={count}
             variant="outlined"
             onChange={handleSetCount}
@@ -212,9 +194,7 @@ const DeliveryCalculator = (): JSX.Element => {
         </div>
       </div>
       <div className="w-full md:w-3/5 md:pr-3 mb-6 md:mb-0">
-        <label className="block text-gray-700" htmlFor="grid-delivery-city">
-          Город назначения
-        </label>
+        <FormLabel focused={false}>Город назначения</FormLabel>
 
         <Autocomplete
           getOptionLabel={(option) => option.label || ''}
@@ -231,9 +211,7 @@ const DeliveryCalculator = (): JSX.Element => {
         />
       </div>
       <div className="w-full md:w-1/5 ">
-        <label className="block text-gray-700" htmlFor="grid-delivery-zip">
-          Индекс
-        </label>
+        <FormLabel focused={false}>Индекс</FormLabel>
 
         <Autocomplete
           getOptionLabel={(option) => option || ''}
@@ -249,40 +227,44 @@ const DeliveryCalculator = (): JSX.Element => {
       </div>
       <div className="w-full ">
         <RadioGroup
-          className={classes.deliveryType}
           name="deliveryType"
           value={deliveryType}
+          row
           onChange={handleDeliveryTypeChange}
         >
           <FormControlLabel
-            classes={{
-              label: classes.label,
-            }}
             control={<Radio color="primary" />}
             label="Доставка до квартиры"
             value={DELIVERY_TYPES.DELIVERY}
           />
           <FormControlLabel
-            classes={{
-              label: classes.label,
-            }}
             control={<Radio color="primary" />}
             label="Самовывоз со склада"
             value={DELIVERY_TYPES.WAREHOUSE}
           />
         </RadioGroup>
       </div>
-      {deliveryPriceRub > 0 && deliveryPriceKzt > 0 && (
-        <div className="w-full mt-4 text-green-800">
-          <p>
-            Стоимость доставки составит - {deliveryPriceKzt}{' '}
-            {CURRENCY_SYMBOLS.KZT} (~{deliveryPriceRub} {CURRENCY_SYMBOLS.RUB})
-          </p>
-          <p>
-            Срок доставки от {deliveryPeriodMin} до {deliveryPeriodMax} дней/дня
-          </p>
-        </div>
-      )}
+      <div className="w-full py-4 flex justify-center">
+        {loading ? (
+          <CircularProgress color="secondary" />
+        ) : (
+          <>
+            {deliveryPriceRub > 0 && deliveryPriceKzt > 0 && (
+              <div className="w-full mt-4 text-green-800">
+                <p>
+                  Стоимость доставки составит - {deliveryPriceKzt}{' '}
+                  {CURRENCY_SYMBOLS.KZT} (~{deliveryPriceRub}{' '}
+                  {CURRENCY_SYMBOLS.RUB})
+                </p>
+                <p>
+                  Срок доставки от {deliveryPeriodMin} до {deliveryPeriodMax}{' '}
+                  дней/дня
+                </p>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
