@@ -1,7 +1,6 @@
 const productName = 'Алтайсорбент 1г/20 шт.';
 const minimumAvailableCount = 1;
-const maximumAvailableCountCDEK = 64;
-const maximumAvailableCountKazPost = 32;
+const maximumAvailableCount = 64;
 const productPriceKzt = 700;
 const productPriceRub = 125;
 const currencyCode = 'KZT';
@@ -64,8 +63,7 @@ const CURRENCY_SYMBOLS: CurrencySymbols = {
 
 export {
   productName,
-  maximumAvailableCountCDEK,
-  maximumAvailableCountKazPost,
+  maximumAvailableCount,
   minimumAvailableCount,
   productPriceKzt,
   productPriceRub,

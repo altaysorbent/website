@@ -1,59 +1,22 @@
-import React, { createRef, useEffect, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import { faMobileAlt } from '@fortawesome/free-solid-svg-icons';
+import Logo from '../assets/logo.svg';
 
 const Header = (): JSX.Element => {
-  const logoRef: React.RefObject<HTMLImageElement> = createRef();
-  const headerRef: React.RefObject<HTMLElement> = createRef();
-  const toToggle = [];
-
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
-  const handleScroll = useCallback(() => {
-    const scrollpos = window.scrollY;
-    const headerClasses = ['bg-white', 'border-b', 'shadow', 'top-0'];
-    if (logoRef.current && headerRef.current) {
-      if (scrollpos > 1) {
-        logoRef.current.src = '/images/logo_black.png';
-        headerRef.current.classList.add(...headerClasses);
-        //Use to switch toggleColour colours
-        for (const element of toToggle) {
-          element.classList.add('text-black');
-          element.classList.remove('text-white');
-        }
-      } else {
-        logoRef.current.src = '/images/logo_white.png';
-
-        headerRef.current.classList.remove(...headerClasses);
-        for (const element of toToggle) {
-          element.classList.remove('text-black');
-        }
-      }
-    }
-  }, [headerRef, logoRef, toToggle]);
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [handleScroll]);
-
   const menuElements = [
-    {
-      href: '/',
-      title: 'Главная',
-    },
     {
       href: '/blog',
       title: 'Блог',
+    },
+    {
+      href: '/buy',
+      title: 'Купить',
     },
     {
       href: '/delivery',
@@ -79,33 +42,12 @@ const Header = (): JSX.Element => {
   ));
 
   return (
-    <nav className="w-full z-30 text-white sticky" ref={headerRef}>
+    <nav className="w-full z-30 text-gray-700 sticky bg-white border-b top-0">
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4">
         <div className="lg:pl-0 pl-2 flex items-center order-1">
           <Link href="/">
-            <a className="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl">
-              <img alt="" ref={logoRef} src="/images/logo_white.png" />
-            </a>
+            <Logo className="no-underline cursor-pointer hover:no-underline text-2xl lg:text-4xl" />
           </Link>
-        </div>
-        <div
-          className="ml-0 flex flex-col w-full text-center order-3 mt-4 sm:text-left sm:w-auto sm:mr-auto sm:mt-0 sm:ml-6 lg:order-2 lg:text-left text-lg"
-          ref={(el) => {
-            el && toToggle.push(el);
-          }}
-        >
-          <div className="flex flex-col">
-            <a className="cursor-pointer " href="tel:+77779898998">
-              <FontAwesomeIcon height={16} icon={faWhatsapp} />
-              &nbsp; +7 (777) 989-89-98 &nbsp; Казахстан
-            </a>
-          </div>
-          <div className="flex flex-col mt-2 sm:mt-0">
-            <a className="cursor-pointer" href="tel:+79956254555">
-              <FontAwesomeIcon height={16} icon={faMobileAlt} />
-              &nbsp; +7 (995) 625-45-55 &nbsp; Россия
-            </a>
-          </div>
         </div>
 
         <div className="block lg:hidden pr-4 order-2 sm:order-3">
@@ -128,15 +70,10 @@ const Header = (): JSX.Element => {
           className={[
             'w-full flex-grow mt-2 bg-white p-4 z-20 order-3',
             'lg:mt-0 lg:flex lg:items-center lg:w-auto lg:block lg:bg-transparent lg:p-0',
-            showMenu ? 'block text-black' : 'hidden text-white',
+            showMenu ? 'block text-gray-700' : 'hidden',
           ].join(' ')}
         >
-          <ul
-            className="list-reset lg:flex justify-end flex-1 items-center text-lg"
-            ref={(el) => {
-              toToggle.push(el);
-            }}
-          >
+          <ul className="list-reset lg:flex justify-end flex-1 items-center text-lg">
             {menuItems}
           </ul>
         </div>
