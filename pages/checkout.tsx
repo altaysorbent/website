@@ -231,11 +231,11 @@ const CheckoutPage = (): JSX.Element => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Paper className="w-full mb-10 py-10 px-2 sm:px-6" elevation={3}>
             <div className="flex flex-col sm:flex-row">
-              <div className="w-full sm:w-1/4 mb-4">
+              <div className="w-full sm:w-1/4 mb-0 sm:mb-4 pr-0 sm:pr-4">
                 <img
-                  alt=""
-                  className="mx-auto sm:mx-0"
-                  src="/images/new-design.png"
+                  alt="Алтайсорбент"
+                  className="mx-auto sm:mx-0 border"
+                  src="/images/altaysorbent.jpg"
                   style={{
                     maxHeight: '155px',
                     width: 'auto',
@@ -312,7 +312,7 @@ const CheckoutPage = (): JSX.Element => {
               </div>
             </div>
             <div className="w-full mt-4">
-              <MaximumAmountNotice />
+              <MaximumAmountNotice className="text-lg" />
             </div>
           </Paper>
           <Paper className="w-full mb-10 p-4" elevation={3}>
@@ -481,7 +481,7 @@ const CheckoutPage = (): JSX.Element => {
 
           <div className="w-full">
             <div className="w-full">
-              <p className="text-red-900 my-4">
+              <p className="text-red-900 my-4 text-lg">
                 Сумма оплачивается в валюте KZT (Казахстанский тенге).
               </p>
 

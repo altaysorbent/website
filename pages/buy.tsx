@@ -19,15 +19,16 @@ const BuyPage = (): JSX.Element => {
       <Meta title={productName} />
       <div className="flex flex-wrap mx-auto px-2">
         <div className="w-full">
-          <h3 className="text-3xl font-bold leading-none mb-4">
+          <h3 className="text-3xl font-bold leading-none mb-4 text-center sm:text-left">
             {productName}
           </h3>
         </div>
         <div className="flex flex-col sm:flex-row w-full mb-12">
-          <div className="w-full sm:w-1/3 my-4 sm:my-0">
+          <div className="w-full sm:w-1/3 my-4 sm:my-0 pr-0 sm:pr-4">
             <img
-              alt=""
-              src="/images/new-design.png"
+              alt="Алтайсорбент"
+              className="border mx-auto sm:mx-0"
+              src="/images/altaysorbent.jpg"
               style={{
                 maxHeight: '265px',
                 width: 'auto',

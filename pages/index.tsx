@@ -111,9 +111,9 @@ const IndexPage = (): JSX.Element => {
                 консерванты...
               </p>
             </div>
-            <div className="w-full md:w-1/3 p-6 flex justify-center">
+            <div className="w-full md:w-1/3 p-6">
               <img
-                alt=""
+                alt="Глина"
                 className="mx-auto"
                 src="/images/naturs.png"
                 style={{
@@ -124,9 +124,9 @@ const IndexPage = (): JSX.Element => {
             </div>
           </div>
           <div className="flex flex-wrap flex-col md:flex-row">
-            <div className="w-full md:w-1/3 p-6 align-middle">
+            <div className="w-full md:w-1/3 p-6">
               <img
-                alt=""
+                alt="Йога"
                 className="mx-auto"
                 src="/images/yoga.jpg"
                 style={{
@@ -163,7 +163,7 @@ const IndexPage = (): JSX.Element => {
         <div className="container mx-auto px-2 pt-4">
           <div className="flex flex-wrap flex-col-reverse md:flex-row">
             <div className="w-full md:w-2/3 p-6">
-              <h3 className="w-full my-2 text-3xl font-bold leading-tight text-center">
+              <h3 className="w-full my-2 text-3xl font-bold leading-none text-center">
                 А знаете ли Вы?
               </h3>
               <p className="text-xl mb-3 text-justify">
