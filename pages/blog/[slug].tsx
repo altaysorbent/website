@@ -6,10 +6,10 @@ import Link from 'next/link';
 
 import { postImageSizes } from 'constants/Post';
 
-import Layout from 'components/layouts/page';
 import Meta from 'components/Meta';
 import PostRichText from 'components/Post/PostRichText';
 import PostShare from 'components/Post/Share';
+import Layout from 'layouts/Page';
 
 import { IPost } from 'interfaces/Post.interface';
 

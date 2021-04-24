@@ -1,13 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
-import Meta from 'components/Meta';
-import PageLayout from 'components/layouts/page';
-import Description from 'components/Description';
 import { Button } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
+import Meta from 'components/Meta';
+import Description from 'components/Description';
+import PageLayout from 'layouts/Page';
+
 import {
-  CURRENCY_SYMBOLS,
+  CurrencySymbols,
   productName,
   productPriceKzt,
   productPriceRub,
@@ -42,8 +43,8 @@ const BuyPage = (): JSX.Element => {
               </div>
               <div className="font-bold text-green-700">
                 <b>
-                  {productPriceKzt} {CURRENCY_SYMBOLS.KZT} (~ {productPriceRub}{' '}
-                  {CURRENCY_SYMBOLS.RUB})
+                  {productPriceKzt} {CurrencySymbols.KZT} (~ {productPriceRub}{' '}
+                  {CurrencySymbols.RUB})
                 </b>
               </div>
             </div>

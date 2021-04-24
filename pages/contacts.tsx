@@ -2,8 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhoneVolume, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 
-import Layout from 'components/layouts/page';
 import Meta from 'components/Meta';
+import Layout from 'layouts/Page';
 
 const ContactsPage = (): JSX.Element => {
   const title = 'Контактная информация';

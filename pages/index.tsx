@@ -2,12 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from '@material-ui/core';
 
-import IndexLayout from 'components/layouts';
 import Meta from 'components/Meta';
+import MainLayout from 'layouts/Main';
 
 const IndexPage = (): JSX.Element => {
   return (
-    <IndexLayout>
+    <MainLayout>
       <Meta title="Главная" />
       <section id="sorbent">
         <div className="py-10">
@@ -186,7 +186,7 @@ const IndexPage = (): JSX.Element => {
           </div>
         </div>
       </section>
-    </IndexLayout>
+    </MainLayout>
   );
 };
 

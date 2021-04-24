@@ -1,9 +1,9 @@
 import React from 'react';
 import { GetStaticPropsResult } from 'next';
 
-import Layout from 'components/layouts/page';
 import Meta from 'components/Meta';
 import PostItem from 'components/Post/PostItem';
+import Layout from 'layouts/Page';
 
 import { IPost } from 'interfaces/Post.interface';
 

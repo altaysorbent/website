@@ -2,13 +2,13 @@ import React from 'react';
 
 import DeliveryCalculator from 'components/delivery/Calculator';
 import MaximumAmountNotice from 'components/delivery/MaximumAmountNotice';
-import Layout from 'components/layouts/page';
 import Meta from 'components/Meta';
+import Layout from 'layouts/Page';
 
 import {
-  CURRENCY_SYMBOLS,
-  DELIVERY_COMPANIES,
-  KAZPOST_DELIVERY_PRICE,
+  CurrencySymbols,
+  DeliveryCompanies,
+  KazPostDeliveryPrice,
 } from 'constants/Product';
 
 const UsagePage = (): JSX.Element => {
@@ -23,16 +23,16 @@ const UsagePage = (): JSX.Element => {
       <div className="container mx-auto px-2 pt-4 max-w-5xl text-xl">
         <div className="text-justify">
           <p className="mb-2">
-            Доставка осуществляется <b>{DELIVERY_COMPANIES.KAZPOST}</b> (по
-            Казахстану) и курьерской службой <b>{DELIVERY_COMPANIES.CDEK}</b> по
+            Доставка осуществляется <b>{DeliveryCompanies.KAZPOST}</b> (по
+            Казахстану) и курьерской службой <b>{DeliveryCompanies.CDEK}</b> по
             Казахстану, России и Республике Беларусь.
           </p>
           <p className="mb-2">
-            Стоимость доставки <b>{DELIVERY_COMPANIES.KAZPOST}</b> -
+            Стоимость доставки <b>{DeliveryCompanies.KAZPOST}</b> -
             фиксированная и составляет{' '}
             <b>
-              {KAZPOST_DELIVERY_PRICE.KZT}
-              {CURRENCY_SYMBOLS.KZT}
+              {KazPostDeliveryPrice.KZT}
+              {CurrencySymbols.KZT}
             </b>{' '}
             за каждые 32 штуки до почтового отделения.
           </p>
@@ -41,13 +41,13 @@ const UsagePage = (): JSX.Element => {
           </div>
           <p className="mb-2">
             Возможность доставки в другие страны (через{' '}
-            <b>{DELIVERY_COMPANIES.CDEK}</b>) можно узнать воспользовавшись
+            <b>{DeliveryCompanies.CDEK}</b>) можно узнать воспользовавшись
             калькулятором ниже.
           </p>
         </div>
         <div className="mt-6 border-2 border-green-700 p-6">
           <p className="mb-4">
-            Для расчета стоимости доставки <b>{DELIVERY_COMPANIES.CDEK}</b>{' '}
+            Для расчета стоимости доставки <b>{DeliveryCompanies.CDEK}</b>{' '}
             воспользуйтесь калькулятором доставки
           </p>
           <DeliveryCalculator />
