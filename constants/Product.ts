@@ -1,78 +1,62 @@
-const productName = 'Алтайсорбент 1г/20 шт.';
-const minimumAvailableCount = 1;
-const maximumAvailableCount = 64;
-const productPriceKzt = 700;
-const productPriceRub = 125;
-const currencyCode = 'KZT';
-const defaultProductId = 20;
+export const productName = 'Алтайсорбент 1г/20 шт.';
+export const minimumAvailableCount = 1;
+export const maximumAvailableCount = 64;
+export const productPriceKzt = 700;
+export const productPriceRub = 125;
+export const currencyCode = 'KZT';
+export const defaultProductId = 20;
 
-interface DeliveryTypes {
+interface IDeliveryTypes {
   WAREHOUSE: string;
   DELIVERY: string;
 }
 
-interface DeliveryCompanies {
+interface IDeliveryCompanies {
   CDEK: string;
   KAZPOST: string;
 }
 
-interface KazPostDeliveryPrice {
+interface IKazPostDeliveryPrice {
   RUB: number;
   KZT: number;
 }
 
-interface SenderCityIds {
+interface ISenderCityIds {
   SPB: string;
   UKG: string;
 }
 
-interface CurrencySymbols {
+interface ICurrencySymbols {
   KZT: string;
   RUB: string;
 }
 
-const DELIVERY_TYPES: DeliveryTypes = {
+export const DeliveryTypes: IDeliveryTypes = {
   WAREHOUSE: '136',
   DELIVERY: '137',
 };
 
-const DELIVERY_COMPANIES: DeliveryCompanies = {
+export const DeliveryCompanies: IDeliveryCompanies = {
   CDEK: 'CDEK',
   KAZPOST: 'АО «Казпочта»',
 };
 
-const DELIVERY_COMPANIES_IDS: DeliveryCompanies = {
+export const DeliveryCompaniesIds: IDeliveryCompanies = {
   CDEK: 'CDEK',
   KAZPOST: 'KAZPOST',
 };
 
-const KAZPOST_DELIVERY_PRICE: KazPostDeliveryPrice = {
+export const KazPostDeliveryPrice: IKazPostDeliveryPrice = {
   RUB: 176,
   KZT: 1000,
 };
 
-const SENDER_CITY_IDS: SenderCityIds = {
+export const SenderCityIds: ISenderCityIds = {
   SPB: '137',
   UKG: '11903',
 };
 
-const CURRENCY_SYMBOLS: CurrencySymbols = {
+export const CurrencySymbols: ICurrencySymbols = {
   KZT: '\u20B8',
   RUB: '\u20BD',
-};
-
-export {
-  productName,
-  maximumAvailableCount,
-  minimumAvailableCount,
-  productPriceKzt,
-  productPriceRub,
-  currencyCode,
-  DELIVERY_TYPES,
-  DELIVERY_COMPANIES,
-  DELIVERY_COMPANIES_IDS,
-  KAZPOST_DELIVERY_PRICE,
-  CURRENCY_SYMBOLS,
-  SENDER_CITY_IDS,
-  defaultProductId,
 };
