@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Meta from 'components/Meta';
-import PageLayout from './page';
+import PageLayout from './Page';
 
 interface IProps {
   children?: string | JSX.Element[] | JSX.Element;

@@ -8,7 +8,7 @@ interface Props {
   children?: JSX.Element[] | JSX.Element;
 }
 
-const IndexLayout = ({ children }: Props): JSX.Element => {
+const MainLayout = ({ children }: Props): JSX.Element => {
   return (
     <div className="text-gray-700">
       <Header />
@@ -19,4 +19,4 @@ const IndexLayout = ({ children }: Props): JSX.Element => {
   );
 };
 
-export default IndexLayout;
+export default MainLayout;
