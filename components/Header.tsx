@@ -46,7 +46,9 @@ const Header = (): JSX.Element => {
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4">
         <div className="lg:pl-0 pl-2 flex items-center order-1">
           <Link href="/">
-            <Logo className="no-underline cursor-pointer hover:no-underline text-2xl lg:text-4xl" />
+            <a>
+              <Logo className="no-underline cursor-pointer hover:no-underline text-2xl lg:text-4xl" />
+            </a>
           </Link>
         </div>
 
@@ -69,7 +71,7 @@ const Header = (): JSX.Element => {
         <div
           className={[
             'w-full flex-grow mt-2 bg-white p-4 z-20 order-3',
-            'lg:mt-0 lg:flex lg:items-center lg:w-auto lg:block lg:bg-transparent lg:p-0',
+            'lg:mt-0 lg:flex lg:items-center lg:w-auto lg:bg-transparent lg:p-0',
             showMenu ? 'block text-gray-700' : 'hidden',
           ].join(' ')}
         >
