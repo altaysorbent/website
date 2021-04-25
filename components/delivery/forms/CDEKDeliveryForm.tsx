@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormContext, Controller, FieldError } from 'react-hook-form';
+import { useSnackbar } from 'notistack';
 
 import {
   FormControl,
@@ -15,10 +16,7 @@ import { DeliveryTypes, SenderCityIds } from 'constants/Product';
 import { ICDEKCityItem } from 'interfaces/CdekCityItem.interface';
 import { IOrderForm } from 'interfaces/OrderForm.interface';
 
-interface Props {
-  cities: CityOption[];
-  onDestinationCitiesFetch: (e: React.ChangeEvent, value: string) => void;
-}
+import { fetchCityList } from 'services/cdekApi';
 
 interface CityOption {
   label: string;
@@ -28,10 +26,7 @@ interface ICDEKForm extends IOrderForm {
   city: ICDEKCityItem;
 }
 
-const CDEKDeliveryForm = ({
-  cities,
-  onDestinationCitiesFetch,
-}: Props): JSX.Element => {
+const CDEKDeliveryForm = (): JSX.Element => {
   const {
     register,
     errors,
@@ -40,9 +35,30 @@ const CDEKDeliveryForm = ({
     setValue,
   } = useFormContext<ICDEKForm>();
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const { city, zip } = watch(['city', 'zip']) || {};
 
   const zipcodes = city?.zipcodes || [];
+
+  const [cities, setCities] = useState<CityOption[]>([]);
+
+  const onDestinationCitiesFetch = (event, value) => {
+    if (value.length >= 3) {
+      fetchCityList(value)
+        .then((cities) => {
+          setCities(cities);
+        })
+        .catch(() => {
+          enqueueSnackbar(
+            'Ошибка при загрузке списка городов, пожалуйста попробуйте позже',
+            {
+              variant: 'error',
+            }
+          );
+        });
+    }
+  };
 
   useEffect(() => {
     if (zip && zipcodes.some((zipcode) => zipcode === zip) === false) {

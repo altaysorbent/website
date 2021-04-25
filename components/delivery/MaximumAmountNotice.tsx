@@ -11,6 +11,9 @@ const MaximumAmountNotice = ({ className = '' }: IProps): JSX.Element => (
       Максимально возможное количество упаковок для заказа -{' '}
       {maximumAvailableCount} штуки
     </p>
+    <p>
+      При заказе более 16 упаковок - предоставляется <b>10% скидка</b>
+    </p>
   </div>
 );
 
