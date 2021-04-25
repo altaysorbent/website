@@ -1,5 +1,6 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormContext, Controller, FieldError } from 'react-hook-form';
+import { useSnackbar } from 'notistack';
 
 import {
   FormControl,
@@ -11,22 +12,11 @@ import {
 } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import { DELIVERY_TYPES, SENDER_CITY_IDS } from 'constants/Product';
-import { getDeliveryPrice } from 'services/altayApi';
-import { AxiosResponse } from 'axios';
+import { DeliveryTypes, SenderCityIds } from 'constants/Product';
 import { ICDEKCityItem } from 'interfaces/CdekCityItem.interface';
 import { IOrderForm } from 'interfaces/OrderForm.interface';
 
-interface Props {
-  cities: CityOption[];
-  count: number;
-  onDeliveryPriceKztChange: Dispatch<SetStateAction<number>>;
-  onDeliveryPriceRubChange: Dispatch<SetStateAction<number>>;
-  onDeliveryPeriodMinChange: Dispatch<SetStateAction<number>>;
-  onDeliveryPeriodMaxChange: Dispatch<SetStateAction<number>>;
-  onDestinationCitiesFetch: (e: React.ChangeEvent, value: string) => void;
-  onError: (message: string) => void;
-}
+import { fetchCityList } from 'services/cdekApi';
 
 interface CityOption {
   label: string;
@@ -36,79 +26,45 @@ interface ICDEKForm extends IOrderForm {
   city: ICDEKCityItem;
 }
 
-const CDEKDeliveryForm = ({
-  cities,
-  count,
-  onDeliveryPriceKztChange,
-  onDeliveryPriceRubChange,
-  onDeliveryPeriodMinChange,
-  onDeliveryPeriodMaxChange,
-  onError,
-  onDestinationCitiesFetch,
-}: Props): JSX.Element => {
+const CDEKDeliveryForm = (): JSX.Element => {
   const {
     register,
     errors,
     control,
     watch,
-    setError,
-    clearErrors,
     setValue,
   } = useFormContext<ICDEKForm>();
 
-  const { deliveryType, senderCityId, city, zip } =
-    watch(['deliveryType', 'senderCityId', 'city', 'zip']) || {};
+  const { enqueueSnackbar } = useSnackbar();
 
-  const uid = city?.uid || null;
+  const { city, zip } = watch(['city', 'zip']) || {};
+
   const zipcodes = city?.zipcodes || [];
+
+  const [cities, setCities] = useState<CityOption[]>([]);
+
+  const onDestinationCitiesFetch = (event, value) => {
+    if (value.length >= 3) {
+      fetchCityList(value)
+        .then((cities) => {
+          setCities(cities);
+        })
+        .catch(() => {
+          enqueueSnackbar(
+            'Ошибка при загрузке списка городов, пожалуйста попробуйте позже',
+            {
+              variant: 'error',
+            }
+          );
+        });
+    }
+  };
 
   useEffect(() => {
     if (zip && zipcodes.some((zipcode) => zipcode === zip) === false) {
       setValue('zip', null);
     }
-  }, [city, zipcodes, zip]);
-
-  useEffect(() => {
-    if (uid && deliveryType && senderCityId && zip) {
-      clearErrors('deliveryError');
-      getDeliveryPrice({
-        senderCityId,
-        receiverCityId: uid,
-        quantity: count,
-        tariffId: deliveryType,
-      })
-        .then(({ data }: AxiosResponse) => {
-          const { result, error } = data;
-          if (result) {
-            onDeliveryPriceKztChange(Math.ceil(result.priceByCurrency));
-            onDeliveryPriceRubChange(Math.ceil(result.price));
-
-            onDeliveryPeriodMinChange(result.deliveryPeriodMin);
-            onDeliveryPeriodMaxChange(result.deliveryPeriodMax);
-          }
-          if (error) {
-            const text = error?.[0]?.text;
-            if (text) {
-              setError('deliveryError', {
-                type: 'manual',
-                message: text,
-              });
-              throw new Error(text);
-            } else {
-              throw new Error(
-                'Ошибка при расчете доставки, пожалуйста попробуйте позже'
-              );
-            }
-          }
-        })
-        .catch(({ message }) => onError(message));
-    } else {
-      onDeliveryPriceKztChange(0);
-      onDeliveryPriceRubChange(0);
-      onDeliveryPeriodMinChange(0);
-      onDeliveryPeriodMaxChange(0);
-    }
-  }, [uid, deliveryType, senderCityId, zip, count]);
+  }, [zipcodes, zip]);
 
   return (
     <>
@@ -123,17 +79,17 @@ const CDEKDeliveryForm = ({
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Санкт-Петербург"
-                  value={SENDER_CITY_IDS.SPB}
+                  value={SenderCityIds.SPB}
                 />
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Усть-Каменогорск"
-                  value={SENDER_CITY_IDS.UKG}
+                  value={SenderCityIds.UKG}
                 />
               </RadioGroup>
             }
             control={control}
-            defaultValue={SENDER_CITY_IDS.SPB}
+            defaultValue={SenderCityIds.SPB}
             name="senderCityId"
             rules={{ required: true }}
           />
@@ -238,17 +194,17 @@ const CDEKDeliveryForm = ({
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Доставка до квартиры"
-                  value={DELIVERY_TYPES.DELIVERY}
+                  value={DeliveryTypes.DELIVERY}
                 />
                 <FormControlLabel
                   control={<Radio color="primary" />}
                   label="Самовывоз со склада"
-                  value={DELIVERY_TYPES.WAREHOUSE}
+                  value={DeliveryTypes.WAREHOUSE}
                 />
               </RadioGroup>
             }
             control={control}
-            defaultValue={DELIVERY_TYPES.DELIVERY}
+            defaultValue={DeliveryTypes.DELIVERY}
             name="deliveryType"
             rules={{ required: true }}
           />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { AxiosResponse } from 'axios';
 import { useSnackbar } from 'notistack';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
 
 import {
   Box,
@@ -20,42 +20,39 @@ import {
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 
 import {
-  CURRENCY_SYMBOLS,
+  CurrencySymbols,
   defaultProductId,
-  DELIVERY_COMPANIES,
-  DELIVERY_COMPANIES_IDS,
-  DELIVERY_TYPES,
-  KAZPOST_DELIVERY_PRICE,
+  DeliveryCompanies,
+  DeliveryCompaniesIds,
+  DeliveryTypes,
   maximumAvailableCount,
   minimumAvailableCount,
   productName,
-  productPriceKzt,
-  productPriceRub,
-  SENDER_CITY_IDS,
+  SenderCityIds,
 } from 'constants/Product';
 
 import MaximumAmountNotice from 'components/delivery/MaximumAmountNotice';
 import CDEKDeliveryForm from 'components/delivery/forms/CDEKDeliveryForm';
 import KazPostDeliveryForm from 'components/delivery/forms/KazPostDeliveryForm';
-import OrderLayout from 'components/layouts/Order';
+import { useDeliveryPrice } from 'hooks/useDeliveryPrice';
+import { useProductPrice } from 'hooks/useProductPrice';
+import OrderLayout from 'layouts/Order';
 
 import { ICDEKCityItem } from 'interfaces/CdekCityItem.interface';
 import { IOrderForm } from 'interfaces/OrderForm.interface';
 
-import { fetchCityList } from 'services/cdekApi';
 import { createOrder } from 'services/altayApi';
-
 const CheckoutPage = (): JSX.Element => {
   const { enqueueSnackbar } = useSnackbar();
 
   const methods = useForm<IOrderForm>({
     defaultValues: {
       count: 1,
-      deliveryCompany: DELIVERY_COMPANIES_IDS.CDEK,
+      deliveryCompany: DeliveryCompaniesIds.CDEK,
       zip: null,
       address: null,
-      deliveryType: DELIVERY_TYPES.DELIVERY,
-      senderCityId: SENDER_CITY_IDS.SPB,
+      deliveryType: DeliveryTypes.DELIVERY,
+      senderCityId: SenderCityIds.SPB,
       city: null,
     },
   });
@@ -73,8 +70,17 @@ const CheckoutPage = (): JSX.Element => {
 
   const count = Number(watch('count'));
 
-  const { deliveryCompany, zip: zipCode, address, city } = watch([
+  const {
+    deliveryCompany,
+    deliveryType,
+    senderCityId,
+    zip: zipCode,
+    address,
+    city,
+  } = watch([
     'deliveryCompany',
+    'deliveryType',
+    'senderCityId',
     'zip',
     'address',
     'city',
@@ -82,40 +88,53 @@ const CheckoutPage = (): JSX.Element => {
 
   const customerData = watch(['name', 'email', 'phone']);
 
-  const isCDEKCompanySelected = deliveryCompany === DELIVERY_COMPANIES_IDS.CDEK;
-
-  const productSumKzt = count * productPriceKzt;
-  const productSumRub = count * productPriceRub;
+  const isCDEKCompanySelected = deliveryCompany === DeliveryCompaniesIds.CDEK;
 
   const [loading, setLoading] = useState(false);
-  const [cities, setCities] = useState([]);
-  const [deliveryPriceKzt, setDeliveryPriceKzt] = useState(0);
-  const [deliveryPriceRub, setDeliveryPriceRub] = useState(0);
-  const [deliveryPeriodMin, setDeliveryPeriodMin] = useState(0);
-  const [deliveryPeriodMax, setDeliveryPeriodMax] = useState(0);
+
+  const {
+    deliveryPriceKzt,
+    deliveryPriceRub,
+    deliveryPeriodMin,
+    deliveryPeriodMax,
+    deliveryErrorText,
+    loading: deliveryPriceLoading,
+  } = useDeliveryPrice({
+    cityUid: (city as ICDEKCityItem)?.uid,
+    deliveryType,
+    senderCityId,
+    zip: zipCode,
+    count,
+    isCDEKCompanySelected,
+  });
+
+  useEffect(() => {
+    if (deliveryErrorText) {
+      enqueueSnackbar(deliveryErrorText, {
+        variant: 'error',
+        persist: true,
+      });
+
+      setError('deliveryError', {
+        type: 'manual',
+        message: deliveryErrorText,
+      });
+    } else {
+      clearErrors('deliveryError');
+    }
+  }, [deliveryErrorText]);
+
+  const canRenderDeliveryInfo = deliveryPriceKzt > 0 && zipCode && city;
+
+  const {
+    productPriceKzt,
+    productPriceRub,
+    productSumKzt,
+    productSumRub,
+  } = useProductPrice(count);
 
   const totalSumKzt = productSumKzt + deliveryPriceKzt;
   const totalSumRub = productSumRub + deliveryPriceRub;
-
-  const canRenderDeliveryInfo =
-    deliveryPriceKzt > 0 && zipCode && city && address;
-
-  const onCDEKDestinationCitiesFetch = (event, value) => {
-    if (value.length >= 3) {
-      fetchCityList(value)
-        .then((cities) => {
-          setCities(cities);
-        })
-        .catch(() => {
-          enqueueSnackbar(
-            'Ошибка при загрузке списка городов, пожалуйста попробуйте позже',
-            {
-              variant: 'error',
-            }
-          );
-        });
-    }
-  };
 
   const onSubmit = (data) => {
     const { city, deliveryType, address, zip, senderCityId } = data;
@@ -201,25 +220,10 @@ const CheckoutPage = (): JSX.Element => {
     }
   };
 
-  useEffect(() => {
-    if (isCDEKCompanySelected === false) {
-      if (count <= 32) {
-        setDeliveryPriceKzt(KAZPOST_DELIVERY_PRICE.KZT);
-        setDeliveryPriceRub(KAZPOST_DELIVERY_PRICE.RUB);
-      } else {
-        setDeliveryPriceKzt(KAZPOST_DELIVERY_PRICE.KZT * 2);
-        setDeliveryPriceRub(KAZPOST_DELIVERY_PRICE.RUB * 2);
-      }
-      if (count > maximumAvailableCount) {
-        setValue('count', maximumAvailableCount);
-      }
-    }
-  }, [isCDEKCompanySelected, count]);
-
   const TotalText = canRenderDeliveryInfo ? (
     <>
-      {totalSumKzt} {CURRENCY_SYMBOLS.KZT} (~ {totalSumRub}{' '}
-      {CURRENCY_SYMBOLS.RUB})
+      {totalSumKzt} {CurrencySymbols.KZT}
+      (~ {totalSumRub} {CurrencySymbols.RUB})
     </>
   ) : (
     '-'
@@ -228,14 +232,14 @@ const CheckoutPage = (): JSX.Element => {
   return (
     <OrderLayout title="Оформление заказа">
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
           <Paper className="w-full mb-10 py-10 px-2 sm:px-6" elevation={3}>
             <div className="flex flex-col sm:flex-row">
-              <div className="w-full sm:w-1/4 mb-4">
+              <div className="w-full sm:w-1/4 mb-0 sm:mb-4 pr-0 sm:pr-4">
                 <img
-                  alt=""
-                  className="mx-auto sm:mx-0"
-                  src="/images/new-design.png"
+                  alt="Алтайсорбент"
+                  className="mx-auto sm:mx-0 border"
+                  src="/images/altaysorbent.jpg"
                   style={{
                     maxHeight: '155px',
                     width: 'auto',
@@ -257,7 +261,7 @@ const CheckoutPage = (): JSX.Element => {
                       <RemoveIcon />
                     </IconButton>
 
-                    <Box width="60px">
+                    <Box width="70px">
                       <Controller
                         control={control}
                         defaultValue={1}
@@ -288,23 +292,23 @@ const CheckoutPage = (): JSX.Element => {
                   </div>
 
                   <div className="flex items-center">
-                    {productPriceKzt} {CURRENCY_SYMBOLS.KZT} (~{' '}
-                    {productPriceRub} {CURRENCY_SYMBOLS.RUB})
+                    {productPriceKzt} {CurrencySymbols.KZT} (~ {productPriceRub}{' '}
+                    {CurrencySymbols.RUB})
                   </div>
                 </div>
 
                 <div className="pt-4 flex justify-between border-t items-end">
                   <div className="w-full">
                     <div className="text-right">
-                      {count}шт × {productPriceKzt} {CURRENCY_SYMBOLS.KZT} ={' '}
-                      {productSumKzt} {CURRENCY_SYMBOLS.KZT}
+                      {count}шт × {productPriceKzt} {CurrencySymbols.KZT} ={' '}
+                      {productSumKzt} {CurrencySymbols.KZT}
                     </div>
 
                     <div className="text-xl mt-4 flex flex-col text-left sm:text-right sm:flex-row sm:justify-end">
                       Итого (без учета доставки)
                       <span className="sm:ml-4 font-semibold w-1/2 sm:w-1/3">
-                        {productSumKzt} {CURRENCY_SYMBOLS.KZT} (~{' '}
-                        {productSumRub} {CURRENCY_SYMBOLS.RUB})
+                        {productSumKzt} {CurrencySymbols.KZT} (~ {productSumRub}{' '}
+                        {CurrencySymbols.RUB})
                       </span>
                     </div>
                   </div>
@@ -312,7 +316,7 @@ const CheckoutPage = (): JSX.Element => {
               </div>
             </div>
             <div className="w-full mt-4">
-              <MaximumAmountNotice />
+              <MaximumAmountNotice className="text-lg" />
             </div>
           </Paper>
           <Paper className="w-full mb-10 p-4" elevation={3}>
@@ -395,13 +399,13 @@ const CheckoutPage = (): JSX.Element => {
                   <RadioGroup row>
                     <FormControlLabel
                       control={<Radio color="primary" />}
-                      label={`${DELIVERY_COMPANIES.CDEK} (Россия и страны СНГ)`}
-                      value={DELIVERY_COMPANIES_IDS.CDEK}
+                      label={`${DeliveryCompanies.CDEK} (Россия и страны СНГ)`}
+                      value={DeliveryCompaniesIds.CDEK}
                     />
                     <FormControlLabel
                       control={<Radio color="primary" />}
-                      label={`${DELIVERY_COMPANIES.KAZPOST} (Казахстан)`}
-                      value={DELIVERY_COMPANIES_IDS.KAZPOST}
+                      label={`${DeliveryCompanies.KAZPOST} (Казахстан)`}
+                      value={DeliveryCompaniesIds.KAZPOST}
                     />
                   </RadioGroup>
                 }
@@ -413,50 +417,49 @@ const CheckoutPage = (): JSX.Element => {
 
             <div className="py-4">
               {isCDEKCompanySelected ? (
-                <CDEKDeliveryForm
-                  cities={cities}
-                  count={count}
-                  onDeliveryPeriodMaxChange={setDeliveryPeriodMax}
-                  onDeliveryPeriodMinChange={setDeliveryPeriodMin}
-                  onDeliveryPriceKztChange={setDeliveryPriceKzt}
-                  onDeliveryPriceRubChange={setDeliveryPriceRub}
-                  onDestinationCitiesFetch={onCDEKDestinationCitiesFetch}
-                  onError={(message) => {
-                    enqueueSnackbar(message, {
-                      variant: 'error',
-                    });
-                  }}
-                />
+                <CDEKDeliveryForm />
               ) : (
                 <KazPostDeliveryForm />
               )}
+              {deliveryErrorText && (
+                <div className="text-red-600 text-lg">{deliveryErrorText}</div>
+              )}
             </div>
-            {canRenderDeliveryInfo && (
-              <div className="py-4">
-                <p>
-                  до {zipCode}, г.
-                  {(city as ICDEKCityItem)?.name || city}, {address} -{' '}
-                  {deliveryPriceKzt}
-                  {CURRENCY_SYMBOLS.KZT} (~{deliveryPriceRub}
-                  {CURRENCY_SYMBOLS.RUB})
-                </p>
-                {isCDEKCompanySelected && (
-                  <p>
-                    (приблизительное время в пути от {deliveryPeriodMin} - до{' '}
-                    {deliveryPeriodMax} дня/дней)
-                  </p>
+
+            {deliveryPriceLoading ? (
+              <div className="w-full sm:w-1/2 py-4 flex justify-center">
+                <CircularProgress color="secondary" />
+              </div>
+            ) : (
+              <>
+                {canRenderDeliveryInfo && (
+                  <div className="py-4">
+                    <p>
+                      до {zipCode}, г.
+                      {(city as ICDEKCityItem)?.name || city}, {address} -{' '}
+                      {deliveryPriceKzt}
+                      {CurrencySymbols.KZT} (~{deliveryPriceRub}
+                      {CurrencySymbols.RUB})
+                    </p>
+                    {isCDEKCompanySelected && (
+                      <p>
+                        (приблизительное время в пути от {deliveryPeriodMin} -
+                        до {deliveryPeriodMax} дня/дней)
+                      </p>
+                    )}
+                  </div>
                 )}
-              </div>
-            )}
-            {canRenderDeliveryInfo && (
-              <div className="py-4 font-semibold text-xl">
-                Итого с учетом доставки: {TotalText}
-              </div>
+                {canRenderDeliveryInfo && (
+                  <div className="py-4 font-semibold text-xl">
+                    Итого с учетом доставки: {TotalText}
+                  </div>
+                )}
+              </>
             )}
           </Paper>
 
           <Paper className="w-full mb-10 p-4" elevation={3}>
-            <h3 className="text-2xl leading-none mb-4">Способ оплаты</h3>
+            <h3 className="text-2xl leading-none mb-4">Оплата</h3>
             <div className="w-full flex flex-col sm:flex-row justify-between">
               <FormControl component="fieldset">
                 <FormLabel focused={false} required>
@@ -481,7 +484,7 @@ const CheckoutPage = (): JSX.Element => {
 
           <div className="w-full">
             <div className="w-full">
-              <p className="text-red-900 my-4">
+              <p className="text-red-900 my-4 text-lg">
                 Сумма оплачивается в валюте KZT (Казахстанский тенге).
               </p>
 

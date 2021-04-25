@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { AxiosResponse } from 'axios';
 import { useSnackbar } from 'notistack';
 
 import {
@@ -14,81 +13,53 @@ import {
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+import { useCDEKDeliveryPrice } from 'hooks/useCDEKDeliveryPrice';
+
 import { fetchCityList } from 'services/cdekApi';
-import { getDeliveryPrice } from 'services/altayApi';
 
 import {
-  CURRENCY_SYMBOLS,
-  DELIVERY_TYPES,
+  CurrencySymbols,
+  DeliveryTypes,
   maximumAvailableCount,
   minimumAvailableCount,
-  SENDER_CITY_IDS,
+  SenderCityIds,
 } from 'constants/Product';
 
-import { IDestinationCity } from 'interfaces/DestinationCity.interface';
-
 const DeliveryCalculator = (): JSX.Element => {
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState(null);
   const [zipCodes, setZipCodes] = useState([]);
   const [zipCode, setZipCode] = useState(null);
   const [count, setCount] = useState(minimumAvailableCount);
-  const [deliveryType, setDeliveryType] = useState(DELIVERY_TYPES.DELIVERY);
-  const [senderCity, setSenderCity] = useState(SENDER_CITY_IDS.SPB);
-  const [loading, setLoading] = useState(false);
+  const [deliveryType, setDeliveryType] = useState(DeliveryTypes.DELIVERY);
+  const [senderCity, setSenderCity] = useState(SenderCityIds.SPB);
 
-  const [deliveryPriceKzt, setDeliveryPriceKzt] = useState(0);
-  const [deliveryPriceRub, setDeliveryPriceRub] = useState(0);
-  const [deliveryPeriodMin, setDeliveryPeriodMin] = useState(0);
-  const [deliveryPeriodMax, setDeliveryPeriodMax] = useState(0);
+  const {
+    deliveryPriceKzt,
+    deliveryPriceRub,
+    deliveryPeriodMin,
+    deliveryPeriodMax,
+    deliveryErrorText,
+    loading,
+  } = useCDEKDeliveryPrice({
+    cityUid: city?.uid,
+    deliveryType,
+    senderCityId: senderCity,
+    zip: zipCode,
+    count,
+  });
 
   useEffect(() => {
-    if (count && zipCode && city && deliveryType && senderCity) {
-      setLoading(true);
-      getDeliveryPrice({
-        senderCityId: senderCity,
-        receiverCityId: city.uid,
-        quantity: count,
-        tariffId: deliveryType,
-      })
-        .then(({ data }: AxiosResponse) => {
-          const { result, error } = data;
-          if (result as IDestinationCity) {
-            setDeliveryPriceKzt(Math.ceil(result.priceByCurrency));
-            setDeliveryPriceRub(Math.ceil(result.price));
-
-            setDeliveryPeriodMin(result.deliveryPeriodMin);
-            setDeliveryPeriodMax(result.deliveryPeriodMax);
-          }
-          if (error) {
-            const text = error?.[0]?.text;
-            if (text) {
-              enqueueSnackbar(text, {
-                variant: 'error',
-              });
-            } else {
-              enqueueSnackbar(
-                'Ошибка при расчете доставки, пожалуйста попробуйте позже',
-                {
-                  variant: 'error',
-                }
-              );
-            }
-          }
-        })
-        .catch(() => {
-          enqueueSnackbar(
-            'Ошибка при расчете доставки, пожалуйста попробуйте позже',
-            {
-              variant: 'error',
-            }
-          );
-        })
-        .finally(() => setLoading(false));
+    if (deliveryErrorText) {
+      const id = enqueueSnackbar(deliveryErrorText, {
+        variant: 'error',
+        persist: true,
+        onClick: () => closeSnackbar(id),
+      });
     }
-  }, [count, zipCode, city, deliveryType, senderCity, enqueueSnackbar]);
+  }, [deliveryErrorText]);
 
   useEffect(() => {
     if (!city) {
@@ -162,12 +133,12 @@ const DeliveryCalculator = (): JSX.Element => {
           <FormControlLabel
             control={<Radio color="primary" />}
             label="Санкт-Петербург (Россия)"
-            value={SENDER_CITY_IDS.SPB}
+            value={SenderCityIds.SPB}
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             label="Усть-Каменогорск (Казахстан)"
-            value={SENDER_CITY_IDS.UKG}
+            value={SenderCityIds.UKG}
           />
         </RadioGroup>
       </div>
@@ -235,12 +206,12 @@ const DeliveryCalculator = (): JSX.Element => {
           <FormControlLabel
             control={<Radio color="primary" />}
             label="Доставка до квартиры"
-            value={DELIVERY_TYPES.DELIVERY}
+            value={DeliveryTypes.DELIVERY}
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             label="Самовывоз со склада"
-            value={DELIVERY_TYPES.WAREHOUSE}
+            value={DeliveryTypes.WAREHOUSE}
           />
         </RadioGroup>
       </div>
@@ -253,8 +224,8 @@ const DeliveryCalculator = (): JSX.Element => {
               <div className="w-full mt-4 text-green-800">
                 <p>
                   Стоимость доставки составит - {deliveryPriceKzt}{' '}
-                  {CURRENCY_SYMBOLS.KZT} (~{deliveryPriceRub}{' '}
-                  {CURRENCY_SYMBOLS.RUB})
+                  {CurrencySymbols.KZT} (~{deliveryPriceRub}{' '}
+                  {CurrencySymbols.RUB})
                 </p>
                 <p>
                   Срок доставки от {deliveryPeriodMin} до {deliveryPeriodMax}{' '}

@@ -1,6 +1,7 @@
 import React from 'react';
-import Layout from 'components/layouts/page';
+
 import Meta from 'components/Meta';
+import Layout from 'layouts/Page';
 
 const UsagePage = (): JSX.Element => {
   const title = 'Показания к применению';

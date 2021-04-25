@@ -1,6 +1,6 @@
 import React from 'react';
-import Layout from 'components/layouts/page';
 import Meta from 'components/Meta';
+import Layout from 'layouts/Page';
 
 const CertificationPage = (): JSX.Element => {
   const title = 'Сертификация';
