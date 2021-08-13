@@ -12,4 +12,6 @@ export interface IOrderForm extends ICustomer {
   senderCityId: string;
 
   deliveryError?: string;
+
+  promoCode: string | null;
 }
