@@ -4,22 +4,35 @@ import {
 } from 'constants/Product';
 
 interface IState {
+  isPromoCodeValid: boolean;
   productPriceKzt: number;
   productPriceRub: number;
   productSumKzt: number;
   productSumRub: number;
 }
-export const useProductPrice = (count: number): IState => {
-  const getProductPrice = (price: number, count: number): number => {
-    return count > 16 ? Math.ceil(price * 0.9) : price;
+const PROMO_CODE = process.env.NEXT_PUBLIC_PROMO_CODE;
+
+export const useProductPrice = (
+  count: number,
+  promoCode: string | null = null
+): IState => {
+  const getProductPrice = (price: number): number => {
+    const priceWithPromoCode = isPromoCodeValid ? price * 0.92 : price;
+    return Math.ceil(
+      count > 16 ? priceWithPromoCode * 0.9 : priceWithPromoCode
+    );
   };
 
-  const productPriceKzt = getProductPrice(baseProductPriceKzt, count);
-  const productPriceRub = getProductPrice(baseProductPriceRub, count);
+  const isPromoCodeValid =
+    promoCode && promoCode.toLowerCase().trim() === PROMO_CODE;
+
+  const productPriceKzt = getProductPrice(baseProductPriceKzt);
+  const productPriceRub = getProductPrice(baseProductPriceRub);
   const productSumKzt = count * productPriceKzt;
   const productSumRub = count * productPriceRub;
 
   return {
+    isPromoCodeValid,
     productPriceKzt,
     productPriceRub,
     productSumKzt,

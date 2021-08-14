@@ -44,7 +44,7 @@ const Header = (): JSX.Element => {
   return (
     <nav className="w-full z-30 text-gray-700 sticky bg-white border-b top-0">
       <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4">
-        <div className="lg:pl-0 pl-2 flex items-center order-1">
+        <div className="pl-2 flex items-center order-1">
           <Link href="/">
             <a>
               <Logo className="no-underline cursor-pointer hover:no-underline text-2xl lg:text-4xl" />
