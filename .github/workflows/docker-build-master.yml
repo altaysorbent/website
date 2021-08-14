@@ -36,5 +36,6 @@ jobs:
           build-args: |
             NEXT_PUBLIC_API_URL=https://api.altaysorbent.org
             NEXT_PUBLIC_DOMAIN_URL=https://altaysorbent.org
+            NEXT_PUBLIC_PROMO_CODE=элемент
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
