@@ -505,7 +505,7 @@ const CheckoutPage = (): JSX.Element => {
                 />
               </FormControl>
 
-              <div>
+              <div className="leading-none">
                 <p className="mb-2">Мы принимаем платежи с карт:</p>
                 <img
                   alt="Visa, Mastercard, Сбербан Онлайн, American Express"
