@@ -9,7 +9,8 @@ const UsagePage = (): JSX.Element => {
   const title = 'Подтверждение заказа';
 
   useEffect(() => {
-    const { m } = router.query;
+    const urlSearchParams = new URLSearchParams(router.asPath.split('?').pop());
+    const m = urlSearchParams.get('m');
     const orderIdValue = parseInt(m as string, 10);
 
     if (!(orderIdValue > 0)) {
