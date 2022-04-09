@@ -26,17 +26,6 @@ const ContactsPage = (): JSX.Element => {
             - ежедневно с 10:00 до 20:00 по Москве
           </p>
           <p className="py-1">
-            Консультации по телефону по будням с 11:00 до 20:00 -{' '}
-            <span className="text-green-800">
-              <FontAwesomeIcon
-                className="mx-2"
-                height={16}
-                icon={faMobileAlt}
-              />
-              <a href="tel:+79956254555">+7 (995) 625-45-55</a>
-            </span>{' '}
-          </p>
-          <p>
             Консультации по телефону или WhatsApp по будням с 7:00 до 14:00 по
             Москве:
             <span className="text-green-800">
@@ -49,35 +38,17 @@ const ContactsPage = (): JSX.Element => {
             </span>
           </p>
         </div>
-        <h4 className="text-2xl font-bold mb-2">Российская Федерация</h4>
-        <div className="ml-4 mb-4">
-          <p>
-            <b>ИП Садоян Роман Андреевич</b>
-          </p>
-          <p>ОГРН: 320784700145055</p>
-          <p>
-            Телефон:{' '}
-            <span className="text-green-800">
-              <FontAwesomeIcon
-                className="mx-2"
-                height={16}
-                icon={faMobileAlt}
-              />
-              <a href="tel:+79956254555">+7 (995) 625-45-55</a>
-            </span>{' '}
-          </p>
-        </div>
-        <h4 className="text-2xl font-bold mb-2">Республика Казахстан</h4>
-        <div className="ml-4">
-          <p>
+
+        <div>
+          <p className="py-1">
             <b>Товарищество с ограниченной ответственностью «АКТАС»</b>
           </p>
-          <p>БИН: 921240000388</p>
+          <p className="py-1">БИН: 921240000388</p>
           <p>
             Адрес: Республика Казахстан, г.Усть-Каменогорск, проспект Ауэзова,
             14/1, офис 306
           </p>
-          <p>
+          <p className="py-1">
             Телефон:{' '}
             <span className="text-green-800">
               <FontAwesomeIcon
@@ -88,7 +59,7 @@ const ContactsPage = (): JSX.Element => {
               <a href="tel:+77779898998">+7 (777) 989-89-98</a>
             </span>
           </p>
-          <p>
+          <p className="py-1">
             Отдел производства - ТОО «Арника»:
             <span className="text-green-800">
               <FontAwesomeIcon

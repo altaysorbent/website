@@ -1,7 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
-import { Button } from '@material-ui/core';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import Meta from 'components/Meta';
 import Description from 'components/Description';
@@ -48,17 +45,17 @@ const BuyPage = (): JSX.Element => {
                 </b>
               </div>
             </div>
-
-            <Link href="/checkout">
-              <Button
-                color="primary"
-                size="large"
-                startIcon={<ShoppingCartIcon />}
-                variant="contained"
-              >
-                В корзину
-              </Button>
-            </Link>
+            <div className="font-semibold text-red-900">
+              По техническим причинам покупка на сайте временно приостановлена!
+            </div>
+            <div>
+              По всем вопросам, в том числе по вопросам приобритения, пишите в
+              <br />
+              Whatsapp{' '}
+              <a className="text-green-700" href="https://wa.me/77779898998">
+                +7 (777) 989-89-98
+              </a>
+            </div>
           </div>
         </div>
         <div className="w-full">
