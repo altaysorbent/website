@@ -1,7 +1,7 @@
 export const productName = 'Алтайсорбент 1г/20 шт.';
 export const minimumAvailableCount = 1;
 export const maximumAvailableCount = 64;
-export const productPriceKzt = 700;
+export const productPriceKzt = 950;
 export const productPriceRub = 125;
 export const currencyCode = 'KZT';
 export const defaultProductId = 20;
