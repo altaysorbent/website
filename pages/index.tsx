@@ -11,7 +11,7 @@ const IndexPage = (): JSX.Element => {
       <Meta title="Главная" />
       <section id="sorbent">
         <div className="py-10">
-          <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center text-white">
+          <div className="container max-w-6xl px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center text-white">
             <div className="w-full md:w-1/2 text-center md:text-left">
               <h1 className="mb-4 text-5xl font-bold leading-tight">
                 Алтайсорбент - здоровья важный элемент!
@@ -95,7 +95,7 @@ const IndexPage = (): JSX.Element => {
         </div>
       </section>
       <section className="bg-white border-b py-8" id="specification">
-        <div className="container mx-auto">
+        <div className="container max-w-6xl mx-auto">
           <div className="flex flex-wrap flex-col-reverse md:flex-row">
             <div className="w-full md:w-2/3 p-6">
               <h3 className="text-3xl font-bold leading-none mb-3">
@@ -160,7 +160,7 @@ const IndexPage = (): JSX.Element => {
       </section>
 
       <section className="bg-white py-8 border-b">
-        <div className="container mx-auto px-2 pt-4">
+        <div className="container max-w-6xl mx-auto px-2 pt-4">
           <div className="flex flex-wrap flex-col-reverse md:flex-row">
             <div className="w-full md:w-2/3 p-6">
               <h3 className="w-full my-2 text-3xl font-bold leading-none text-center">

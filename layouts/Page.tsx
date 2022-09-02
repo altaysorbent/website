@@ -10,9 +10,7 @@ const PageLayout = ({ children }: Props): JSX.Element => {
   return (
     <MainLayout>
       <div className="flex-grow bg-white py-8">
-        <div className="container max-w-screen-xl mx-auto h-full">
-          {children}
-        </div>
+        <div className="container max-w-6xl mx-auto h-full">{children}</div>
       </div>
     </MainLayout>
   );
