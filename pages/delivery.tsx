@@ -58,7 +58,11 @@ const UsagePage = (): JSX.Element => {
             Заказ можно оплатить банковской картой онлайн через платежную
             систему PAYBOX
           </p>
-          <p>К оплате принимаются карты VISA, MasterCard, American Express</p>
+          <p>К оплате принимаются карты VISA, MasterCard, МИР</p>
+          <p className="text-red-900">
+            Оплата картами российских банков доступна только с помощью платежной
+            системы МИР
+          </p>
         </div>
       </div>
     </Layout>

@@ -505,13 +505,17 @@ const CheckoutPage = (): JSX.Element => {
                 />
               </FormControl>
 
-              <div className="leading-none">
+              <div className="leading-none w-full sm:w-1/2 flex flex-col items-center">
                 <p className="mb-2">Мы принимаем платежи с карт:</p>
                 <img
-                  alt="Visa, Mastercard, Сбербан Онлайн, American Express"
+                  alt="Visa, Mastercard, МИР"
                   src="/images/cards.png"
                   style={{ width: '300px' }}
                 />
+                <p className="text-red-900 leading-5 text-center">
+                  Оплата картами российских банков доступна только с помощью
+                  платежной системы МИР
+                </p>
               </div>
             </div>
           </Paper>
