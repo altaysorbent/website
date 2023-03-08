@@ -15,6 +15,7 @@ interface IDeliveryPrice {
   receiverCityId: number;
   quantity: number;
   tariffId: string;
+  deliveryCompany: string;
 }
 
 const getDeliveryPrice = ({
@@ -22,12 +23,14 @@ const getDeliveryPrice = ({
   receiverCityId,
   quantity,
   tariffId,
+  deliveryCompany,
 }: IDeliveryPrice): Promise<void | AxiosResponse> => {
   const params = new URLSearchParams();
   params.append('senderCityId', senderCityId);
   params.append('receiverCityId', `${receiverCityId}`);
   params.append('tariffId', tariffId);
   params.append('quantity', `${quantity}`);
+  params.append('deliveryCompany', deliveryCompany);
 
   return altayApi
     .get(`/delivery/calculate?${params.toString()}`)

@@ -34,7 +34,7 @@ const UsagePage = (): JSX.Element => {
               {KazPostDeliveryPrice.KZT}
               {CurrencySymbols.KZT}
             </b>{' '}
-            за каждые 32 штуки до почтового отделения.
+            за каждые 2 блока до почтового отделения.
           </p>
           <div className="mb-2">
             <MaximumAmountNotice />

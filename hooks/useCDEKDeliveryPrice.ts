@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AxiosResponse } from 'axios';
 
 import { getDeliveryPrice } from 'services/altayApi';
+import { DeliveryCompaniesIds } from 'constants/Product';
 
 interface IState {
   deliveryPriceKzt: number;
@@ -48,6 +49,7 @@ export const useCDEKDeliveryPrice = ({
         receiverCityId: cityUid,
         quantity: count,
         tariffId: deliveryType,
+        deliveryCompany: DeliveryCompaniesIds.CDEK,
       })
         .then(({ data }: AxiosResponse) => {
           const { result, error } = data;

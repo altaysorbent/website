@@ -39,7 +39,7 @@ const BuyPage = (): JSX.Element => {
           <div className="w-full sm:w-2/3 text-xl text-center sm:text-left">
             <div className="mb-4">
               <div className="font-semibold mb-2">
-                Стоимость товара (без учета доставки)
+                Стоимость блока (16 пачек) (без учета доставки)
               </div>
               <div className="font-bold text-green-700">
                 <b>
