@@ -17,8 +17,6 @@ import {
   TextField,
 } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/styles';
-
 import { Add as AddIcon, Remove as RemoveIcon } from '@material-ui/icons';
 
 import {
@@ -45,20 +43,8 @@ import { IOrderForm } from 'interfaces/OrderForm.interface';
 
 import { createOrder } from 'services/altayApi';
 
-const useStyles = makeStyles(() => ({
-  validPromoCode: {
-    '& input:valid + fieldset': {
-      borderColor: 'green',
-    },
-    '& input:valid:focus + fieldset': {
-      borderColor: 'green',
-    },
-  },
-}));
-
 const CheckoutPage = (): JSX.Element => {
   const { enqueueSnackbar } = useSnackbar();
-  const classes = useStyles();
 
   const methods = useForm<IOrderForm>({
     defaultValues: {
@@ -149,7 +135,6 @@ const CheckoutPage = (): JSX.Element => {
     productPriceRub,
     productSumKzt,
     productSumRub,
-    isPromoCodeValid,
   } = useProductPrice(count, promoCode);
 
   const totalSumKzt = productSumKzt + deliveryPriceKzt;
@@ -319,22 +304,10 @@ const CheckoutPage = (): JSX.Element => {
                 <div className="pt-4 flex justify-between border-t items-end">
                   <div className="w-full">
                     <div className="flex flex-row">
-                      <div className="flex w-full sm:w-2/3 justify-end">
-                        <TextField
-                          className={
-                            isPromoCodeValid ? classes.validPromoCode : ''
-                          }
-                          color="secondary"
-                          inputRef={register}
-                          name="promoCode"
-                          placeholder="Промокод"
-                          size="small"
-                          variant="outlined"
-                        />
-                      </div>
-                      <div className="flex w-full sm:w-1/3 justify-end items-center">
-                        {count}шт × {productPriceKzt} {CurrencySymbols.KZT} ={' '}
-                        {productSumKzt} {CurrencySymbols.KZT}
+                      <div className="flex w-full justify-end items-center">
+                        {count} × {productPriceKzt} {CurrencySymbols.KZT} ={' '}
+                        {productSumKzt}
+                        {CurrencySymbols.KZT}
                       </div>
                     </div>
 

@@ -6,16 +6,12 @@ interface IProps {
   className?: string;
 }
 const MaximumAmountNotice = ({ className = '' }: IProps): JSX.Element => (
-  <div className={`${className} text-red-900`}>
-    <p>
-      Максимально возможное количество упаковок для заказа -{' '}
-      {maximumAvailableCount} штуки
+  <div className={`${className} `}>
+    <p className="text-red-900">
+      Максимально возможное количество блоков для заказа -{' '}
+      {maximumAvailableCount} блоков
     </p>
-    <p>
-      При заказе более 16 упаковок - предоставляется <b>10% скидка</b>, также
-      после заказа будет направлен <b>промокод со скидкой 8%</b> для последующих
-      заказов
-    </p>
+    <p>В одном блоке 16 пачек, в каждой пачке 20 пакетиков по 1 грамму</p>
   </div>
 );
 
