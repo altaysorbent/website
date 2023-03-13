@@ -34,7 +34,7 @@ const DeliveryCalculator = (): JSX.Element => {
   const [zipCode, setZipCode] = useState(null);
   const [count, setCount] = useState(minimumAvailableCount);
   const [deliveryType, setDeliveryType] = useState(DeliveryTypes.DELIVERY);
-  const [senderCity, setSenderCity] = useState(SenderCityIds.SPB);
+  const [senderCity, setSenderCity] = useState(SenderCityIds.UKG);
 
   const {
     deliveryPriceKzt,
@@ -130,11 +130,6 @@ const DeliveryCalculator = (): JSX.Element => {
           row
           onChange={handleSenderCityChange}
         >
-          <FormControlLabel
-            control={<Radio color="primary" />}
-            label="Санкт-Петербург (Россия)"
-            value={SenderCityIds.SPB}
-          />
           <FormControlLabel
             control={<Radio color="primary" />}
             label="Усть-Каменогорск (Казахстан)"

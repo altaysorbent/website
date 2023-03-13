@@ -78,18 +78,13 @@ const CDEKDeliveryForm = (): JSX.Element => {
               <RadioGroup row>
                 <FormControlLabel
                   control={<Radio color="primary" />}
-                  label="Санкт-Петербург"
-                  value={SenderCityIds.SPB}
-                />
-                <FormControlLabel
-                  control={<Radio color="primary" />}
                   label="Усть-Каменогорск"
                   value={SenderCityIds.UKG}
                 />
               </RadioGroup>
             }
             control={control}
-            defaultValue={SenderCityIds.SPB}
+            defaultValue={SenderCityIds.UKG}
             name="senderCityId"
             rules={{ required: true }}
           />
