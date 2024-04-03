@@ -98,7 +98,6 @@ const CheckoutPage = (): JSX.Element => {
 
   const {
     deliveryPriceKzt,
-    deliveryPriceRub,
     deliveryPeriodMin,
     deliveryPeriodMax,
     deliveryErrorText,
@@ -130,15 +129,9 @@ const CheckoutPage = (): JSX.Element => {
 
   const canRenderDeliveryInfo = deliveryPriceKzt > 0 && zipCode && city;
 
-  const {
-    productPriceKzt,
-    productPriceRub,
-    productSumKzt,
-    productSumRub,
-  } = useProductPrice(count, promoCode);
+  const { productPriceKzt, productSumKzt } = useProductPrice(count, promoCode);
 
   const totalSumKzt = productSumKzt + deliveryPriceKzt;
-  const totalSumRub = productSumRub + deliveryPriceRub;
 
   const onSubmit = (data) => {
     const { city, deliveryType, address, zip, senderCityId } = data;
@@ -227,7 +220,6 @@ const CheckoutPage = (): JSX.Element => {
   const TotalText = canRenderDeliveryInfo ? (
     <>
       {totalSumKzt} {CurrencySymbols.KZT}
-      (~ {totalSumRub} {CurrencySymbols.RUB})
     </>
   ) : (
     '-'
@@ -296,8 +288,7 @@ const CheckoutPage = (): JSX.Element => {
                   </div>
 
                   <div className="flex items-center">
-                    {productPriceKzt} {CurrencySymbols.KZT} (~ {productPriceRub}{' '}
-                    {CurrencySymbols.RUB})
+                    {productPriceKzt} {CurrencySymbols.KZT}
                   </div>
                 </div>
 
@@ -314,8 +305,7 @@ const CheckoutPage = (): JSX.Element => {
                     <div className="text-xl mt-4 flex flex-col text-left sm:text-right sm:flex-row sm:justify-end">
                       Итого (без учета доставки)
                       <span className="sm:ml-4 font-semibold w-1/2 sm:w-1/3">
-                        {productSumKzt} {CurrencySymbols.KZT} (~ {productSumRub}{' '}
-                        {CurrencySymbols.RUB})
+                        {productSumKzt} {CurrencySymbols.KZT}
                       </span>
                     </div>
                   </div>
@@ -445,8 +435,7 @@ const CheckoutPage = (): JSX.Element => {
                       до {zipCode}, г.
                       {(city as ICDEKCityItem)?.name || city}, {address} -{' '}
                       {deliveryPriceKzt}
-                      {CurrencySymbols.KZT} (~{deliveryPriceRub}
-                      {CurrencySymbols.RUB})
+                      {CurrencySymbols.KZT}
                     </p>
                     {isCDEKCompanySelected && (
                       <p>
