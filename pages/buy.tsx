@@ -11,7 +11,6 @@ import {
   CurrencySymbols,
   productName,
   productPriceKzt,
-  productPriceRub,
 } from 'constants/Product';
 
 const BuyPage = (): JSX.Element => {
@@ -43,8 +42,7 @@ const BuyPage = (): JSX.Element => {
               </div>
               <div className="font-bold text-green-700">
                 <b>
-                  {productPriceKzt} {CurrencySymbols.KZT} (~ {productPriceRub}{' '}
-                  {CurrencySymbols.RUB})
+                  {productPriceKzt} {CurrencySymbols.KZT}
                 </b>
               </div>
             </div>
