@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 RUN rm -rf .env.local
 RUN yarn install
-RUN yarn add sharp
+RUN #yarn add sharp
 RUN yarn build
 
 FROM nginx:alpine
