@@ -49,7 +49,7 @@ const CheckoutPage = (): JSX.Element => {
   const methods = useForm<IOrderForm>({
     defaultValues: {
       count: 1,
-      deliveryCompany: DeliveryCompaniesIds.CDEK,
+      deliveryCompany: DeliveryCompaniesIds.KAZPOST,
       zip: null,
       address: null,
       deliveryType: DeliveryTypes.DELIVERY,
