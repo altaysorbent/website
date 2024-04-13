@@ -37,7 +37,7 @@ const kazPostDeliveryForm = (): JSX.Element => {
               required: 'Обязательно укажите индекс',
             })}
             name="zip"
-            placeholder="F02D8D5 или 070004"
+            placeholder="F02D8D5 или 070018"
             size="small"
             variant="outlined"
             fullWidth
