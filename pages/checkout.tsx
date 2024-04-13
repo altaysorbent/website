@@ -394,11 +394,11 @@ const CheckoutPage = (): JSX.Element => {
               <Controller
                 as={
                   <RadioGroup row>
-                    <FormControlLabel
-                      control={<Radio color="primary" />}
-                      label={`${DeliveryCompanies.CDEK} (Россия и страны СНГ)`}
-                      value={DeliveryCompaniesIds.CDEK}
-                    />
+                    {/*<FormControlLabel*/}
+                    {/*  control={<Radio color="primary" />}*/}
+                    {/*  label={`${DeliveryCompanies.CDEK} (Россия и страны СНГ)`}*/}
+                    {/*  value={DeliveryCompaniesIds.CDEK}*/}
+                    {/*/>*/}
                     <FormControlLabel
                       control={<Radio color="primary" />}
                       label={`${DeliveryCompanies.KAZPOST} (Казахстан)`}
