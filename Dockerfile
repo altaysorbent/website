@@ -5,16 +5,8 @@ WORKDIR /app
 COPY . .
 RUN rm -rf .env.local
 RUN npm install
-RUN #yarn add sharp
 RUN npm run build
 
-FROM nginx:alpine
-WORKDIR /usr/share/nginx/html
-# Remove default nginx static assets
-RUN rm -rf ./*
-# Copy static assets from builder stage
-COPY --from=builder /app/out .
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-# Containers run nginx with global directives and daemon off
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+
+CMD [ "npm", "run", "start" ]
