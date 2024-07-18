@@ -6,7 +6,7 @@ COPY . .
 RUN rm -rf .env.local
 RUN npm install
 RUN #yarn add sharp
-RUN npm build
+RUN npm run build
 
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
