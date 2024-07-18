@@ -40,8 +40,6 @@ import { ICDEKCityItem } from '@/lib/interfaces/CdekCityItem.interface';
 import { IOrderForm } from '@/lib/interfaces/OrderForm.interface';
 
 import { createOrder } from '@/lib/services/altayApi';
-import { Simulate } from 'react-dom/test-utils';
-import reset = Simulate.reset;
 
 const CheckoutPage = (): React.JSX.Element => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

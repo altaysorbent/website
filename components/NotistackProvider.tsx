@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import { SnackbarProvider } from 'notistack';
 import type { ReactNode } from 'react';
 
