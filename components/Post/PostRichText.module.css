@@ -1,0 +1,27 @@
+.richText {
+  text-align: justify;
+}
+
+.richText a {
+  @apply border-b border-green-700 text-green-700;
+}
+
+.richText ul {
+  @apply mb-8 ml-8 mt-4 list-inside list-disc;
+}
+
+.richText ul li {
+  @apply mb-2;
+}
+
+.richText ol {
+  @apply mb-8 mt-4 list-inside list-decimal;
+}
+
+.richText ol li {
+  @apply mb-2;
+}
+
+.richText img {
+  @apply mx-auto;
+}

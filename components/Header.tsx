@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Logo from '../assets/logo.svg';
+'use client';
 
-const Header = (): JSX.Element => {
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+
+export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
-    setShowMenu(!showMenu);
+    setShowMenu((value) => !value);
   };
 
   const menuElements = [
@@ -33,36 +35,40 @@ const Header = (): JSX.Element => {
   ];
   const menuItems = menuElements.map((item) => (
     <li className="mr-3 last:mr-0" key={item.href}>
-      <Link href={item.href}>
-        <a className="no-underline hover:text-underline cursor-pointer focus:outline-none">
-          {item.title}
-        </a>
+      <Link
+        className="hover:text-underline cursor-pointer no-underline focus:outline-none"
+        href={item.href}
+      >
+        {item.title}
       </Link>
     </li>
   ));
 
   return (
-    <nav className="w-full z-30 text-gray-700 sticky bg-white border-b top-0">
-      <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4">
-        <div className="pl-2 flex items-center order-1">
+    <nav className="sticky top-0 z-30 w-full border-b bg-white text-gray-700">
+      <div className="container mx-auto mt-0 flex w-full flex-wrap items-center justify-between py-4">
+        <div className="order-1 flex items-center pl-2">
           <Link href="/">
-            <a>
-              <Logo className="no-underline cursor-pointer hover:no-underline text-2xl lg:text-4xl" />
-            </a>
+            <Image
+              className="cursor-pointer text-2xl no-underline hover:no-underline lg:text-4xl"
+              width={198}
+              height={24}
+              src="/logo.svg"
+              alt="Altaysorbent"
+            />
           </Link>
         </div>
 
-        <div className="block lg:hidden pr-4 order-2 sm:order-3">
+        <div className="order-2 block pr-4 sm:order-3 lg:hidden">
           <button
-            className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-700 hover:border-teal-500 appearance-none focus:outline-none"
+            className="flex appearance-none items-center rounded border border-gray-600 px-3 py-2 text-gray-500 hover:border-teal-500 hover:text-gray-700 focus:outline-none"
             onClick={toggleMenu}
           >
             <svg
-              className="fill-current h-3 w-3"
+              className="h-3 w-3 fill-current"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title>Menu</title>
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
             </svg>
           </button>
@@ -70,18 +76,16 @@ const Header = (): JSX.Element => {
 
         <div
           className={[
-            'w-full flex-grow mt-2 bg-white p-4 z-20 order-3',
-            'lg:mt-0 lg:flex lg:items-center lg:w-auto lg:bg-transparent lg:p-0',
+            'z-20 order-3 mt-2 w-full flex-grow bg-white p-4',
+            'lg:mt-0 lg:flex lg:w-auto lg:items-center lg:bg-transparent lg:p-0',
             showMenu ? 'block text-gray-700' : 'hidden',
           ].join(' ')}
         >
-          <ul className="list-reset lg:flex justify-end flex-1 items-center text-lg">
+          <ul className="list-reset flex-1 items-center justify-end text-lg lg:flex">
             {menuItems}
           </ul>
         </div>
       </div>
     </nav>
   );
-};
-
-export default Header;
+}
