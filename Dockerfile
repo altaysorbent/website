@@ -1,6 +1,6 @@
-FROM node:lts-alpine3.12 AS builder
+FROM node:lts-alpine3.19 AS builder
 ARG NEXT_PUBLIC_API_URL=https://next.api.altaysorbent.org
-ARG NEXT_PUBLIC_PROMO_CODE=
+ARG NEXT_PUBLIC_PROMO_CODE=''
 WORKDIR /app
 COPY . .
 RUN rm -rf .env.local
