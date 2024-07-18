@@ -24,7 +24,7 @@ export const useProductPrice = (
   };
 
   const isPromoCodeValid =
-    promoCode && promoCode.toLowerCase().trim() === PROMO_CODE;
+    !!promoCode && promoCode.toLowerCase().trim() === PROMO_CODE;
 
   const productPriceKzt = getProductPrice(baseProductPriceKzt);
   const productPriceRub = getProductPrice(baseProductPriceRub);
