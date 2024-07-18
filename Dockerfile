@@ -4,9 +4,9 @@ ARG NEXT_PUBLIC_PROMO_CODE=
 WORKDIR /app
 COPY . .
 RUN rm -rf .env.local
-RUN yarn install
+RUN npm install
 RUN #yarn add sharp
-RUN yarn build
+RUN npm build
 
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
