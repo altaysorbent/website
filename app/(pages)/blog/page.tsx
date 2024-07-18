@@ -1,9 +1,7 @@
 import React from 'react';
-import { GetServerSidePropsResult, type Metadata } from 'next';
+import { type Metadata } from 'next';
 
 import PostItem from '@/components/Post/PostItem';
-
-import { IPost } from '@/lib/interfaces/Post.interface';
 
 import { getAllPostsForBlog } from '@/lib/services/contentful';
 import { getMeta } from '@/lib/meta';
