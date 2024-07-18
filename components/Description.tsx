@@ -1,5 +1,10 @@
+'use client';
+//  @todo make this component ssr compatible
 import React, { useState } from 'react';
-import { Box, Paper, Tab, Tabs } from '@material-ui/core';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -7,7 +12,7 @@ const TabPanel = (props) => {
   return (
     <div hidden={value !== index} {...other}>
       {value === index && (
-        <Box className="text-xl leading-relaxed p-4 pl-8 text-gray-700">
+        <Box className="p-4 pl-8 text-xl leading-relaxed text-gray-700">
           {children}
         </Box>
       )}
@@ -15,10 +20,10 @@ const TabPanel = (props) => {
   );
 };
 
-const Description = (): JSX.Element => {
+const Description = (): React.JSX.Element => {
   const [tabIndex, setTabIndex] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_event: Event, newValue: number) => {
     setTabIndex(newValue);
   };
 
@@ -78,7 +83,7 @@ const Description = (): JSX.Element => {
         <p>
           ТОО «Cityinfo.kz», 070018, Республика Казахстан, г. Усть-Каменогорск,
           ул. Беспалова 51, корпус 1, офис 211, телефон:{' '}
-          <a className="text-green-700 block" href="tel:+77779898998">
+          <a className="block text-green-700" href="tel:+77779898998">
             +7 (777) 989-89-98
           </a>
         </p>

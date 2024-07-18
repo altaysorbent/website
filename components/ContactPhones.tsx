@@ -1,9 +1,9 @@
 import React from 'react';
-import HeaderContactNumber from './HeaderContactNumber';
+import HeaderContactNumber from '@/components/HeaderContactNumber';
 
-const ContactPhones = (): JSX.Element => {
+const ContactPhones = (): React.JSX.Element => {
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center w-full bg-white ml-0 text-lg py-4">
+    <div className="ml-0 flex w-full flex-col items-center justify-center bg-white py-4 text-lg sm:flex-row">
       <div className="flex flex-col">
         <HeaderContactNumber />
       </div>

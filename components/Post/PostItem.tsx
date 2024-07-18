@@ -1,19 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { previewImageSizes } from 'constants/Post';
+import { previewImageSizes } from '@/lib/constants/Post';
 
-import PostRichText from 'components/Post/PostRichText';
+import PostRichText from '@/components/Post/PostRichText';
 
-import { IPost } from 'interfaces/Post.interface';
+import { IPost } from '@/lib/interfaces/Post.interface';
 
-import { getPostDate, getPostDay } from 'utils/Post';
+import { getPostDate, getPostDay } from './utils/Post';
 
 interface IProps {
   post: IPost;
 }
 
-const PostItem = ({ post }: IProps): JSX.Element => {
+const PostItem = ({ post }: IProps): React.JSX.Element => {
   const postDay = getPostDay(post.date);
   const postDate = getPostDate(post.date);
 
@@ -34,22 +34,20 @@ const PostItem = ({ post }: IProps): JSX.Element => {
       {hasPreviewImage && (
         <div className="mb-8">
           <Link href={postUrl}>
-            <a>
-              <img
-                alt={post.title}
-                height={previewImageSizes.height}
-                src={post.image.preview}
-                width={previewImageSizes.width}
-              />
-            </a>
+            <img
+              alt={post.title}
+              height={previewImageSizes.height}
+              src={post.image?.preview}
+              width={previewImageSizes.width}
+            />
           </Link>
         </div>
       )}
       <PostRichText className="mb-4" content={post.annotation} />
 
       <div className="font-medium">
-        <Link href={postUrl}>
-          <a className="mx-auto text-green-700">Читать далее →</a>
+        <Link className="mx-auto text-green-700" href={postUrl}>
+          Читать далее →
         </Link>
       </div>
     </article>

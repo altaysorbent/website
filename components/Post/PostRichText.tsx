@@ -1,6 +1,14 @@
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, Document } from '@contentful/rich-text-types';
-import styles from './PostRichText.module.scss';
+import {
+  documentToReactComponents,
+  type Options,
+} from '@contentful/rich-text-react-renderer';
+import {
+  BLOCKS,
+  type Document,
+  Inline,
+  ResourceLink,
+} from '@contentful/rich-text-types';
+import styles from './PostRichText.module.css';
 
 interface IProps {
   content: {
@@ -9,11 +17,14 @@ interface IProps {
   };
   className: string;
 }
-const PostRichText = ({ content, className = '' }: IProps): JSX.Element => {
-  const options = {
+const PostRichText = ({
+  content,
+  className = '',
+}: IProps): React.JSX.Element => {
+  const options: Options = {
     renderNode: {
       [BLOCKS.LIST_ITEM]: (node) => {
-        const UnTaggedChildren = documentToReactComponents(node, {
+        const UnTaggedChildren = documentToReactComponents(node as Document, {
           renderNode: {
             [BLOCKS.PARAGRAPH]: (node, children) => children,
             [BLOCKS.LIST_ITEM]: (node, children) => children,
@@ -25,7 +36,7 @@ const PostRichText = ({ content, className = '' }: IProps): JSX.Element => {
 
       [BLOCKS.EMBEDDED_ASSET]: (node) => {
         const img = content.links.assets.block.find(
-          (i) => i.sys.id === node.data.target.sys.id
+          (i: any) => i.sys.id === node.data.target.sys.id
         );
         return <img alt={img?.title} src={img?.url} />;
       },

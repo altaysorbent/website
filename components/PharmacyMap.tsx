@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import {
   Map as YMap,
   Placemark as YPlaceMark,
   YMaps,
   ZoomControl,
-} from 'react-yandex-maps';
-import * as contentful from 'contentful';
-import Spinner from 'components/Spinner';
+} from '@pbe/react-yandex-maps';
+
+import Spinner from '@/components/Spinner/Spinner';
+import { YMapsApi } from '@pbe/react-yandex-maps/typings/util/typing';
 
 interface IPLaceMarkProps {
   pharmacy: {
@@ -22,14 +25,14 @@ interface IPLaceMarkProps {
   };
 }
 
-const PlaceMark = (props: IPLaceMarkProps): JSX.Element => {
+const PlaceMark = (props: IPLaceMarkProps): React.JSX.Element => {
   const {
     pharmacy: { location, title, price, address, phone },
   } = props;
 
   const content = (
     <div>
-      <h4 className="text-lg font-bold mb-2">{title}</h4>
+      <h4 className="mb-2 text-lg font-bold">{title}</h4>
       <p>
         <b>Адрес:</b> {address}
       </p>
@@ -58,90 +61,104 @@ const PlaceMark = (props: IPLaceMarkProps): JSX.Element => {
   );
 };
 
-const Map = (props): JSX.Element => {
-  const [ymaps, setYmaps] = useState(null);
+interface IMapProps {
+  placeMarks: React.JSX.Element[];
+  bounds: number[][];
+}
+
+const Map = (
+  props: IMapProps = { bounds: [], placeMarks: [] }
+): React.JSX.Element => {
+  const [ymaps, setYmaps] = useState<YMapsApi | null>(null);
   const [showSpinner, setShowSpinner] = useState(true);
 
   const { placeMarks, bounds } = props;
 
-  const disableBehaviors = (ref) => {
+  const disableBehaviors = (ref: ymaps.Map) => {
     ref && ref.behaviors.disable(['scrollZoom', 'rightMouseButtonMagnifier']);
   };
 
-  const setCenter = (ref) => {
+  const setCenter = async (ref: ymaps.Map) => {
     if (ref && ymaps && bounds.length > 0) {
-      ref.setBounds(ymaps.util.bounds.fromPoints(bounds));
+      await ref.setBounds(ymaps.util.bounds.fromPoints(bounds));
     }
   };
 
   return (
     <>
-      <YMaps
-        query={{
-          load:
-            'Map,Placemark,control.ZoomControl,util.bounds,geoObject.addon.balloon',
-        }}
-      >
-        <YMap
-          defaultState={{
-            center: [49.945177, 82.612766],
-            zoom: 16,
-            controls: [],
-            behaviors: ['default', 'scrollZoom'],
-          }}
-          instanceRef={(ref) => {
-            disableBehaviors(ref);
-            setCenter(ref);
-          }}
-          style={{
+      <div className="relative w-full" style={{ height: '500px' }}>
+        <Spinner
+          containerStyle={{
+            position: 'absolute',
             width: '100%',
-            height: '500px',
+            height: '100%',
           }}
-          onLoad={(ymaps) => {
-            setYmaps(ymaps);
-            setShowSpinner(false);
+          show={showSpinner}
+        />
+        <YMaps
+          query={{
+            load: 'Map,Placemark,control.ZoomControl,util.bounds,geoObject.addon.balloon',
           }}
         >
-          <ZoomControl
-            options={{
-              size: 'small',
+          <YMap
+            defaultState={{
+              center: [49.945177, 82.612766],
+              zoom: 16,
+              controls: [],
+              behaviors: ['default', 'scrollZoom'],
             }}
-          />
-          {placeMarks}
-        </YMap>
-      </YMaps>
-      <Spinner containerStyle={{ height: '339px' }} show={showSpinner} />
+            instanceRef={(ref) => {
+              disableBehaviors(ref);
+              setCenter(ref);
+            }}
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+            onLoad={(ymaps: YMapsApi) => {
+              setYmaps(ymaps);
+              setShowSpinner(false);
+            }}
+          >
+            <ZoomControl
+              options={{
+                size: 'small',
+              }}
+            />
+            {placeMarks}
+          </YMap>
+        </YMaps>
+      </div>
     </>
   );
 };
 
-const client = contentful.createClient({
-  // This is the space ID. A space is like a project folder in Contentful terms
-  space: `57e4k2ca6fmc`,
-  // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-  accessToken: `Lh4LbfbNBL_vd6Vy22vMWSmiPiVdhYwenpfNzfyAyjg`,
-});
+export type TPharmacy = {
+  fields: {
+    title: string;
+    address: string;
+    phone: string;
+    price: number;
+    info: string;
+    location: {
+      lat: number;
+      lon: number;
+    };
+  };
+  sys: {
+    id: string;
+  };
+};
 
-const PharmacyMap = (): JSX.Element => {
-  const [pharmacies, setPharmacies] = useState([]);
-
-  useEffect(() => {
-    client
-      .getEntries({
-        content_type: 'pharmacy',
-      })
-      .then((entries) => {
-        setPharmacies(entries.items);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const bounds = [];
+export default function PharmacyMap({
+  pharmacies = [],
+}: {
+  pharmacies: TPharmacy[];
+}): React.JSX.Element {
+  const bounds: number[][] = [];
   const PlaceMarks = pharmacies.map((pharmacy) => {
     bounds.push([pharmacy.fields.location.lat, pharmacy.fields.location.lon]);
     return <PlaceMark key={pharmacy.sys.id} pharmacy={pharmacy.fields} />;
   });
   return <Map bounds={bounds} placeMarks={PlaceMarks} />;
-};
-
-export default PharmacyMap;
+}
