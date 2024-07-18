@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 
-function kazPostDeliveryForm() {
+function KazPostDeliveryForm() {
   const {
     register,
     formState: { errors },
@@ -18,7 +18,7 @@ function kazPostDeliveryForm() {
           </FormLabel>
           <TextField
             error={!!errors?.city}
-            helperText={errors?.city?.message}
+            helperText={errors?.city?.message as string}
             {...register('city', {
               required: 'Обязательно укажите населенный пункт',
             })}
@@ -35,7 +35,7 @@ function kazPostDeliveryForm() {
           </FormLabel>
           <TextField
             error={!!errors?.zip}
-            helperText={errors?.zip?.message}
+            helperText={errors?.zip?.message as string}
             {...register('zip', {
               required: 'Обязательно укажите индекс',
             })}
@@ -53,7 +53,7 @@ function kazPostDeliveryForm() {
         </FormLabel>
         <TextField
           error={!!errors?.address}
-          helperText={errors?.address?.message}
+          helperText={errors?.address?.message as string}
           {...register('address', {
             required: 'Обязательно укажите адрес',
           })}
@@ -71,4 +71,4 @@ function kazPostDeliveryForm() {
   );
 }
 
-export default kazPostDeliveryForm;
+export default KazPostDeliveryForm;
