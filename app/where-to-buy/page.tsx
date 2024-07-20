@@ -7,6 +7,8 @@ import { getClient } from '@/lib/services/contentful';
 
 export const metadata: Metadata = getMeta({ title: 'Где купить?' });
 
+export const dynamic = 'force-dynamic';
+
 export default async function WhereToBuyPage() {
   const client = getClient();
 
