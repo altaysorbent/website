@@ -12,6 +12,7 @@ import NotistackProvider from '@/components/NotistackProvider';
 import YandexMetrika from '@/components/YandexMetrika';
 
 import { Exo_2 } from 'next/font/google';
+import Chatra from '@/components/Chatra';
 
 const exo2 = Exo_2({
   weight: ['400', '500', '600', '700'],
@@ -42,6 +43,7 @@ export default function RootLayout({
                 <Footer />
               </div>
               <YandexMetrika />
+              <Chatra />
             </NotistackProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
