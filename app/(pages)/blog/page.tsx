@@ -6,6 +6,8 @@ import PostItem from '@/components/Post/PostItem';
 import { getAllPostsForBlog } from '@/lib/services/contentful';
 import { getMeta } from '@/lib/meta';
 
+export const dynamic = 'force-dynamic';
+
 const title = 'Блог Алтайсорбент';
 export const metadata: Metadata = getMeta({ title });
 
