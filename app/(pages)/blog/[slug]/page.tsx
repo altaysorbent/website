@@ -16,9 +16,16 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const slug = params.slug;
-  const { post } = await getPostAndMorePosts(slug);
-  return { title: post?.title };
+  try {
+    const slug = params.slug;
+    const { post } = await getPostAndMorePosts(slug);
+    return { title: post?.title };
+  } catch {
+    return {
+      title: 'Not Found',
+      description: 'The page you are looking for does not exist',
+    };
+  }
 }
 
 export default async function BlogPage({ params }: Props) {
