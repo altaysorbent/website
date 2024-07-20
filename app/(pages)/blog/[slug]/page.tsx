@@ -16,6 +16,8 @@ type Props = {
   params: { slug: string };
 };
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const slug = params.slug;
