@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { notFound } from 'next/navigation';
 import { postImageSizes } from '@/lib/constants/Post';
@@ -60,11 +59,11 @@ export default async function BlogPage({ params }: Props) {
         <div className="mx-auto my-2 max-w-4xl text-xl">
           {hasPostImage && (
             <div className="mb-8">
-              <Image
-                src={image.post}
+              <img
                 alt={title}
-                width={postImageSizes.width}
                 height={postImageSizes.height}
+                src={image.post}
+                width={postImageSizes.width}
               />
             </div>
           )}
