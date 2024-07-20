@@ -4,6 +4,7 @@ COPY . .
 RUN rm -rf .env.local
 RUN npm ci
 RUN npm run build
+RUN npm prune --production
 
 EXPOSE 3000
 
