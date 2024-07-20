@@ -37,7 +37,5 @@ jobs:
             NEXT_PUBLIC_API_URL=https://api.altaysorbent.org
             NEXT_PUBLIC_DOMAIN_URL=https://altaysorbent.org
             NEXT_PUBLIC_PROMO_CODE=${{ secrets.PROMO_CODE }}
-            NEXT_CONTENTFUL_ACCESS_TOKEN=${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
-            NEXT_CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

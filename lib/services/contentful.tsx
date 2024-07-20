@@ -1,16 +1,23 @@
-import * as contentful from 'contentful';
+import { createClient, type ContentfulClientApi } from 'contentful';
 import { postImageSizes, previewImageSizes } from '@/lib/constants/Post';
 import { IPost } from '@/lib/interfaces/Post.interface';
 
+let client: ContentfulClientApi<undefined>;
 const spaceId = process.env.NEXT_CONTENTFUL_SPACE_ID!;
 const accessToken = process.env.NEXT_CONTENTFUL_ACCESS_TOKEN!;
 
-const client = contentful.createClient({
-  // This is the space ID. A space is like a project folder in Contentful terms
-  space: spaceId,
-  // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-  accessToken,
-});
+export function getClient() {
+  if (client) return client;
+
+  client = createClient({
+    // This is the space ID. A space is like a project folder in Contentful terms
+    space: spaceId,
+    // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+    accessToken: accessToken,
+  });
+
+  return client;
+}
 
 const POST_GRAPHQL_LIST_FIELDS = `
 annotation{
@@ -113,6 +120,3 @@ export async function getAllPostsForBlog() {
   );
   return extractPostEntries(entries);
 }
-
-export { fetchGraphQL };
-export default client;
