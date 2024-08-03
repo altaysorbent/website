@@ -8,43 +8,6 @@ const altayApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
-interface IDeliveryPrice {
-  senderCityId: string;
-  receiverCityId: number;
-  quantity: number;
-  tariffId: string;
-  deliveryCompany: string;
-}
-
-/**
- * @deprecated consider {@link calculateDeliveryPrice}
- * @param senderCityId
- * @param receiverCityId
- * @param quantity
- * @param tariffId
- * @param deliveryCompany
- */
-export const getDeliveryPrice = ({
-  senderCityId,
-  receiverCityId,
-  quantity,
-  tariffId,
-  deliveryCompany,
-}: IDeliveryPrice): Promise<void | AxiosResponse> => {
-  const params = new URLSearchParams();
-  params.append('senderCityId', senderCityId);
-  params.append('receiverCityId', `${receiverCityId}`);
-  params.append('tariffId', tariffId);
-  params.append('quantity', `${quantity}`);
-  params.append('deliveryCompany', deliveryCompany);
-
-  return altayApi
-    .get(`/delivery/calculate?${params.toString()}`)
-    .catch((err) => {
-      console.log('Error during getting Delivery price', err);
-    });
-};
-
 export const createOrder = (
   customer: ICustomer,
   delivery: IDelivery,
