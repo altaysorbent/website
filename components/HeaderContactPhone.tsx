@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
-const ContactNumber = (): React.JSX.Element => (
+const HeaderContactPhone = (): React.JSX.Element => (
   <a
     className="flex cursor-pointer items-center text-green-900"
     href="https://wa.me/77779898998"
@@ -14,4 +14,4 @@ const ContactNumber = (): React.JSX.Element => (
   </a>
 );
 
-export default ContactNumber;
+export default HeaderContactPhone;

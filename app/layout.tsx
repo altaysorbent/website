@@ -13,6 +13,7 @@ import YandexMetrika from '@/components/YandexMetrika';
 
 import { Exo_2 } from 'next/font/google';
 import Chatra from '@/components/Chatra';
+import HeaderCloseNotification from '@/components/HeaderCloseNotification';
 
 const exo2 = Exo_2({
   weight: ['400', '500', '600', '700'],
@@ -38,6 +39,7 @@ export default function RootLayout({
             <NotistackProvider>
               <div className="flex flex-col text-gray-700">
                 <Header />
+                <HeaderCloseNotification  />
                 <ContactPhones />
                 {children}
                 <Footer />

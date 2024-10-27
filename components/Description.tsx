@@ -1,12 +1,17 @@
 'use client';
 //  @todo make this component ssr compatible
-import React, { useState } from 'react';
+import React, {type SyntheticEvent, useState } from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 
-const TabPanel = (props) => {
+interface TabPanelProps {
+  index: number;
+  value: number
+  children: React.ReactNode
+}
+const TabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -23,7 +28,7 @@ const TabPanel = (props) => {
 const Description = (): React.JSX.Element => {
   const [tabIndex, setTabIndex] = useState(0);
 
-  const handleChange = (_event: Event, newValue: number) => {
+  const handleChange = (_event: SyntheticEvent, newValue: number) => {
     setTabIndex(newValue);
   };
 
